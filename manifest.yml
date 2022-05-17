@@ -1,0 +1,153 @@
+# Example language specification
+
+# foobar:
+#   template_files:
+#     - Dockerfile # automatically added if not included
+#     - docker-bake.hcl # automatically added if not included
+#     - .env
+#   defaults:
+#     sqlite_version: 3
+#   versions:
+#     '3':
+#       sqlite_version: 2 # overrides the 3 from defaults above
+#       additional_tags: foo:latest # Adds additonal tags to docker-bake.hcl
+#     '4':
+#clojure:
+  #versions:
+    #'11':
+      #java_version: '11'
+      #lein_version: '2.9.1'
+      #package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
+      #jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
+
+# Define global defaults here, that apply to all images.
+# Can be overriden by image specific defaults
+globals:
+  defaults:
+    additional_tags: []
+    base_image: ubuntu:jammy
+    distribution: ubuntu
+    distribution_code_name: jammy
+    docker_syntax: docker/dockerfile:1.4  # https://hub.docker.com/r/docker/dockerfile
+    ecr_registry: 127178877223.dkr.ecr.us-east-2.amazonaws.com
+    tini_version: v0.19.0
+
+############### Image definitions #################################
+
+core:
+  defaults:
+    flavor: slim
+  versions:
+    jammy:
+      latest: true # apply the latest tag to this version
+    # Fat image has things like build-essential, and other libraries needed for compilation
+    # This image should only be used via docker multi-stage build and not deployed, see README for details
+    fat-jammy:
+      flavor: fat
+
+#golang:
+  #defaults:
+    #base_image: get-bridge/core:jammy
+  #versions:
+    #'1.16':
+      #full_version: '1.16.2'
+      #package_sha: '542e936b19542e62679766194364f45141fde55169db2d8d01046555ca9eb4b8'
+
+#graalvm-ce:
+  #defaults:
+    #distro: focal
+  #versions:
+    #'19-java11':
+      #java_version: 11
+      #graal_version: 19.3.5
+      #package_sha: 4936cdf48cd501e9df7ff41929774bd1cd88aecb41c3fbf2c970b29c340bbc95
+    #'21-java11':
+      #java_version: 11
+      #graal_version: 21.0.0.2
+      #package_sha: bd3fbe796e803c4fe5cd089371588d3d716fa3cdb653fe8dd6dba31b57bef934
+
+#java:
+  #defaults:
+    #base_image: get-bridge/core:jammy
+  #versions:
+    #'graalvm-11':
+      #distro: jammy
+      #flavor: jdk
+      #java_version: 11
+    #'11':
+      #java_version: 11
+      #flavor: jdk
+    #'11-jre':
+      #java_version: 11
+      #flavor: jre
+
+
+# We are no longer accepting new minor version tags for Node images, simply
+# update the corresponding major version tag (4, 6, 8) to the latest minor.
+#node: &NODE
+  #defaults:
+    #base_distro: bionic
+    #base_image: instructure/core:bionic
+    #npm_version: latest
+    #yarn_version: latest
+  #versions:
+    #'8-xenial':
+      #base_distro: xenial
+      #base_image: instructure/core:xenial
+      #node_version: '8'
+      #npm_version: '5.10.0'
+      #yarn_version: '0.27.5-1'
+    #'10':
+      #node_version: '10'
+    #'12':
+      #node_version: '12'
+    #'14':
+      #node_version: '14'
+      #base_distro: focal
+      #base_image: instructure/core:focal
+
+#node-pm2:
+  #defaults:
+    #base_distro: bionic
+    #base_image: instructure/node:12
+  #versions:
+    #'8-xenial':
+      #base_distro: xenial
+      #base_image: instructure/node:8-xenial
+    #'10':
+      #base_image: instructure/node:10
+    #'12':
+      #base_image: instructure/node:12
+    #'14':
+      #base_image: instructure/node:14
+      #base_distro: focal
+
+#python: &PYTHON
+  #defaults:
+    #base_image: instructure/core:bionic
+  #versions:
+    #'3.7':
+      #python_version: 3.7.5
+      #python_build_version: 3.7
+      #pip_version: 20.1
+
+ruby: &RUBY
+  defaults:
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+    bundler_version: 2.3.14
+    rubygems_version: 3.3.14
+    flavor: slim
+  versions:
+    '2.7':
+      ruby_major: 2.7
+      ruby_version: 2.7.6
+      ruby_download_sha256: 54dcd3044726c4ab75a9d4604720501442b229a3aed6a55fe909567da8807f24
+    '3.0':
+      ruby_major: 3.0
+      ruby_version: 3.0.4
+      ruby_download_sha256: 8e22fc7304520435522253210ed0aa9a50545f8f13c959fe01a05aea06bef2f0
+    '3.1':
+      ruby_major: 3.1
+      ruby_version: 3.1.2
+      ruby_download_sha256: ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a
+      latest: true # apply the latest tag

@@ -1,0 +1,75 @@
+# syntax=<%= docker_syntax %>
+
+<%= generation_message %>
+
+########## tini ##########################
+# Grab tini binary (used as default entrypoint)
+FROM <%= base_image %> as tini
+LABEL org.opencontainers.image.authors="get-bridge"
+ENV TINI_VERSION=<%= tini_version %>
+ENV CFLAGS="-DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37"
+
+RUN <<EOT
+#!/usr/bin/env bash
+set -e
+apt update
+apt install -qqy sudo curl ca-certificates tar make cmake build-essential golang --no-install-recommends
+update-ca-certificates
+curl -L https://github.com/krallin/tini/archive/refs/tags/$TINI_VERSION.tar.gz -o tini-$TINI_VERSION.tar.gz
+tar -xf tini-$TINI_VERSION.tar.gz
+# Compile tini from source to ensure compatability with the m1 architectures
+cd tini-$(echo $TINI_VERSION | cut -c2-)
+cmake .
+make
+# Ensure tini runs
+./tini-static --version
+mv ./tini-static /tini
+EOT
+
+
+########## Core image ##########################
+FROM <%= base_image %>
+LABEL com.get-bridge.image.authors="get-bridge"
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Create a 'docker' user
+RUN <<EOT
+#!/usr/bin/env bash
+set -e
+addgroup --gid 9999 docker
+adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
+usermod -L docker
+apt update
+apt install -qqy sudo curl vim-tiny ca-certificates locales --no-install-recommends
+update-ca-certificates
+localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+# vim-tiny only adds about 2mb
+update-alternatives --install /usr/bin/vim vim /usr/bin/vim.tiny 1
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+EOT
+
+# Ensure UTF-8 locale
+ENV LANG en_US.utf-8
+ENV LANGUAGE en_US:en
+
+<% if flavor == 'fat' -%>
+RUN <<EOT
+#!/usr/bin/env bash
+set -e
+apt update
+apt install -qqy build-essential git psmisc software-properties-common tzdata gnupg2 --no-install-recommends
+# gnupg2 and dirmngr will attempt to use IPv6 if it's enabled in Docker, even
+# if the container doesn't have an IPv6 address (this is true on Docker Hub).
+mkdir ~/.gnupg
+echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+EOT
+<% end -%>
+
+# Install Tini for init use (reaps defunct processes and forwards signals)
+COPY --from=tini /tini /tini
+
+ENTRYPOINT ["/tini", "--"]
+
+# Switch to the 'docker' user
+USER docker
