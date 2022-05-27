@@ -1,12 +1,9 @@
 name: Build Images
 
 env:
-  ECR_AWS_ACCESS_KEY_ID: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
-  ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
   ECR_AWS_DEFAULT_REGION: us-east-2
   ECR_REGISTRY: 127178877223.dkr.ecr.us-east-2.amazonaws.com
   DOCKER_BUILDKIT: 1
-  BUILDKIT_PROGRESS: auto
   COMPOSE_DOCKER_CLI_BUILD: 1
   CI_BUILDX_CACHE: true
 
@@ -21,8 +18,11 @@ jobs:
       # Build the core images first using the matrix strategy, from there, we will get a list
       # of other docker images to build concurrently.
       matrix:
-        core-paths: ["core/jammy/docker-bake.hcl", "core/fat-jammy/docker-bake.hcl"]
+        core-paths: ["core/jammy/docker-bake.hcl", "core/jammy-fat/docker-bake.hcl"]
     steps:
+      # If you want to set an environment variable equal to the result of a script
+      # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
+      # https://docs.github.com/en/actions/learn-github-actions/environment-variables#passing-values-between-steps-and-jobs-in-a-workflow
       - name: set PWD environt variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
       - uses: actions/checkout@v3
@@ -46,8 +46,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.ECR_REGISTRY }}
-          username: ${{ env.ECR_AWS_ACCESS_KEY_ID }}
-          password: ${{ env.ECR_AWS_SECRET_ACCESS_KEY }}
+          username: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
@@ -61,7 +61,7 @@ jobs:
             ${{ runner.os }}-${{ matrix.core-paths }}-buildx-
 
       - name: Build and push
-        uses: docker/bake-action@v2
+        uses: docker/bake-action@v2.0.0
         with:
           pull: true
           push: true
@@ -73,8 +73,8 @@ jobs:
       - name: Move cache(docker layers)
         if: ${{ env.CI_BUILDX_CACHE }}
         run: |
-          rm -rf /tmp/.buildx-cache || true
-          mv /tmp/.buildx-cache-new /tmp/.buildx-cache || true
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
   set_outputs:
     needs: build-core-images
@@ -121,8 +121,8 @@ jobs:
         uses: docker/login-action@v2
         with:
           registry: ${{ env.ECR_REGISTRY }}
-          username: ${{ env.ECR_AWS_ACCESS_KEY_ID }}
-          password: ${{ env.ECR_AWS_SECRET_ACCESS_KEY }}
+          username: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
+          password: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
@@ -141,3 +141,12 @@ jobs:
           pull: true
           push: true
           files: ${{ matrix.ci-files }}
+
+        # Temp fix
+        # https://github.com/docker/build-push-action/issues/252
+        # https://github.com/moby/buildkit/issues/1896
+      - name: Move cache(docker layers)
+        if: ${{ env.CI_BUILDX_CACHE }}
+        run: |
+          rm -rf /tmp/.buildx-cache || true
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache || true

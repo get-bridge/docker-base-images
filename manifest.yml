@@ -42,7 +42,7 @@ core:
       latest: true # apply the latest tag to this version
     # Fat image has things like build-essential, and other libraries needed for compilation
     # This image should only be used via docker multi-stage build and not deployed, see README for details
-    fat-jammy:
+    jammy-fat:
       flavor: fat
 
 #golang:

@@ -17,10 +17,17 @@ RUN <<EOT
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
   apt update
-  apt install -qqy bzip2 libffi-dev libgmp-dev libssl-dev libyaml-dev procps zlib1g-dev --no-install-recommends
+  apt install -qqy --no-install-recommends \
+    bzip2 \
+    libffi-dev \
+    libgmp-dev \
+    libssl-dev \
+    libyaml-dev \
+    procps \
+    zlib1g-dev
     arch=$(dpkg --print-architecture)
   if [ "$arch" == "arm64" ]; then
-    # Ruby versions older than 2.7 require an older version of openssl :| which is really annoying
+    # Ruby versions older than or equal to 3.0 require an older version of openssl :| which is really annoying
     echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish main restricted" >> /etc/apt/sources.list
     echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish-updates main restricted" >> /etc/apt/sources.list
     echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish-security main restricted" >> /etc/apt/sources.list
@@ -30,9 +37,14 @@ RUN <<EOT
     echo "deb http://security.ubuntu.com/ubuntu/ impish-security main restricted" >> /etc/apt/sources.list
   fi
   apt update
-  apt install -qqy --allow-downgrades openssl=1.1.1* libssl-dev=1.1.1*
-  apt-mark hold libssl-dev libssl1.1 openssl
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+  apt install -qqy --allow-downgrades \
+    libssl-dev=1.1.1* \
+    openssl=1.1.1*
+  apt-mark hold \
+    libssl-dev \
+    libssl1.1 \
+    openssl
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 EOT
 
 # skip installing gem documentation
@@ -57,9 +69,25 @@ RUN <<EOT
   set -eux
   savedAptMark="$(apt-mark showmanual)"
   apt update
-  apt install -qqy bison dpkg-dev libgdbm-dev ruby autoconf g++ gcc libbz2-dev libgdbm-compat-dev libglib2.0-dev \
-    libncurses-dev libreadline-dev libxml2-dev libxslt-dev make wget xz-utils --no-install-recommends
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+  apt install -qqy --no-install-recommends \
+    autoconf \
+    bison \
+    dpkg-dev \
+    g++ \
+    gcc \
+    libbz2-dev \
+    libgdbm-compat-dev \
+    libgdbm-dev \
+    libglib2.0-dev \
+    libncurses-dev \
+    libreadline-dev \
+    libxml2-dev \
+    libxslt-dev \
+    make \
+    ruby \
+    wget \
+    xz-utils
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   curl -L https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz -o ruby.tar.xz
   echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict
   mkdir -p /usr/src/ruby
@@ -73,7 +101,6 @@ RUN <<EOT
   arch=$(dpkg --print-architecture)
   # Should return something like `linux-gnu`
   operating_system=$(uname -o | awk '{split($0,a,"/"); print tolower(a[2])"-"tolower(a[1])}')
-  # --enable-yjit
   ./configure --build="$arch-$operating_system" --disable-install-doc --enable-shared
   make -j "$(nproc)"
   make install
@@ -88,7 +115,7 @@ RUN <<EOT
           | sort -u \
           | xargs -r apt-mark manual
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   cd /
   rm -r /usr/src/ruby
   # Ensure we have removed the system ruby

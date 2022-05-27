@@ -1,21 +1,17 @@
 # https://docs.docker.com/engine/reference/commandline/buildx_bake/#file-definition
-<%
-# Specify any additional tags here, see defaults defined in lib/metadata.rb
-core_tags = []
-custom_tags = docker_tags(core_tags)
-%>
+
 
 variable "PWD" {default="" }
 variable "CI_BUILDX_CACHE" {default=false }
 
 group "default" {
-    targets = ["<%= image_name %>"]
+    targets = ["core"]
 }
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
-target "<%= image_name %>" {
-    tags = <%= custom_tags %>
-    context = "${PWD}/<%= image_name %>/<%= version %>"
+target "core" {
+    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy-fat"]
+    context = "${PWD}/core/jammy-fat"
     platforms = ["linux/amd64", "linux/arm64"]
     cache-from = [equal(true,CI_BUILDX_CACHE) ? "type=local,src=/tmp/.buildx-cache": "",]
     cache-to = [equal(true,CI_BUILDX_CACHE) ? "type=local,dest=/tmp/.buildx-cache-new,mode=max": ""]

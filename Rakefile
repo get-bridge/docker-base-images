@@ -2,11 +2,12 @@
 
 # STDLIB stuffs
 require 'fileutils'
-require 'yaml'
 require 'json'
 require 'pathname'
+require 'yaml'
 
 # Local stuffs
+require_relative 'lib/ecr'
 require_relative 'lib/generation_message'
 require_relative 'lib/template'
 
@@ -14,11 +15,10 @@ task default: 'generate:all'
 
 PROJECT_DIR = File.dirname(__FILE__)
 PROJECT_PATHNAME = Pathname.new(PROJECT_DIR)
-BAKE_FILE = "docker-bake.hcl"
-TESTING_PARALLELIZATION = 2
+BAKE_FILE = 'docker-bake.hcl'
 MANIFEST = YAML.load_file(File.join(PROJECT_DIR, 'manifest.yml'))
 
-# Get global defaults, and delete from yml so they are not translated a docker image
+# Get global defaults, and delete from yml so they are not translated into a docker image
 GLOBAL_DEFAULTS = MANIFEST.delete('globals')
 
 def build_output_path(*parts)
@@ -51,8 +51,18 @@ namespace :ci do
     end.to_json
 
     puts 'setting matrix output'
-    puts docker_contexts.inspect
     system('echo', "::set-output name=matrix::#{docker_contexts}")
+  end
+end
+
+namespace :ecr do
+  desc 'Ensure all ecr repositories exist'
+  task 'create_if_missing' do
+    repository_names = MANIFEST.map do |image_name, _details|
+      "get-bridge/#{image_name}"
+    end
+
+    Ecr.new(dry_run: false).create_if_missing(repository_names: repository_names)
   end
 end
 

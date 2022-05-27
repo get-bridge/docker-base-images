@@ -17,8 +17,15 @@ RUN <<EOT
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
   apt update
-  apt install -qqy bzip2 libffi-dev libgmp-dev libssl-dev libyaml-dev procps zlib1g-dev --no-install-recommends
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+  apt install -qqy --no-install-recommends \
+    bzip2 \
+    libffi-dev \
+    libgmp-dev \
+    libssl-dev \
+    libyaml-dev \
+    procps \
+    zlib1g-dev
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 EOT
 
 # skip installing gem documentation
@@ -43,9 +50,25 @@ RUN <<EOT
   set -eux
   savedAptMark="$(apt-mark showmanual)"
   apt update
-  apt install -qqy bison dpkg-dev libgdbm-dev ruby autoconf g++ gcc libbz2-dev libgdbm-compat-dev libglib2.0-dev \
-    libncurses-dev libreadline-dev libxml2-dev libxslt-dev make wget xz-utils --no-install-recommends
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+  apt install -qqy --no-install-recommends \
+    autoconf \
+    bison \
+    dpkg-dev \
+    g++ \
+    gcc \
+    libbz2-dev \
+    libgdbm-compat-dev \
+    libgdbm-dev \
+    libglib2.0-dev \
+    libncurses-dev \
+    libreadline-dev \
+    libxml2-dev \
+    libxslt-dev \
+    make \
+    ruby \
+    wget \
+    xz-utils
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   curl -L https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz -o ruby.tar.xz
   echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict
   mkdir -p /usr/src/ruby
@@ -59,7 +82,6 @@ RUN <<EOT
   arch=$(dpkg --print-architecture)
   # Should return something like `linux-gnu`
   operating_system=$(uname -o | awk '{split($0,a,"/"); print tolower(a[2])"-"tolower(a[1])}')
-  # --enable-yjit
   ./configure --build="$arch-$operating_system" --disable-install-doc --enable-shared
   make -j "$(nproc)"
   make install
@@ -74,7 +96,7 @@ RUN <<EOT
           | sort -u \
           | xargs -r apt-mark manual
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
-  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/ /var/cache/* || true
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   cd /
   rm -r /usr/src/ruby
   # Ensure we have removed the system ruby
