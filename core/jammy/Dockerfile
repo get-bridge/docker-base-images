@@ -1,0 +1,82 @@
+# syntax=docker/dockerfile:1.4
+
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:core`
+
+
+########## tini ##########################
+# Grab tini binary (used as default entrypoint)
+FROM ubuntu:jammy as tini
+LABEL org.opencontainers.image.authors="get-bridge"
+ENV TINI_VERSION=v0.19.0
+# Options added via tini README.md suggestion
+# https://github.com/krallin/tini#building-tini
+ENV CFLAGS="-DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37"
+
+RUN <<EOT
+#!/usr/bin/env bash
+set -e
+apt update
+apt install -qqy --no-install-recommends \
+  build-essential \
+  ca-certificates \
+  cmake \
+  curl \
+  golang \
+  make \
+  tar \
+  sudo
+update-ca-certificates
+curl -L https://github.com/krallin/tini/archive/refs/tags/$TINI_VERSION.tar.gz -o tini-$TINI_VERSION.tar.gz
+tar -xf tini-$TINI_VERSION.tar.gz
+# Compile tini from source to ensure compatability with the m1 architectures
+cd tini-$(echo $TINI_VERSION | cut -c2-)
+cmake .
+make
+# Ensure tini runs
+./tini-static --version
+mv ./tini-static /tini
+EOT
+
+
+########## Core image ##########################
+FROM ubuntu:jammy
+LABEL com.get-bridge.image.authors="get-bridge"
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Create a 'docker' user
+RUN <<EOT
+#!/usr/bin/env bash
+set -e
+addgroup --gid 9999 docker
+adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
+usermod -L docker
+apt update
+apt install -qqy --no-install-recommends \
+  ca-certificates \
+  curl \
+  locales \
+  sudo \
+  vim-tiny
+update-ca-certificates
+# See the Locals heading at https://hub.docker.com/_/ubuntu
+# Alias created as some languages (such as ruby) require the extra local
+localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
+# vim-tiny only adds about 2mb
+update-alternatives --install /usr/bin/vim vim /usr/bin/vim.tiny 1
+rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
+EOT
+
+# Ensure UTF-8 locale
+ENV LANG en_US.utf-8
+ENV LANGUAGE en_US:en
+
+
+# Install Tini for init use (reaps defunct processes and forwards signals)
+COPY --from=tini /tini /tini
+
+ENTRYPOINT ["/tini", "--"]
+
+# Switch to the 'docker' user
+USER docker

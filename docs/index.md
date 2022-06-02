@@ -1,2 +1,2 @@
 # Docker Base Images
-TODO
+Official Bridge multi architecture docker base images
