@@ -6,6 +6,9 @@ require 'json'
 require 'pathname'
 require 'yaml'
 
+# Additional rake tasks
+require 'rubocop/rake_task'
+
 # Local stuffs
 require_relative 'lib/ecr'
 require_relative 'lib/generation_message'
@@ -36,6 +39,9 @@ def with_clean_output_dir(*path_parts)
   yield output_dir
 end
 
+RuboCop::RakeTask.new
+
+# rubocop:disable Metrics/BlockLength
 namespace :ci do
   desc 'Generate index of bake files and set-matrix output'
   task 'set-matrix' do
@@ -112,3 +118,4 @@ namespace :generate do
   desc 'Generate all templatized Dockerfiles'
   task 'all' => Rake.application.tasks.select { |t| t.name.start_with?('generate') }.map(&:name)
 end
+# rubocop:enable Metrics/BlockLength

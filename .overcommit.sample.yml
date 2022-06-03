@@ -1,0 +1,21 @@
+---
+# See https://github.com/sds/overcommit/blob/master/config/default.yml for additional options
+
+CommitMsg:
+  HardTabs:
+    enabled: true
+    description: 'Check for hard tabs'
+
+PreCommit:
+  RuboCop:
+    enabled: true
+    command: ['bundle', 'exec', 'rubocop']
+
+  # If you have ripgrep installed switch
+  # required_executable: 'rg'
+  # flags: ['-H', '--no-heading', "[ \t]$"]
+  TrailingWhitespace:
+    enabled: true
+    description: 'Check for trailing whitespace'
+    required_executable: 'grep'
+    flags: ['-IHn', "[ \t]$"]

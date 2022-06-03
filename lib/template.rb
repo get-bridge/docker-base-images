@@ -33,7 +33,7 @@ class Template
 
     def to(output_dir)
       output_path = File.join(output_dir, @template.filename)
-      IO.write(output_path, to_string)
+      File.write(output_path, to_string)
     end
 
     def to_string

@@ -12,7 +12,7 @@ class Metadata
 
   # NOTE: see ../manifest.yml for values passed into the initialize method
   # some of the methods defined here, use those vaules if they exist
-  def get_binding
+  def get_binding # rubocop:disable Naming/AccessorMethodName
     binding
   end
 
@@ -26,13 +26,13 @@ class Metadata
     "#{ecr_namespace}/#{image_name}"
   end
 
-  def docker_tags(custom_tags=[])
+  def docker_tags(custom_tags = [])
     custom_tags = custom_tags.push(additional_tags).flatten.uniq
     default_docker_tags.push(custom_tags).flatten.uniq
   end
 
   # return nil if you try to call a method that doesn't exist
-  def method_missing(_method_name, *_args, &block); end
+  def method_missing(_method_name, *_args, &); end
   def respond_to_missing?(_method_name); end
 
   private
