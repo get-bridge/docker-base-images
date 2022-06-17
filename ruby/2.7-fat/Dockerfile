@@ -55,9 +55,9 @@ EOT
 ENV BUNDLER_VERSION 2.3.14
 ENV LANG en_US.utf-8
 ENV RUBYGEMS_VERSION 3.3.14
-ENV RUBY_DOWNLOAD_SHA256 8e22fc7304520435522253210ed0aa9a50545f8f13c959fe01a05aea06bef2f0
-ENV RUBY_MAJOR 3.0
-ENV RUBY_VERSION 3.0.4
+ENV RUBY_DOWNLOAD_SHA256 54dcd3044726c4ab75a9d4604720501442b229a3aed6a55fe909567da8807f24
+ENV RUBY_MAJOR 2.7
+ENV RUBY_VERSION 2.7.6
 
 # NOTE: some of ruby's build scripts are written in ruby so we need to install ruby
 # in order to compile ruby. We use apt-mark to uninstall packages we don't need.
@@ -122,6 +122,33 @@ RUN <<EOT
   # Update rubygems and bundler
   gem update  --no-document --system $RUBYGEMS_VERSION
   gem install --no-document bundler -v $BUNDLER_VERSION
+  # Install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
+  apt update
+  apt install -qqy --no-install-recommends \
+    autoconf \
+    bison \
+    build-essential \
+    dpkg-dev \
+    g++ \
+    gcc \
+    imagemagick \
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    libevent-dev \
+    libgdbm-compat-dev \
+    libgdbm-dev \
+    libjpeg-dev \
+    libmagickcore-dev \
+    libmagickwand-dev \
+    libmysqlclient-dev \
+    libncurses-dev \
+    libpq-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    make \
+    wget \
+    xz-utils
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   # Check that ruby commands work
   [ "$(command -v ruby)" = '/usr/local/bin/ruby' ]
   ruby --version

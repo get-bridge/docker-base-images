@@ -21,7 +21,6 @@ RUN <<EOT
     bzip2 \
     libffi-dev \
     libgmp-dev \
-    libssl-dev \
     libyaml-dev \
     procps \
     zlib1g-dev

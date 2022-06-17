@@ -2,12 +2,12 @@
 <%
 # Specify any additional tags here, see defaults defined in lib/metadata.rb
 ruby_tags = [
-    "#{full_ecr_path}:#{ruby_version}",
     "#{full_ecr_path}:#{ruby_version}-#{flavor}",
     "#{full_ecr_path}:#{ruby_version}-#{flavor}-#{distribution_code_name}",
     "#{full_ecr_path}:#{ruby_major}-#{flavor}",
     "#{full_ecr_path}:#{ruby_major}-#{flavor}-#{distribution_code_name}"
 ]
+ruby_tags.push("#{full_ecr_path}:#{ruby_version}") if flavor&.casecmp('slim')&.zero?
 custom_tags = docker_tags(ruby_tags)
 %>
 

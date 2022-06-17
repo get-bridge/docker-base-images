@@ -10,7 +10,7 @@ class Util
   PROJECT_DIR = Rake.original_dir
   PROJECT_PATHNAME = Pathname.new(PROJECT_DIR)
   BAKE_FILE = 'docker-bake.hcl'
-  MANIFEST = YAML.load_file(File.join(PROJECT_DIR, 'manifest.yml'))
+  MANIFEST = YAML.load_file(File.join(PROJECT_DIR, 'manifest.yml'), aliases: true)
 
   # Get global defaults, and delete from yml so they are not translated into a docker image
   GLOBAL_DEFAULTS = MANIFEST.delete('globals')
