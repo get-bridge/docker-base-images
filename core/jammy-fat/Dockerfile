@@ -4,7 +4,6 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:core`
 
-
 ########## tini ##########################
 # Grab tini binary (used as default entrypoint)
 FROM ubuntu:jammy as tini

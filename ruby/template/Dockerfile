@@ -1,6 +1,6 @@
 # syntax=<%= docker_syntax %>
 
-<%= generation_message %>
+<%= generation_message -%>
 
 ########## Ruby image ##########################
 FROM <%= base_image %>

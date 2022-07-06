@@ -4,7 +4,6 @@
 # To update this file please edit the relevant template and run the generation
 # task `rake generate:ruby`
 
-
 ########## Ruby image ##########################
 FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
 LABEL com.get-bridge.image.authors="get-bridge"
