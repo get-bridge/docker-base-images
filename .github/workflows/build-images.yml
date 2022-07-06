@@ -1,19 +1,21 @@
 name: Build Images
 
+on:
+  push:
+    branches-ignore:
+      - "dependabot/**"
+    paths-ignore:
+      - ".github/CODEOWNERS"
+  pull_request_target:
+    types: [labeled]
+  workflow_dispatch: {}
+
 env:
   ECR_AWS_DEFAULT_REGION: us-east-2
   ECR_REGISTRY: 127178877223.dkr.ecr.us-east-2.amazonaws.com
   DOCKER_BUILDKIT: 1
   COMPOSE_DOCKER_CLI_BUILD: 1
   CI_BUILDX_CACHE: true
-
-on:
-  push:
-    branches-ignore:
-      - "dependabot/**"
-  pull_request_target:
-    types: [labeled]
-  workflow_dispatch: {}
 
 jobs:
   build-core-images:
