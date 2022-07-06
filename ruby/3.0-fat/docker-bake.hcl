@@ -1,3 +1,7 @@
+# GENERATED FILE, DO NOT MODIFY!
+# To update this file please edit the relevant template and run the generation
+# task `rake generate:ruby`
+
 # https://docs.docker.com/engine/reference/commandline/buildx_bake/#file-definition
 
 variable "PWD" {default="" }

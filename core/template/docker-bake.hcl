@@ -1,3 +1,5 @@
+<%= generation_message -%>
+
 # https://docs.docker.com/engine/reference/commandline/buildx_bake/#file-definition
 <%
 # Specify any additional tags here, see defaults defined in lib/metadata.rb

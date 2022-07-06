@@ -1,6 +1,6 @@
 # syntax=<%= docker_syntax %>
 
-<%= generation_message %>
+<%= generation_message -%>
 
 ########## tini ##########################
 # Grab tini binary (used as default entrypoint)
