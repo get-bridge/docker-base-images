@@ -9,7 +9,7 @@ ruby_tags = [
 ]
 ruby_tags.push("#{full_ecr_path}:#{ruby_version}") if flavor&.casecmp('slim')&.zero?
 custom_tags = docker_tags(ruby_tags)
-%>
+-%>
 
 variable "PWD" {default="" }
 variable "CI_BUILDX_CACHE" {default=false }
