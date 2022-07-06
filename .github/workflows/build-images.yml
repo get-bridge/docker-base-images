@@ -30,13 +30,8 @@ jobs:
       # https://docs.github.com/en/actions/learn-github-actions/environment-variables#passing-values-between-steps-and-jobs-in-a-workflow
       - name: set PWD environt variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
+
       - uses: actions/checkout@v3
-      - name: Checkout Bridge Actions
-        uses: actions/checkout@v3
-        with:
-          repository: get-bridge/actions
-          token: ${{ secrets.GIT_HUB_TOKEN }}
-          path: .github/actions
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -69,19 +64,19 @@ jobs:
         uses: docker/bake-action@v2.0.0
         with:
           pull: true
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.core-paths }}
 
-        # Temp fix
-        # https://github.com/docker/build-push-action/issues/252
-        # https://github.com/moby/buildkit/issues/1896
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
       - name: Move cache(docker layers)
         if: ${{ env.CI_BUILDX_CACHE }}
         run: |
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
-  set_outputs:
+  set-outputs:
     runs-on: ubuntu-latest
     needs: build-core-images
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push'
@@ -89,31 +84,28 @@ jobs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v3
+
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.1'
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
       - id: set-matrix
         run: bundle exec rake ci:set-matrix
 
   build-all-images:
+    needs: set-outputs
     runs-on: ubuntu-latest
-    needs: set_outputs
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push'
     strategy:
       max-parallel: 4
       matrix:
-        ci-files: ${{ fromJSON(needs.set_outputs.outputs.matrix) }}
+        ci-files: ${{ fromJSON(needs.set-outputs.outputs.matrix) }}
     steps:
       - name: set PWD environt variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
+
       - uses: actions/checkout@v3
-      - name: Checkout Bridge Actions
-        uses: actions/checkout@v3
-        with:
-          repository: get-bridge/actions
-          token: ${{ secrets.GIT_HUB_TOKEN }}
-          path: .github/actions
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -146,12 +138,12 @@ jobs:
         uses: docker/bake-action@v2
         with:
           pull: true
-          push: true
+          push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.ci-files }}
 
-        # Temp fix
-        # https://github.com/docker/build-push-action/issues/252
-        # https://github.com/moby/buildkit/issues/1896
+      # Temp fix
+      # https://github.com/docker/build-push-action/issues/252
+      # https://github.com/moby/buildkit/issues/1896
       - name: Move cache(docker layers)
         if: ${{ env.CI_BUILDX_CACHE }}
         run: |
