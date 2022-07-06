@@ -21,28 +21,10 @@ RUN <<EOT
     bzip2 \
     libffi-dev \
     libgmp-dev \
+    libssl-dev \
     libyaml-dev \
     procps \
     zlib1g-dev
-    arch=$(dpkg --print-architecture)
-  if [ "$arch" == "arm64" ]; then
-    # Ruby versions older than or equal to 3.0 require an older version of openssl :| which is really annoying
-    echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish main restricted" >> /etc/apt/sources.list
-    echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish-updates main restricted" >> /etc/apt/sources.list
-    echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish-security main restricted" >> /etc/apt/sources.list
-  else
-    echo "deb http://archive.ubuntu.com/ubuntu/ impish main restricted" >> /etc/apt/sources.list
-    echo "deb http://archive.ubuntu.com/ubuntu/ impish-updates main restricted" >> /etc/apt/sources.list
-    echo "deb http://security.ubuntu.com/ubuntu/ impish-security main restricted" >> /etc/apt/sources.list
-  fi
-  apt update
-  apt install -qqy --allow-downgrades \
-    libssl-dev=1.1.1* \
-    openssl=1.1.1*
-  apt-mark hold \
-    libssl-dev \
-    libssl1.1 \
-    openssl
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 EOT
 
@@ -55,9 +37,9 @@ EOT
 ENV BUNDLER_VERSION 2.3.14
 ENV LANG en_US.utf-8
 ENV RUBYGEMS_VERSION 3.3.14
-ENV RUBY_DOWNLOAD_SHA256 8e22fc7304520435522253210ed0aa9a50545f8f13c959fe01a05aea06bef2f0
-ENV RUBY_MAJOR 3.0
-ENV RUBY_VERSION 3.0.4
+ENV RUBY_DOWNLOAD_SHA256 ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a
+ENV RUBY_MAJOR 3.1
+ENV RUBY_VERSION 3.1.2
 
 # NOTE: some of ruby's build scripts are written in ruby so we need to install ruby
 # in order to compile ruby. We use apt-mark to uninstall packages we don't need.
@@ -122,6 +104,33 @@ RUN <<EOT
   # Update rubygems and bundler
   gem update  --no-document --system $RUBYGEMS_VERSION
   gem install --no-document bundler -v $BUNDLER_VERSION
+  # Install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
+  apt update
+  apt install -qqy --no-install-recommends \
+    autoconf \
+    bison \
+    build-essential \
+    dpkg-dev \
+    g++ \
+    gcc \
+    imagemagick \
+    libbz2-dev \
+    libcurl4-openssl-dev \
+    libevent-dev \
+    libgdbm-compat-dev \
+    libgdbm-dev \
+    libjpeg-dev \
+    libmagickcore-dev \
+    libmagickwand-dev \
+    libmysqlclient-dev \
+    libncurses-dev \
+    libpq-dev \
+    libreadline-dev \
+    libsqlite3-dev \
+    make \
+    wget \
+    xz-utils
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   # Check that ruby commands work
   [ "$(command -v ruby)" = '/usr/local/bin/ruby' ]
   ruby --version

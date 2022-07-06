@@ -13,7 +13,9 @@ class Ecr
   end
 
   def create_if_missing(repository_names: [])
-    raise 'Argument must be a non empty Array<String>' unless repository_names.is_a?(Array) && repository_names.count > 0
+    unless repository_names.is_a?(Array) && repository_names.count.positive?
+      raise 'Argument must be a non empty Array<String>'
+    end
 
     diff = repository_names.sort - ecr_respository_names
     if diff.count.positive?
@@ -29,13 +31,13 @@ class Ecr
     results = []
     response = describe_repositories(max_results: 100)
     results << response.to_h[:repositories]
-    while response.next_page? do
+    while response.next_page?
       response = response.next_page
       results << response.to_h[:repositories]
     end
 
     results.map do |result|
-      result.collect {|r| r[:repository_name]}
+      result.collect { |r| r[:repository_name] }
     end.flatten.sort
   end
 
@@ -44,7 +46,7 @@ class Ecr
     client.describe_repositories(default_options)
   end
 
-  def create_repository(repository_names:, **opts)
+  def create_repository(repository_names:, **opts) # rubocop:disable Metrics/MethodLength
     default_options = {
       registry_id: '127178877223', # bridge-shared
       image_tag_mutability: 'MUTABLE',
