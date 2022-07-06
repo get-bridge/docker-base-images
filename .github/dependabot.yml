@@ -1,17 +1,96 @@
----
 version: 2
+
 updates:
   - package-ecosystem: github-actions
     directory: /
     schedule:
-      interval: weekly
-    open-pull-requests-limit: 1
-  - package-ecosystem: "bundler"
-    directory: "/"
-    schedule:
-      interval: "weekly"
+      interval: daily
     labels:
-      - "dependencies"
-    open-pull-requests-limit: 5
+      - dependencies
     reviewers:
-      - "get-bridge/oberbaum"
+      - get-bridge/oberbaum
+
+  - package-ecosystem: bundler
+    directory: /
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    reviewers:
+      - get-bridge/oberbaum
+
+  # These are not meant to be automatically accepted
+  # because they're templated files, however this will
+  # give us a way to be automatically notified when there
+  # are upstream changes to roll into our own templates.
+  - package-ecosystem: docker
+    directory: core/jammy/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: core/jammy-fat/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/2.7/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/2.7-fat/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/3.0/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/3.0-fat/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/3.1/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/3.1-fat/Dockerfile
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+    assignees:
+      - djbender

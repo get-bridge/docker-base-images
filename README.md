@@ -11,7 +11,6 @@ We use `ruby` , and `erb` templates to generate our Dockerfile's
 - `bundle install`
 - `bundle exec rake -T` to see rake tasks
 
-
 You can install some useful git-hooks by install [overcommit](https://github.com/sds/overcommit#installation)
 - `gem install overcommit`
 - `cp .overcommit.sample.yml .overcommit.yml`
