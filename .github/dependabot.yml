@@ -24,7 +24,7 @@ updates:
   # give us a way to be automatically notified when there
   # are upstream changes to roll into our own templates.
   - package-ecosystem: docker
-    directory: core/jammy/Dockerfile
+    directory: core/jammy
     schedule:
       interval: daily
     labels:
@@ -33,7 +33,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: core/jammy-fat/Dockerfile
+    directory: core/jammy-fat
     schedule:
       interval: daily
     labels:
@@ -42,7 +42,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: ruby/2.7/Dockerfile
+    directory: ruby/2.7
     schedule:
       interval: daily
     labels:
@@ -51,7 +51,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: ruby/2.7-fat/Dockerfile
+    directory: ruby/2.7-fat
     schedule:
       interval: daily
     labels:
@@ -60,7 +60,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: ruby/3.0/Dockerfile
+    directory: ruby/3.0
     schedule:
       interval: daily
     labels:
@@ -69,7 +69,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: ruby/3.0-fat/Dockerfile
+    directory: ruby/3.0-fat
     schedule:
       interval: daily
     labels:
@@ -78,7 +78,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: ruby/3.1/Dockerfile
+    directory: ruby/3.1
     schedule:
       interval: daily
     labels:
@@ -87,7 +87,7 @@ updates:
       - djbender
 
   - package-ecosystem: docker
-    directory: ruby/3.1-fat/Dockerfile
+    directory: ruby/3.1-fat
     schedule:
       interval: daily
     labels:
