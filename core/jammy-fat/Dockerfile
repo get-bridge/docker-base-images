@@ -24,8 +24,7 @@ apt install -qqy --no-install-recommends \
   curl \
   golang \
   make \
-  tar \
-  sudo
+  tar
 update-ca-certificates
 curl -L https://github.com/krallin/tini/archive/refs/tags/$TINI_VERSION.tar.gz -o tini-$TINI_VERSION.tar.gz
 tar -xf tini-$TINI_VERSION.tar.gz
@@ -56,7 +55,6 @@ apt install -qqy --no-install-recommends \
   ca-certificates \
   curl \
   locales \
-  sudo \
   vim-tiny
 update-ca-certificates
 # See the Locals heading at https://hub.docker.com/_/ubuntu
