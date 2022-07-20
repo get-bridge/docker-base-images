@@ -21,7 +21,7 @@ RUN <<EOT
 #!/usr/bin/env bash
   apt-get install -y --no-install-recommends gnupg parallel
   # Import gpg keys for node.js releasers
-  <% if node_major >= 12 %>
+  <% if node_major >= 12 -%>
   # via https://github.com/nodejs/node/tree/dd167ff0ee90fa47e0d92c514c20f1aaa53363bc#release-keys
   # use parallel to fetch keys faster
   parallel gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys ::: \
@@ -39,7 +39,7 @@ RUN <<EOT
     A48C2BEE680E841632CD4E44F07496B3EB3C1762 \
     108F52B48DB57BB0CC439B2997B01419BD92F80A \
     B9E2F5981AA6E0CD28160D9FF13993A75599653C
-  <% else %>
+  <% else -%>
   # Node v8.11 keys sourced from:
   # https://github.com/nodejs/docker-node/blob/48af72ca53ea2836009970e45ed3e4fcb237f3b4/8/stretch/Dockerfile#L21-L30
   # use parallel to fetch keys faster
@@ -53,7 +53,7 @@ RUN <<EOT
     56730D5401028683275BD23C23EFEFE93C4CFFFE \
     77984A986EBC2AA786BC0F66B01FBB92821C587A \
     8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600
-  <% end %>
+  <% end -%>
 EOT
 
 ENV NODE_MAJOR 8.11
@@ -65,9 +65,12 @@ ENV LANG en_US.utf-8
 RUN <<EOT
 #!/usr/bin/env bash
   set -exu
+
+  # set up working directory
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
 
+  # test arch compatability
   ARCH= && dpkgArch="$(dpkg --print-architecture)"
   case "${dpkgArch##*-}" in
     amd64) ARCH='x64';;
@@ -78,9 +81,11 @@ RUN <<EOT
     i386) ARCH='x86';;
     *) echo "unsupported architecture"; exit 1 ;;
   esac
-
-  apt-get update
+  # hold build dependencies in a variable to make cleanup easy
   buildDeps='ca-certificates curl xz-utils'
+
+  # install node
+  apt-get update
   apt-get install -y --no-install-recommends $buildDeps
   curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-$ARCH.tar.xz"
   curl -fsSLO --compressed "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc"
@@ -89,18 +94,21 @@ RUN <<EOT
   tar -xJf "node-v$NODE_VERSION-linux-$ARCH.tar.xz" -C /usr/local --strip-components=1 --no-same-owner
   rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
+  # cleanup apt
   apt-get purge -y --auto-remove $buildDeps
 
 <% if flavor == 'fat' -%>
-  # Install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
-  apt update
-  apt install -y --no-install-recommends \
+  # install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
+  apt-get update
+  apt-get install -y --no-install-recommends \
     build-essential \
     wget \
     xz-utils
 <% end -%>
 
+  # cleanup disk
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
+
   #  Check that node commands work
   test "$(command -v node)" = '/usr/local/bin/node'
   test "$(command -v npm)" = '/usr/local/bin/npm'
