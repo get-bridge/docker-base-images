@@ -60,7 +60,7 @@ core:
       #java_version: 11
       #flavor: jre
 
-ruby: &RUBY
+ruby:
   defaults:
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
     bundler_version: 2.3.14
@@ -89,3 +89,24 @@ ruby: &RUBY
     '3.1-fat':
       <<: *RUBY31
       flavor: fat
+
+node:
+  defaults:
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+    npm_version: 2.3.14
+    flavor: slim
+  versions:
+    '8.11': &NODE811
+      node_major: 8.11
+      node_version: 8.11.3
+    '8.11-fat':
+      <<: *NODE811
+      flavor: fat
+    # '3.1': &RUBY31
+    #   ruby_major: 3.1
+    #   ruby_version: 3.1.2
+    #   ruby_download_sha256: ca10d017f8a1b6d247556622c841fc56b90c03b1803f87198da1e4fd3ec3bf2a
+    #   latest: true # apply the latest tag
+    # '3.1-fat':
+    #   <<: *RUBY31
+    #   flavor: fat
