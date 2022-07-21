@@ -23,7 +23,7 @@ RUN <<EOT
     libyaml-dev \
     procps \
     zlib1g-dev
-    arch=$(dpkg --print-architecture)
+  arch=$(dpkg --print-architecture)
   if [ "$arch" == "arm64" ]; then
     # Ruby versions older than or equal to 3.0 require an older version of openssl :| which is really annoying
     echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish main restricted" >> /etc/apt/sources.list
@@ -42,7 +42,7 @@ RUN <<EOT
     libssl-dev \
     libssl1.1 \
     openssl
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
+  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 EOT
 
 # skip installing gem documentation

@@ -1,6 +1,6 @@
 # syntax=<%= docker_syntax %>
 
-<%= generation_message -%>
+<%= generation_message %>
 
 ########## Ruby image ##########################
 FROM <%= base_image %>
@@ -18,13 +18,13 @@ RUN <<EOT
     bzip2 \
     libffi-dev \
     libgmp-dev \
-  <% if ruby_major >= 3.1 -%>
-  libssl-dev \
-  <% end -%>
-  libyaml-dev \
+<% if ruby_major >= 3.1 %>
+    libssl-dev \
+<% end %>
+    libyaml-dev \
     procps \
     zlib1g-dev
-  <% if ruby_major <= 3.0 -%>
+<% if ruby_major <= 3.0 %>
   arch=$(dpkg --print-architecture)
   if [ "$arch" == "arm64" ]; then
     # Ruby versions older than or equal to 3.0 require an older version of openssl :| which is really annoying
@@ -44,7 +44,7 @@ RUN <<EOT
     libssl-dev \
     libssl1.1 \
     openssl
-  <% end -%>
+<% end %>
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 EOT
 
@@ -129,7 +129,7 @@ RUN <<EOT
   # Update rubygems and bundler
   gem update  --no-document --system $RUBYGEMS_VERSION
   gem install --no-document bundler -v $BUNDLER_VERSION
-<% if flavor == 'fat' -%>
+<% if flavor == 'fat' %>
   # Install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
   apt-get update
   apt-get install --yes --no-install-recommends \
@@ -157,7 +157,7 @@ RUN <<EOT
     wget \
     xz-utils
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
-<% end -%>
+<% end %>
   # Check that ruby commands work
   [ "$(command -v ruby)" = '/usr/local/bin/ruby' ]
   ruby --version

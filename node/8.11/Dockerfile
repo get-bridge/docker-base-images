@@ -14,16 +14,11 @@ USER root
 RUN <<EOT
 #!/usr/bin/env bash
   set -eux
-  cp /etc/apt/sources.list /etc/apt/sources.list.bak
-  sed -i 's/archive.ubuntu.com/la.mirrors.clouvider.net/g' /etc/apt/sources.list
   apt-get update
-EOT
-
-RUN <<EOT
-#!/usr/bin/env bash
   apt-get install -y --no-install-recommends gnupg parallel
   # Import gpg keys for node.js releasers
-    # Node v8.11 keys sourced from:
+  
+  # Node v8.11 keys sourced from:
   # https://github.com/nodejs/docker-node/blob/48af72ca53ea2836009970e45ed3e4fcb237f3b4/8/stretch/Dockerfile#L21-L30
   # use parallel to fetch keys faster
   parallel gpg --batch --keyserver hkps://keys.openpgp.org --recv-keys ::: \
@@ -36,17 +31,19 @@ RUN <<EOT
     56730D5401028683275BD23C23EFEFE93C4CFFFE \
     77984A986EBC2AA786BC0F66B01FBB92821C587A \
     8FCCA13FEF1D0C2E91008E09770F7A9A5AE15600
-  EOT
+  
+
+EOT
 
 ENV NODE_MAJOR 8.11
 ENV NODE_VERSION 8.11.3
-# node 8.11.3 comes prepackaged with npm 5.6.0
-ENV NPM_VERSION 5.6.0
+# TODO: need to export npm version programmatically
+# ENV NPM_VERSION 5.6.0
 ENV LANG en_US.utf-8
 
 RUN <<EOT
 #!/usr/bin/env bash
-  set -exu
+  set -eux
 
   # set up working directory
   mkdir -p /usr/src/app

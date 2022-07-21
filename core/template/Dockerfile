@@ -1,6 +1,6 @@
 # syntax=<%= docker_syntax %>
 
-<%= generation_message -%>
+<%= generation_message %>
 
 ########## tini ##########################
 # Grab tini binary (used as default entrypoint)
@@ -67,7 +67,7 @@ EOT
 ENV LANG en_US.utf-8
 ENV LANGUAGE en_US:en
 
-<% if flavor == 'fat' -%>
+<% if flavor == 'fat' %>
 RUN <<EOT
 #!/usr/bin/env bash
 set -eux -o pipefail
@@ -85,7 +85,7 @@ mkdir ~/.gnupg
 echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf
 rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 EOT
-<% end -%>
+<% end %>
 
 # Install Tini for init use (reaps defunct processes and forwards signals)
 COPY --from=tini /tini /tini

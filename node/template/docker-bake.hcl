@@ -1,4 +1,4 @@
-<%= generation_message -%>
+<%= generation_message %>
 
 # https://docs.docker.com/engine/reference/commandline/buildx_bake/#file-definition
 <%
@@ -11,7 +11,7 @@ node_tags = [
 ]
 node_tags.push("#{full_ecr_path}:#{node_version}") if flavor&.casecmp('slim')&.zero?
 custom_tags = docker_tags(node_tags)
--%>
+%>
 
 variable "PWD" {default="" }
 variable "CI_BUILDX_CACHE" {default=false }

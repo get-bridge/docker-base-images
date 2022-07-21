@@ -102,6 +102,12 @@ node:
     '8.11-fat':
       <<: *NODE811
       flavor: fat
+    '14.20': &NODE1420
+      node_major: 14.20
+      node_version: 14.20.0
+    '14.20-fat':
+      <<: *NODE1420
+      flavor: fat
     # '3.1': &RUBY31
     #   ruby_major: 3.1
     #   ruby_version: 3.1.2

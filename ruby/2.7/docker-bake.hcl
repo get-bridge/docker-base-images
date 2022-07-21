@@ -4,6 +4,7 @@
 
 # https://docs.docker.com/engine/reference/commandline/buildx_bake/#file-definition
 
+
 variable "PWD" {default="" }
 variable "CI_BUILDX_CACHE" {default=false }
 

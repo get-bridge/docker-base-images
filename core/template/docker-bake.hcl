@@ -1,4 +1,4 @@
-<%= generation_message -%>
+<%= generation_message %>
 
 # https://docs.docker.com/engine/reference/commandline/buildx_bake/#file-definition
 <%
