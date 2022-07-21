@@ -104,14 +104,19 @@ RUN <<EOT
   make install
   apt-mark auto '.*' > /dev/null
   apt-mark manual $savedAptMark > /dev/null
-  find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' \
-          | awk '/=>/ { print $(NF-1) }' \
-          | sort -u \
-          | grep -vE '^/usr/local/lib/' \
-          | xargs -r dpkg-query --search \
-          | cut -d: -f1 \
-          | sort -u \
-          | xargs -r apt-mark manual
+  # Disable pipefail because apt-mark errors when packages are already marked as manual.
+  # Perhaps there is a more sophisticated filtering solution but for the sake of enabling
+  # `-o pipefail` for the rest of this script, it's worth toggling off and on here.
+  set +o pipefail ; \
+    find /usr/local -type f -executable -not \( -name '*tkinter*' \) -exec ldd '{}' ';' \
+            | awk '/=>/ { print $(NF-1) }' \
+            | sort -u \
+            | grep -vE '^/usr/local/lib/' \
+            | xargs -r dpkg-query --search \
+            | cut -d: -f1 \
+            | sort -u \
+            | xargs -r apt-mark manual; \
+    set -o pipefail
   apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   cd /
