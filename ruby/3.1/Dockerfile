@@ -12,11 +12,11 @@ USER root
 
 RUN <<EOT
 #!/usr/bin/env bash
-  set -eux
+  set -eux -o pipefail
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
-  apt update
-  apt install -qqy --no-install-recommends \
+  apt-get update
+  apt-get install --yes --no-install-recommends \
     bzip2 \
     libffi-dev \
     libgmp-dev \
@@ -46,10 +46,10 @@ ENV RUBY_VERSION 3.1.2
 # Adapted from https://github.com/docker-library/ruby/blob/master
 RUN <<EOT
 #!/usr/bin/env bash
-  set -eux
+  set -eux -o pipefail
   savedAptMark="$(apt-mark showmanual)"
-  apt update
-  apt install -qqy --no-install-recommends \
+  apt-get update
+  apt-get install --yes --no-install-recommends \
     autoconf \
     bison \
     dpkg-dev \
@@ -115,7 +115,7 @@ USER docker
 
 RUN <<EOT
 #!/usr/bin/env bash
-  set -eux
+  set -eux -o pipefail
   echo 'gem: --no-document' >> /home/docker/.gemrc
   mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/build_info \
            /home/docker/.gem/ruby/$RUBY_MAJOR.0/cache \
