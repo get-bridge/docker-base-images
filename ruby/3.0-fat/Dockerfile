@@ -26,13 +26,13 @@ RUN <<EOT
     arch=$(dpkg --print-architecture)
   if [ "$arch" == "arm64" ]; then
     # Ruby versions older than or equal to 3.0 require an older version of openssl :| which is really annoying
-    echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish main restricted" >> /etc/apt/sources.list
-    echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish-updates main restricted" >> /etc/apt/sources.list
-    echo "deb http://ports.ubuntu.com/ubuntu-ports/ impish-security main restricted" >> /etc/apt/sources.list
+    echo "deb http://ports.ubuntu.com/ubuntu-ports/ focal main restricted" >> /etc/apt/sources.list
+    echo "deb http://ports.ubuntu.com/ubuntu-ports/ focal-updates main restricted" >> /etc/apt/sources.list
+    echo "deb http://ports.ubuntu.com/ubuntu-ports/ focal-security main restricted" >> /etc/apt/sources.list
   else
-    echo "deb http://archive.ubuntu.com/ubuntu/ impish main restricted" >> /etc/apt/sources.list
-    echo "deb http://archive.ubuntu.com/ubuntu/ impish-updates main restricted" >> /etc/apt/sources.list
-    echo "deb http://security.ubuntu.com/ubuntu/ impish-security main restricted" >> /etc/apt/sources.list
+    echo "deb http://archive.ubuntu.com/ubuntu/ focal main restricted" >> /etc/apt/sources.list
+    echo "deb http://archive.ubuntu.com/ubuntu/ focal-updates main restricted" >> /etc/apt/sources.list
+    echo "deb http://security.ubuntu.com/ubuntu/ focal-security main restricted" >> /etc/apt/sources.list
   fi
   apt update
   apt install -qqy --allow-downgrades \
