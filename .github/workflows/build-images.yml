@@ -20,7 +20,7 @@ env:
 jobs:
   build-core-images:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push'
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
       # Build the core images first using the matrix strategy, from there, we will get a list
       # of other docker images to build concurrently.
@@ -81,7 +81,7 @@ jobs:
   set-outputs:
     runs-on: ubuntu-latest
     needs: build-core-images
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push'
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -98,7 +98,7 @@ jobs:
   build-all-images:
     needs: set-outputs
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push'
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
       max-parallel: 4
       matrix:
