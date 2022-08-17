@@ -62,7 +62,8 @@ jobs:
   set-outputs:
     runs-on: ubuntu-latest
     needs: build-core-images
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: false
+    # if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
@@ -79,9 +80,9 @@ jobs:
   build-all-images:
     needs: set-outputs
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: false
+    # if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
-      max-parallel: 4
       matrix:
         ci-files: ${{ fromJSON(needs.set-outputs.outputs.matrix) }}
     steps:
