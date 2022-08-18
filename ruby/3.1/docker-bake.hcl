@@ -19,6 +19,6 @@ target "ruby" {
         "type=gha"
     ]
     cache-to = [
-        "type=gha,mode=max"
+        "type=gha,mode=max,scope=ruby/3.1"
     ]
 }

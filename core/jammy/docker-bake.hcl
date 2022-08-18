@@ -20,6 +20,6 @@ target "core" {
         "type=gha"
     ]
     cache-to = [
-        "type=gha,mode=max"
+        "type=gha,mode=max,scope=core/jammy"
     ]
 }
