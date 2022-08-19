@@ -57,8 +57,7 @@ jobs:
         uses: docker/bake-action@v2.2.0
         with:
           pull: true
-          push: true
-          # push: ${{ github.ref == 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.core-paths }}
 
   set-outputs:
