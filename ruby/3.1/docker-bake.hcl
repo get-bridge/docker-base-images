@@ -16,9 +16,9 @@ target "ruby" {
     context = "${PWD}/ruby/3.1"
     platforms = ["linux/amd64", "linux/arm64"]
     cache-from = [
-        "type=gha"
+        "type=gha,scope=ruby/3.1"
     ]
     cache-to = [
-        "type=gha,mode=max,scope=ruby/3.1"
+        "type=gha,scope=ruby/3.1,mode=max"
     ]
 }

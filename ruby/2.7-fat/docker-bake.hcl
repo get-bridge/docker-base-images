@@ -16,9 +16,9 @@ target "ruby" {
     context = "${PWD}/ruby/2.7-fat"
     platforms = ["linux/amd64", "linux/arm64"]
     cache-from = [
-        "type=gha"
+        "type=gha,scope=ruby/2.7-fat"
     ]
     cache-to = [
-        "type=gha,mode=max,scope=ruby/2.7-fat"
+        "type=gha,scope=ruby/2.7-fat,mode=max"
     ]
 }

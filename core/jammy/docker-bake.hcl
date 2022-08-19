@@ -17,9 +17,9 @@ target "core" {
     context = "${PWD}/core/jammy"
     platforms = ["linux/amd64", "linux/arm64"]
     cache-from = [
-        "type=gha"
+        "type=gha,scope=core/jammy"
     ]
     cache-to = [
-        "type=gha,mode=max,scope=core/jammy"
+        "type=gha,scope=core/jammy,mode=max"
     ]
 }
