@@ -8,7 +8,6 @@ custom_tags = docker_tags(core_tags)
 %>
 
 variable "PWD" {default="" }
-variable "CI_BUILDX_CACHE" {default=false }
 
 group "default" {
     targets = ["<%= image_name %>"]
@@ -19,6 +18,10 @@ target "<%= image_name %>" {
     tags = <%= custom_tags %>
     context = "${PWD}/<%= image_name %>/<%= version %>"
     platforms = ["linux/amd64", "linux/arm64"]
-    cache-from = [equal(true,CI_BUILDX_CACHE) ? "type=local,src=/tmp/.buildx-cache": "",]
-    cache-to = [equal(true,CI_BUILDX_CACHE) ? "type=local,dest=/tmp/.buildx-cache-new,mode=max": ""]
+    cache-from = [
+        "type=gha,scope=<%= image_name %>/<%= version %>"
+    ]
+    cache-to = [
+        "type=gha,scope=<%= image_name %>/<%= version %>,mode=max"
+    ]
 }

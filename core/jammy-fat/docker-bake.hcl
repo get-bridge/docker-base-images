@@ -6,7 +6,6 @@
 
 
 variable "PWD" {default="" }
-variable "CI_BUILDX_CACHE" {default=false }
 
 group "default" {
     targets = ["core"]
@@ -17,6 +16,10 @@ target "core" {
     tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy-fat"]
     context = "${PWD}/core/jammy-fat"
     platforms = ["linux/amd64", "linux/arm64"]
-    cache-from = [equal(true,CI_BUILDX_CACHE) ? "type=local,src=/tmp/.buildx-cache": "",]
-    cache-to = [equal(true,CI_BUILDX_CACHE) ? "type=local,dest=/tmp/.buildx-cache-new,mode=max": ""]
+    cache-from = [
+        "type=gha,scope=core/jammy-fat"
+    ]
+    cache-to = [
+        "type=gha,scope=core/jammy-fat,mode=max"
+    ]
 }
