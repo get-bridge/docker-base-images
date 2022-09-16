@@ -12,20 +12,14 @@
 #       sqlite_version: 2 # overrides the 3 from defaults above
 #       additional_tags: foo:latest # Adds additonal tags to docker-bake.hcl
 #     '4':
-#clojure:
-  #versions:
-    #'11':
-      #java_version: '11'
-      #lein_version: '2.9.1'
-      #package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
-      #jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
+#
 
 # Define global defaults here, that apply to all images.
 # Can be overriden by image specific defaults
 globals:
   defaults:
     additional_tags: []
-    base_image: ubuntu:jammy
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
     distribution: ubuntu
     distribution_code_name: jammy
     docker_syntax: docker/dockerfile:1.4  # https://hub.docker.com/r/docker/dockerfile
@@ -36,6 +30,7 @@ globals:
 
 core:
   defaults:
+    base_image: ubuntu:jammy
     flavor: slim
   versions:
     jammy:
@@ -45,24 +40,8 @@ core:
     jammy-fat:
       flavor: fat
 
-#java:
-  #defaults:
-    #base_image: get-bridge/core:jammy
-  #versions:
-    #'graalvm-11':
-      #distro: jammy
-      #flavor: jdk
-      #java_version: 11
-    #'11':
-      #java_version: 11
-      #flavor: jdk
-    #'11-jre':
-      #java_version: 11
-      #flavor: jre
-
 ruby: &RUBY
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
     bundler_version: 2.3.14
     rubygems_version: 3.3.14
     flavor: slim
@@ -89,3 +68,24 @@ ruby: &RUBY
     '3.1-fat':
       <<: *RUBY31
       flavor: fat
+
+# java:
+#   versions:
+#     '11':
+#       java_version: 11
+#       flavor: jdk
+#     # '11-jre':
+#     #   java_version: 11
+#     #   flavor: jre
+#     # 'graalvm-11':
+#     #   distro: jammy
+#     #   flavor: jdk
+#     #   java_version: 11
+
+# clojure:
+#   versions:
+#     '11':
+#       java_version: '11'
+#       lein_version: '2.9.1'
+#       package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
+#       jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'

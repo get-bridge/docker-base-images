@@ -10,12 +10,13 @@ ENV TINI_VERSION=<%= tini_version %>
 # Options added via tini README.md suggestion
 # https://github.com/krallin/tini#building-tini
 ENV CFLAGS="-DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37"
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN <<EOT
 #!/usr/bin/env bash
-set -e
-apt update
-apt install -qqy --no-install-recommends \
+set -exu -o pipefail
+apt-get update
+apt-get install --yes --no-install-recommends \
   build-essential \
   ca-certificates \
   cmake \
@@ -24,32 +25,34 @@ apt install -qqy --no-install-recommends \
   make \
   tar
 update-ca-certificates
-curl -L https://github.com/krallin/tini/archive/refs/tags/$TINI_VERSION.tar.gz -o tini-$TINI_VERSION.tar.gz
-tar -xf tini-$TINI_VERSION.tar.gz
+curl -sL \
+  "https://github.com/krallin/tini/archive/refs/tags/$TINI_VERSION.tar.gz" \
+  -o "tini-$TINI_VERSION.tar.gz"
+tar -xf "tini-$TINI_VERSION.tar.gz"
 # Compile tini from source to ensure compatability with the m1 architectures
-cd tini-$(echo $TINI_VERSION | cut -c2-)
+cd "tini-$(echo "$TINI_VERSION" | cut -c2-)"
 cmake .
-make
+make -j "$(nproc)"
 # Ensure tini runs
 ./tini-static --version
 mv ./tini-static /tini
 EOT
 
-
 ########## Core image ##########################
 FROM <%= base_image %>
 LABEL com.get-bridge.image.authors="get-bridge"
 ENV DEBIAN_FRONTEND=noninteractive
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Create a 'docker' user
 RUN <<EOT
 #!/usr/bin/env bash
-set -e
+set -exu -o pipefail
 addgroup --gid 9999 docker
 adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
 usermod -L docker
-apt update
-apt install -qqy --no-install-recommends \
+apt-get update
+apt-get install --yes --no-install-recommends \
   ca-certificates \
   curl \
   locales \
@@ -70,9 +73,9 @@ ENV LANGUAGE en_US:en
 <% if flavor == 'fat' -%>
 RUN <<EOT
 #!/usr/bin/env bash
-set -e
-apt update
-apt install -qqy --no-install-recommends \
+set -exu -o pipefail
+apt-get update
+apt-get install --yes --no-install-recommends \
   build-essential \
   git \
   gnupg2 \

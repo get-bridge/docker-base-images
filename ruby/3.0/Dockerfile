@@ -5,7 +5,7 @@
 # task `rake generate:ruby`
 
 ########## Ruby image ##########################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
 LABEL com.get-bridge.image.authors="get-bridge"
 
 USER root
