@@ -18,7 +18,7 @@ class Metadata
 
   # Ends up looking something like 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge
   def ecr_namespace
-    "#{ENV.fetch('ECR_REGISTRY', ecr_registry)}/get-bridge"
+    "#{ENV.fetch('REGISTRY', registry)}/get-bridge"
   end
 
   # Ends up looking something like 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby

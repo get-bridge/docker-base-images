@@ -3,7 +3,7 @@
 <%= generation_message -%>
 
 ########## Java image ##########################
-FROM <%= base_image %>
+FROM <%= registry %>/<%= base_image %>
 LABEL com.get-bridge.image.authors="get-bridge"
 
 USER root
