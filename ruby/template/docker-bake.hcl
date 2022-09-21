@@ -19,8 +19,11 @@ group "default" {
     targets = ["<%= image_name %>"]
 }
 
+target "docker-metadata-action" {}
+
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "<%= image_name %>" {
+    inherits = "docker-metadata-action"
     tags = <%= custom_tags %>
     context = "${PWD}/<%= image_name %>/<%= version %>"
     platforms = ["linux/amd64", "linux/arm64"]

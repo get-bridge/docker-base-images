@@ -11,8 +11,11 @@ group "default" {
     targets = ["core"]
 }
 
+target "docker-metadata-action" {}
+
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
+    inherits = "docker-metadata-action"
     tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy-fat"]
     context = "${PWD}/core/jammy-fat"
     platforms = ["linux/amd64", "linux/arm64"]
