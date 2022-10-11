@@ -45,20 +45,20 @@ core:
     jammy-fat:
       flavor: fat
 
-#java:
-  #defaults:
-    #base_image: get-bridge/core:jammy
-  #versions:
-    #'graalvm-11':
-      #distro: jammy
-      #flavor: jdk
-      #java_version: 11
-    #'11':
-      #java_version: 11
-      #flavor: jdk
-    #'11-jre':
-      #java_version: 11
-      #flavor: jre
+java:
+  defaults:
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+  versions:
+    # 'graalvm-11':
+    #   distro: jammy
+    #   flavor: jdk
+    #   java_version: 11
+    '11':
+      java_version: 11
+      flavor: jdk
+    '11-jre':
+      java_version: 11
+      flavor: jre
 
 ruby: &RUBY
   defaults:
