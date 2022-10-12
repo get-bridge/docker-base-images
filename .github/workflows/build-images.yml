@@ -54,7 +54,7 @@ jobs:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
       - name: Build and push
-        uses: docker/bake-action@v2.2.0
+        uses: docker/bake-action@v2.3.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
@@ -110,7 +110,7 @@ jobs:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
       - name: Build and push
-        uses: docker/bake-action@v2.2.0
+        uses: docker/bake-action@v2.3.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
