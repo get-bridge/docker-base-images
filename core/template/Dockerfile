@@ -90,7 +90,13 @@ EOT
 # Install Tini for init use (reaps defunct processes and forwards signals)
 COPY --from=tini /tini /tini
 
-ENTRYPOINT ["/tini", "--"]
-
 # Switch to the 'docker' user
 USER docker
+
+# always use tini
+ENTRYPOINT ["/tini", "--"]
+
+# keep backwards compatability with use cases that assume CMD is 'bash' since
+# specifying an ENTRYPOINT always clears the CMD that was inheritted by the FROM image
+# ref: https://docs.docker.com/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact
+CMD ["bash"]
