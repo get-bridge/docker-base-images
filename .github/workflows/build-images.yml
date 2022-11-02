@@ -24,7 +24,11 @@ jobs:
       # Build the core images first using the matrix strategy, from there, we will get a list
       # of other docker images to build concurrently.
       matrix:
-        core-paths: ["core/jammy/docker-bake.hcl", "core/jammy-fat/docker-bake.hcl"]
+        core-paths:
+          - "core/bionic/docker-bake.hcl"
+          - "core/bionic-fat/docker-bake.hcl"
+          - "core/jammy/docker-bake.hcl"
+          - "core/jammy-fat/docker-bake.hcl"
     steps:
       # If you want to set an environment variable equal to the result of a script
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
