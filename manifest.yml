@@ -44,6 +44,13 @@ core:
     # This image should only be used via docker multi-stage build and not deployed, see README for details
     jammy-fat:
       flavor: fat
+    bionic:
+      base_image: ubuntu:bionic
+      distribution_code_name: bionic
+    bionic-fat:
+      base_image: ubuntu:bionic
+      distribution_code_name: bionic
+      flavor: fat
 
 java:
   defaults:
