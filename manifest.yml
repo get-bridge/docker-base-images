@@ -104,7 +104,7 @@ ruby-passenger:
       base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7
       ruby_major: 2.7
       ruby_version: 2.7.6
-    '2.7-fat':
-      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7-fat
-      ruby_major: 2.7
-      ruby_version: 2.7.6
+    # '2.7-fat':
+    #   base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7-fat
+    #   ruby_major: 2.7
+    #   ruby_version: 2.7.6
