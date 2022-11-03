@@ -23,6 +23,6 @@ namespace :ci do
 
     # https://github.blog/changelog/2022-10-11-github-actions-deprecating-save-state-and-set-output-commands/
     # https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions#setting-an-output-parameter
-    system('echo', "\"MATRIX=#{docker_contexts}\" >> $GITHUB_OUTPUT")
+    system('echo', "\"matrix=#{docker_contexts}\" >> $GITHUB_OUTPUT")
   end
 end
