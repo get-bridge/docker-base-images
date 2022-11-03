@@ -88,7 +88,7 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
       matrix:
-        ci-files: ${{ fromJSON(needs.set-outputs.outputs.matrix) }}
+        ci-files: ${{ fromJSON(steps.set-outputs.outputs.MATRIX) }}
     steps:
       - name: set PWD environt variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
