@@ -20,6 +20,6 @@ namespace :ci do
     end.to_json
 
     puts 'setting matrix output'
-    system('echo', "::set-output name=matrix::#{docker_contexts}")
+    system('echo', "\"matrix=#{docker_contexts}\" >> $GITHUB_OUTPUT")
   end
 end
