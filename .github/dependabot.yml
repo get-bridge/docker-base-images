@@ -29,6 +29,8 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -38,6 +40,30 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: core/bionic
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: core/bionic-fat
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -47,6 +73,8 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -56,6 +84,8 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -65,6 +95,8 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -74,6 +106,8 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -83,6 +117,8 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
 
@@ -92,5 +128,7 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - do-not-merge
+      - notification-only
     assignees:
       - djbender
