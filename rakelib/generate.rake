@@ -20,11 +20,11 @@ namespace :generate do
       templates = template_filenames.map { |filename| Template.new(File.join(template_dir, filename)) }
 
       defaults = details.fetch('defaults', {})
-      details['versions'].each do |version, values|
+      details.fetch('versions').each do |version, values|
         print "- #{version}... "
         values ||= {}
         Util.with_clean_output_dir(image_name, version) do |output_dir|
-          version = values['version_override'] if values['version_override']
+          version = values.fetch('version_override', version)
           template_values = Util::GLOBAL_DEFAULTS
                             .fetch('defaults', {})
                             .merge(defaults)
