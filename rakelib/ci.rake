@@ -15,11 +15,12 @@ namespace :ci do
         path.include?('examples')
     end
 
+    # adding a puts here just returns an enumartor (i think this is rake's fault)
+    # so we set it to a variable and the use puts on that
     docker_contexts = dockerfiles.map do |path|
       Pathname.new(path).relative_path_from(Util::PROJECT_PATHNAME).dirname + Util::BAKE_FILE
     end.to_json
 
-    puts 'setting matrix output'
-    system('echo', "::set-output name=matrix::#{docker_contexts}")
+    puts docker_contexts
   end
 end
