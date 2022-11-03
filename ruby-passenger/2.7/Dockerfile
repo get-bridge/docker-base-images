@@ -5,7 +5,7 @@
 # task `rake generate:ruby-passenger`
 
 ########## Ruby Passenger image ##########################
-FROM host.docker.internal:5555/get-bridge/ruby:2.7-fat as build
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7-fat as build
 LABEL com.get-bridge.image.authors="get-bridge"
 
 USER root
