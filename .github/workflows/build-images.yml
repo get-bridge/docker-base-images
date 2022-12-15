@@ -125,5 +125,5 @@ jobs:
         uses: docker/bake-action@v2.3.0
         with:
           pull: true
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/main' }} || ${{ matrix.ci-files == 'clojure/11/docker-bake.hcl' }}
           files: ${{ matrix.ci-files }}
