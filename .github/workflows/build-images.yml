@@ -96,7 +96,7 @@ jobs:
         ci-files: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
     steps:
       - name: set PWD environt variable
-        run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
+        run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3.2.0
         with:

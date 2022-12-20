@@ -11,14 +11,6 @@
 #     '3':
 #       sqlite_version: 2 # overrides the 3 from defaults above
 #       additional_tags: foo:latest # Adds additonal tags to docker-bake.hcl
-#     '4':
-#clojure:
-  #versions:
-    #'11':
-      #java_version: '11'
-      #lein_version: '2.9.1'
-      #package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
-      #jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
 
 # Define global defaults here, that apply to all images.
 # Can be overriden by image specific defaults
@@ -33,6 +25,18 @@ globals:
     tini_version: v0.19.0
 
 ############### Image definitions #################################
+
+clojure:
+  defaults:
+    flavor: slim
+  versions:
+    '11':
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
+      latest: true
+      java_version: '11'
+      lein_version: '2.9.1'
+      package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
+      jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
 
 core:
   defaults:
@@ -54,7 +58,7 @@ core:
 
 java:
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
   versions:
     # 'graalvm-11':
     #   distro: jammy
@@ -69,7 +73,7 @@ java:
 
 ruby: &RUBY
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
     bundler_version: 2.3.14
     rubygems_version: 3.3.14
     flavor: slim
