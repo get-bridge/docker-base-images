@@ -101,7 +101,7 @@ ruby: &RUBY
       flavor: fat
     '3.2': &RUBY32
       ruby_major: 3.2
-      ruby_version: 3.2
+      ruby_version: 3.2.0
       ruby_download_sha256: d2f4577306e6dd932259693233141e5c3ec13622c95b75996541b8d5b68b28b4
       latest: true # apply the latest tag
     '3.2-fat':

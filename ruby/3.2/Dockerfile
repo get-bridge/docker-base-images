@@ -38,7 +38,7 @@ ENV LANG en_US.utf-8
 ENV RUBYGEMS_VERSION 3.4.5
 ENV RUBY_DOWNLOAD_SHA256 d2f4577306e6dd932259693233141e5c3ec13622c95b75996541b8d5b68b28b4
 ENV RUBY_MAJOR 3.2
-ENV RUBY_VERSION 3.2
+ENV RUBY_VERSION 3.2.0
 
 # NOTE: some of ruby's build scripts are written in ruby so we need to install ruby
 # in order to compile ruby. We use apt-mark to uninstall packages we don't need.
