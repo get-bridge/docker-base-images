@@ -27,7 +27,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1.134.0
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.1'
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - run: bundle exec rake generate:all
@@ -99,7 +99,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1.134.0
         with:
-          ruby-version: '3.2'
+          ruby-version: '3.1'
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Set matrix output
