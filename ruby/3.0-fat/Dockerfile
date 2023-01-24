@@ -54,7 +54,7 @@ EOT
 ENV BUNDLER_VERSION 2.4.5
 ENV LANG en_US.utf-8
 ENV RUBYGEMS_VERSION 3.4.5
-ENV RUBY_DOWNLOAD_SHA256 4b63c59ebdc0abcea139a561d67dfa9770af2d9619390f34b8a53f9625a1090d
+ENV RUBY_DOWNLOAD_SHA256 cf7cb5ba2030fe36596a40980cdecfd79a0337d35860876dc2b10a38675bddde
 ENV RUBY_MAJOR 3.0
 ENV RUBY_VERSION 3.0.5
 
@@ -86,11 +86,11 @@ RUN <<EOT
     wget \
     xz-utils
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
-  curl -L https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz -o ruby.tar.xz
-  echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict
+  curl --remote-name --location https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz
+  echo "$RUBY_DOWNLOAD_SHA256 ruby-$RUBY_VERSION.tar.xz" | sha256sum --check --strict
   mkdir -p /usr/src/ruby
-  tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1
-  rm ruby.tar.xz
+  tar -xJf ruby-$RUBY_VERSION.tar.xz -C /usr/src/ruby --strip-components=1
+  rm ruby-$RUBY_VERSION.tar.xz
   cd /usr/src/ruby
   # hack in "ENABLE_PATH_CHECK" disabling to suppress: warning: Insecure world writable dir
   sed -i 's/define ENABLE_PATH_CHECK 1/define ENABLE_PATH_CHECK 0/g' file.c

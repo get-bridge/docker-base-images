@@ -88,7 +88,7 @@ ruby: &RUBY
     '3.0': &RUBY30
       ruby_major: 3.0
       ruby_version: 3.0.5
-      ruby_download_sha256: 4b63c59ebdc0abcea139a561d67dfa9770af2d9619390f34b8a53f9625a1090d
+      ruby_download_sha256: cf7cb5ba2030fe36596a40980cdecfd79a0337d35860876dc2b10a38675bddde
     '3.0-fat':
       <<: *RUBY30
       flavor: fat

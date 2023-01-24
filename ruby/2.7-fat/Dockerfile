@@ -86,11 +86,11 @@ RUN <<EOT
     wget \
     xz-utils
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
-  curl -L https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz -o ruby.tar.xz
-  echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict
+  curl --remote-name --location https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz
+  echo "$RUBY_DOWNLOAD_SHA256 ruby-$RUBY_VERSION.tar.xz" | sha256sum --check --strict
   mkdir -p /usr/src/ruby
-  tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1
-  rm ruby.tar.xz
+  tar -xJf ruby-$RUBY_VERSION.tar.xz -C /usr/src/ruby --strip-components=1
+  rm ruby-$RUBY_VERSION.tar.xz
   cd /usr/src/ruby
   # hack in "ENABLE_PATH_CHECK" disabling to suppress: warning: Insecure world writable dir
   sed -i 's/define ENABLE_PATH_CHECK 1/define ENABLE_PATH_CHECK 0/g' file.c
