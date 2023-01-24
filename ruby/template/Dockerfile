@@ -13,8 +13,8 @@ RUN <<EOT
   set -eux
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
-  apt update
-  apt install -qqy --no-install-recommends \
+  apt-get update
+  apt-get install --yes --no-install-recommends \
     bzip2 \
     libffi-dev \
     libgmp-dev \
@@ -36,8 +36,8 @@ RUN <<EOT
     echo "deb http://archive.ubuntu.com/ubuntu/ focal-updates main restricted" >> /etc/apt/sources.list
     echo "deb http://security.ubuntu.com/ubuntu/ focal-security main restricted" >> /etc/apt/sources.list
   fi
-  apt update
-  apt install -qqy --allow-downgrades \
+  apt-get update
+  apt-get install --yes --allow-downgrades \
     libssl-dev=1.1.1* \
     openssl=1.1.1*
   apt-mark hold \
@@ -69,8 +69,8 @@ RUN <<EOT
 #!/usr/bin/env bash
   set -eux
   savedAptMark="$(apt-mark showmanual)"
-  apt update
-  apt install -qqy --no-install-recommends \
+  apt-get update
+  apt-get install --yes --no-install-recommends \
     autoconf \
     bison \
     dpkg-dev \
@@ -115,7 +115,7 @@ RUN <<EOT
           | cut -d: -f1 \
           | sort -u \
           | xargs -r apt-mark manual
-  apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false
+  apt-get purge --yes --auto-remove -o APT::AutoRemove::RecommendsImportant=false
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
   cd /
   rm -r /usr/src/ruby
@@ -126,8 +126,8 @@ RUN <<EOT
   gem install --no-document bundler -v $BUNDLER_VERSION
 <% if flavor == 'fat' -%>
   # Install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
-  apt update
-  apt install -qqy --no-install-recommends \
+  apt-get update
+  apt-get install --yes --no-install-recommends \
     autoconf \
     bison \
     build-essential \

@@ -16,8 +16,8 @@ ENV CFLAGS="-DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37"
 RUN <<EOT
 #!/usr/bin/env bash
 set -e
-apt update
-apt install -qqy --no-install-recommends \
+apt-get update
+apt-get install --yes --no-install-recommends \
   build-essential \
   ca-certificates \
   cmake \
@@ -50,8 +50,8 @@ set -e
 addgroup --gid 9999 docker
 adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
 usermod -L docker
-apt update
-apt install -qqy --no-install-recommends \
+apt-get update
+apt-get install --yes --no-install-recommends \
   ca-certificates \
   curl \
   locales \
@@ -72,8 +72,8 @@ ENV LANGUAGE en_US:en
 RUN <<EOT
 #!/usr/bin/env bash
 set -e
-apt update
-apt install -qqy --no-install-recommends \
+apt-get update
+apt-get install --yes --no-install-recommends \
   build-essential \
   git \
   gnupg2 \

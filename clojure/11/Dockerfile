@@ -20,8 +20,8 @@ RUN <<EOT
   set -eux
 
   # install readline library for repl
-  apt-get update
-  apt-get install --yes --no-install-recommends \
+  apt-get-get update
+  apt-get-get install --yes --no-install-recommends \
     leiningen \
     rlfe
 
