@@ -13,7 +13,7 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
-    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic-slim"]
+    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:0ff24c3a3cca3f6b252128497e3910a588a763d5", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic-slim"]
     context = "${PWD}/core/bionic"
     platforms = ["linux/amd64", "linux/arm64"]
     cache-from = [

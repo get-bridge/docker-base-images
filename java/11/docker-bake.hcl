@@ -12,7 +12,7 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "java" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11-jdk-jammy"]
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:0ff24c3a3cca3f6b252128497e3910a588a763d5", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11-jdk-jammy"]
   context = "${PWD}/java/11"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [

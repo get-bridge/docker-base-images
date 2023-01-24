@@ -38,7 +38,7 @@ class Metadata
   private
 
   def github_sha
-    ENV.fetch('GITHUB_SHA', nil)
+    ENV.fetch('GITHUB_SHA', `git rev-parse HEAD`.chomp)
   end
 
   # Examples
