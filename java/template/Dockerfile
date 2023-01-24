@@ -13,8 +13,8 @@ RUN <<EOT
   set -eux
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
-  apt update
-  apt install --yes --no-install-recommends \
+  apt-get update
+  apt-get install --yes --no-install-recommends \
     openjdk-<%= java_version %>-<%= flavor %>
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
