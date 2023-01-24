@@ -21,6 +21,11 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     steps:
+      - uses: ruby/setup-ruby@v1.134.0
+        with:
+          ruby-version: '3.2'
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
       - run: bundle exec rake generate:all
       - run: |
           [[ $(git status --porcelain) ]] && exit 1
@@ -90,7 +95,7 @@ jobs:
 
       - uses: ruby/setup-ruby@v1.134.0
         with:
-          ruby-version: '3.1'
+          ruby-version: '3.2'
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
 
       - name: Set matrix output
