@@ -5,7 +5,7 @@
 # task `rake generate:ruby`
 
 ########## Ruby image ##########################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
 LABEL com.get-bridge.image.authors="get-bridge"
 
 USER root
@@ -51,7 +51,7 @@ install: --no-document
 update: --no-document
 EOT
 
-ENV BUNDLER_VERSION 2.3.14
+ENV BUNDLER_VERSION 2.4.5
 ENV LANG en_US.utf-8
 ENV RUBYGEMS_VERSION 3.3.14
 ENV RUBY_DOWNLOAD_SHA256 8e22fc7304520435522253210ed0aa9a50545f8f13c959fe01a05aea06bef2f0
