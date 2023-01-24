@@ -54,9 +54,9 @@ EOT
 ENV BUNDLER_VERSION 2.4.5
 ENV LANG en_US.utf-8
 ENV RUBYGEMS_VERSION 3.4.5
-ENV RUBY_DOWNLOAD_SHA256 54dcd3044726c4ab75a9d4604720501442b229a3aed6a55fe909567da8807f24
+ENV RUBY_DOWNLOAD_SHA256 b38dff2e1f8ce6e5b7d433f8758752987a6b2adfd9bc7571dbc42ea5d04e3e4c
 ENV RUBY_MAJOR 2.7
-ENV RUBY_VERSION 2.7.6
+ENV RUBY_VERSION 2.7.7
 
 # NOTE: some of ruby's build scripts are written in ruby so we need to install ruby
 # in order to compile ruby. We use apt-mark to uninstall packages we don't need.
@@ -86,11 +86,11 @@ RUN <<EOT
     wget \
     xz-utils
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
-  curl -L https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz -o ruby.tar.xz
-  echo "$RUBY_DOWNLOAD_SHA256 *ruby.tar.xz" | sha256sum --check --strict
+  curl --remote-name --location https://cache.ruby-lang.org/pub/ruby/${RUBY_MAJOR%-rc}/ruby-$RUBY_VERSION.tar.xz
+  echo "$RUBY_DOWNLOAD_SHA256 ruby-$RUBY_VERSION.tar.xz" | sha256sum --check --strict
   mkdir -p /usr/src/ruby
-  tar -xJf ruby.tar.xz -C /usr/src/ruby --strip-components=1
-  rm ruby.tar.xz
+  tar -xJf ruby-$RUBY_VERSION.tar.xz -C /usr/src/ruby --strip-components=1
+  rm ruby-$RUBY_VERSION.tar.xz
   cd /usr/src/ruby
   # hack in "ENABLE_PATH_CHECK" disabling to suppress: warning: Insecure world writable dir
   sed -i 's/define ENABLE_PATH_CHECK 1/define ENABLE_PATH_CHECK 0/g' file.c

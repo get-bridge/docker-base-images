@@ -12,7 +12,7 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "ruby" {
-    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0-fat-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0.4-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0.4-fat-jammy"]
+    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0-fat-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0.5-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.0.5-fat-jammy"]
     context = "${PWD}/ruby/3.0-fat"
     platforms = ["linux/amd64", "linux/arm64"]
     cache-from = [
