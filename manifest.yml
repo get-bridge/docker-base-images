@@ -64,11 +64,35 @@ java:
     #   distro: jammy
     #   flavor: jdk
     #   java_version: 11
+    '8':
+      java_version: 8
+      flavor: jdk
+    '8-jre':
+      java_version: 8
+      flavor: jre
     '11':
       java_version: 11
       flavor: jdk
     '11-jre':
       java_version: 11
+      flavor: jre
+    '17':
+      java_version: 17
+      flavor: jdk
+    '17-jre':
+      java_version: 17
+      flavor: jre
+    '18':
+      java_version: 18
+      flavor: jdk
+    '18-jre':
+      java_version: 18
+      flavor: jre
+    '19':
+      java_version: 19
+      flavor: jdk
+    '19-jre':
+      java_version: 19
       flavor: jre
 
 ruby: &RUBY

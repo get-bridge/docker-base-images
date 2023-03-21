@@ -22,7 +22,7 @@ RUN <<EOT
 
   # Check that java commands work
   [ "$(command -v java)" = '/usr/bin/java' ]
-  java --version
+  java -version
 EOT
 
 USER docker
