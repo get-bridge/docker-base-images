@@ -17,7 +17,9 @@ RUN <<EOT
   chown docker:docker /usr/src/app
   apt-get update
   apt-get install --yes --no-install-recommends \
-    openjdk-11-jre
+    ca-certificates-java
+  apt-get install --yes --no-install-recommends \
+    openjdk-19-jre
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
   # Check that java commands work

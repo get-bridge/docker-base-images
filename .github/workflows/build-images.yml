@@ -21,6 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
+      fail-fast: false
       # Build the core images first using the matrix strategy, from there, we will get a list
       # of other docker images to build concurrently.
       matrix:
@@ -92,6 +93,7 @@ jobs:
       - set-matrix
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
+      fail-fast: false
       matrix:
         ci-files: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
     steps:
