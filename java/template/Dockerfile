@@ -14,10 +14,6 @@ RUN <<EOT
   mkdir -p /usr/src/app
   chown docker:docker /usr/src/app
   apt-get update
-  <%- if java_version == 19 -%>
-  apt-get install --yes --no-install-recommends \
-    ca-certificates-java
-  <%- end -%>
   apt-get install --yes --no-install-recommends \
     openjdk-<%= java_version %>-<%= flavor %>
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
