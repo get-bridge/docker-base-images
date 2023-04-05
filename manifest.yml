@@ -95,6 +95,131 @@ java:
       java_version: 19
       flavor: jre
 
+# NOTE: versions for node and npm were sourced from here:
+#       https://nodejs.org/en/download/releases
+# NOTE: let's use the default versions of npm per the chart but I acknowledge this may
+#       need to change if incomaptabilities are found
+# NOTE: Yarn defaults to v1 since I don't believe we use anything later than that
+node: &NODE
+  defaults:
+    flavor: slim
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+  versions:
+    '8': &NODE8
+      # there is no deb for node v8 on anything later than bionic
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+      distribution_code_name: bionic
+      node_major: 8
+      node_version: 8.17.0
+      npm_version: 6.13.4
+    '8-fat':
+      <<: *NODE8
+      flavor: fat
+    '8-yarn':
+      <<: *NODE8
+      flavor: yarn
+      yarn_version: 1.22.19
+    '8-fat-yarn':
+      <<: *NODE8
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+    '10': &NODE10
+      # there is no deb for node v10 on anything later than bionic
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+      distribution_code_name: bionic
+      node_major: 10
+      node_version: 10.24.1
+      npm_version: 6.14.12
+    '10-fat':
+      <<: *NODE10
+      flavor: fat
+    '10-yarn':
+      <<: *NODE10
+      flavor: yarn
+      yarn_version: 1.22.19
+    '10-fat-yarn':
+      <<: *NODE10
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+    '12': &NODE12
+      # there is no deb for node v12 on anything later than bionic
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+      distribution_code_name: bionic
+      node_major: 12
+      node_version: 12.22.12
+      npm_version: 6.14.16
+    '12-fat':
+      <<: *NODE12
+      flavor: fat
+    '12-yarn':
+      <<: *NODE12
+      flavor: yarn
+      yarn_version: 1.22.19
+    '12-fat-yarn':
+      <<: *NODE12
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+    '14': &NODE14
+      node_major: 14
+      node_version: 14.21.3
+      npm_version: 6.14.18
+    '14-fat':
+      <<: *NODE14
+      flavor: fat
+    '14-yarn':
+      <<: *NODE14
+      flavor: yarn
+      yarn_version: 1.22.19
+    '14-fat-yarn':
+      <<: *NODE14
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+    '16': &NODE16
+      node_major: 16
+      node_version: 16.20.0
+      npm_version: 8.19.4
+    '16-fat':
+      <<: *NODE16
+      flavor: fat
+    '16-yarn':
+      <<: *NODE16
+      flavor: yarn
+      yarn_version: 1.22.19
+    '16-fat-yarn':
+      <<: *NODE16
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+    '18': &NODE18
+      node_major: 18
+      node_version: 18.15.0
+      npm_version: 9.5.0
+    '18-fat':
+      <<: *NODE18
+      flavor: fat
+    '18-yarn':
+      <<: *NODE18
+      flavor: yarn
+      yarn_version: 1.22.19
+    '18-fat-yarn':
+      <<: *NODE18
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+    '19': &NODE19
+      node_major: 19
+      node_version: 19.8.1
+      npm_version: 9.5.1
+    '19-fat':
+      <<: *NODE19
+      flavor: fat
+    '19-yarn':
+      <<: *NODE19
+      flavor: yarn
+      yarn_version: 1.22.19
+    '19-fat-yarn':
+      <<: *NODE19
+      flavor: fat-yarn
+      yarn_version: 1.22.19
+
 ruby: &RUBY
   defaults:
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
