@@ -16,9 +16,11 @@ target "java" {
   context = "${PWD}/java/19"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=java/19"
+    "type=gha,scope=java/19",
+    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java/java/19:cache"
   ]
   cache-to = [
-    "type=gha,scope=java/19,mode=max"
+    "type=gha,scope=java/19,mode=max",
+    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java/java/19:cache,mode=max"
   ]
 }

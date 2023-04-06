@@ -13,13 +13,15 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
-    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest"]
-    context = "${PWD}/core/jammy"
-    platforms = ["linux/amd64", "linux/arm64"]
-    cache-from = [
-        "type=gha,scope=core/jammy"
-    ]
-    cache-to = [
-        "type=gha,scope=core/jammy,mode=max"
-    ]
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest"]
+  context = "${PWD}/core/jammy"
+  platforms = ["linux/amd64", "linux/arm64"]
+  cache-from = [
+    "type=gha,scope=core/jammy",
+    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core/core/jammy:cache"
+  ]
+  cache-to = [
+    "type=gha,scope=core/jammy,mode=max",
+    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core/core/jammy:cache,mode=max"
+  ]
 }

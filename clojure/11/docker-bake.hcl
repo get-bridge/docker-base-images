@@ -16,9 +16,11 @@ target "clojure" {
   context = "${PWD}/clojure/11"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=clojure/11"
+    "type=gha,scope=clojure/11",
+    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure/clojure/11:cache"
   ]
   cache-to = [
-    "type=gha,scope=clojure/11,mode=max"
+    "type=gha,scope=clojure/11,mode=max",
+    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure/clojure/11:cache,mode=max"
   ]
 }
