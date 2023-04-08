@@ -41,7 +41,8 @@ jobs:
   build-core-images:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    needs: set-matrix
+    needs:
+      - set-matrix
     strategy:
       fail-fast: false
       # Build the core images first using the matrix strategy, from there, we
