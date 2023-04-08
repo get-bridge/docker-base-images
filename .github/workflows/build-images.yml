@@ -47,8 +47,7 @@ jobs:
       fail-fast: false
       # Build the core images first using the matrix strategy, from there, we
       # will get a list of other docker images to build concurrently.
-      matrix:
-        ci: ${{ fromJSON(needs.set-matrix.outputs.core-matrix) }}
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.core-matrix) }}
     steps:
       # If you want to set an environment variable equal to the result of a script
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
@@ -84,10 +83,10 @@ jobs:
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
-          files: ${{ matrix.ci}}
+          files: ${{ matrix.bake }}
           set: |
-            *.cache-from=${{ matrix.ci.cache-from }}
-            *.cache-to=${{ matrix.ci.cache-to }}
+            *.cache-from=${{ matrix.cache-from }}
+            *.cache-to=${{ matrix.cache-to }}
 
   build-all-images:
     runs-on: ubuntu-latest
@@ -97,8 +96,7 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
-      matrix:
-        ci: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
     steps:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
@@ -131,7 +129,7 @@ jobs:
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
-          files: ${{ matrix.ci.bake }}
+          files: ${{ matrix.bake }}
           set: |
-            *.cache-from=${{ matrix.ci.cache-from }}
-            *.cache-to=${{ matrix.ci.cache-to }}
+            *.cache-from=${{ matrix.cache-from }}
+            *.cache-to=${{ matrix.cache-to }}
