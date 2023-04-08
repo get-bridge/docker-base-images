@@ -15,12 +15,6 @@ target "ruby" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7-fat-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7.7-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:2.7.7-fat-jammy"]
   context = "${PWD}/ruby/2.7-fat"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = [
-    "type=gha,scope=ruby/2.7-fat",
-    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby/ruby/2.7-fat:cache"
-  ]
-  cache-to = [
-    "type=gha,scope=ruby/2.7-fat,mode=max",
-    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby/ruby/2.7-fat:cache,mode=max"
-  ]
+  cache-from = ["type=gha,scope=ruby/2.7-fat"]
+  cache-to = ["type=gha,scope=ruby/2.7-fat,mode=max"]
 }

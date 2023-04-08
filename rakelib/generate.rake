@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # lib/util has shared constants and methods used in rake tasks
 require_relative '../lib/util'
 require_relative '../lib/generation_message'

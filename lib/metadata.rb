@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This class could be replaced with something like OpenStruct,
 # but haveing a dedicated class makes it easy to add helper methods to the ERB templates
 class Metadata

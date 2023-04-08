@@ -16,12 +16,6 @@ target "core" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic-fat"]
   context = "${PWD}/core/bionic-fat"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = [
-    "type=gha,scope=core/bionic-fat",
-    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core/core/bionic-fat:cache"
-  ]
-  cache-to = [
-    "type=gha,scope=core/bionic-fat,mode=max",
-    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core/core/bionic-fat:cache,mode=max"
-  ]
+  cache-from = ["type=gha,scope=core/bionic-fat"]
+  cache-to = ["type=gha,scope=core/bionic-fat,mode=max"]
 }

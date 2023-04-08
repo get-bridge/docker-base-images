@@ -17,24 +17,42 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
 
 jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v3.5.1
+        with:
+          persist-credentials: false
+
+      - uses: ruby/setup-ruby@v1.146.0
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Set matrix output
+        id: set-matrix
+        run: |
+          echo "core-matrix=$(bundle exec rake ci:set-matrix:core)" >> $GITHUB_OUTPUT
+          echo "non-core-matrix=$(bundle exec rake ci:set-matrix:non-core)" >> $GITHUB_OUTPUT
+
   build-core-images:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs: set-matrix
     strategy:
       fail-fast: false
-      # Build the core images first using the matrix strategy, from there, we will get a list
-      # of other docker images to build concurrently.
+      # Build the core images first using the matrix strategy, from there, we
+      # will get a list of other docker images to build concurrently.
       matrix:
-        core-paths:
-          - "core/bionic/docker-bake.hcl"
-          - "core/bionic-fat/docker-bake.hcl"
-          - "core/jammy/docker-bake.hcl"
-          - "core/jammy-fat/docker-bake.hcl"
+        ci: ${{ fromJSON(needs.set-matrix.outputs.core-matrix) }}
     steps:
       # If you want to set an environment variable equal to the result of a script
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
       # https://docs.github.com/en/actions/learn-github-actions/environment-variables#passing-values-between-steps-and-jobs-in-a-workflow
-      - name: set PWD environt variable
+      - name: set PWD environment variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3.5.1
@@ -65,26 +83,10 @@ jobs:
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
-          files: ${{ matrix.core-paths }}
-
-  set-matrix:
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v3.5.1
-        with:
-          persist-credentials: false
-
-      - uses: ruby/setup-ruby@v1.146.0
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-
-      - name: Set matrix output
-        id: set-matrix
-        run: echo "matrix=$(bundle exec rake ci:set-matrix)" >> $GITHUB_OUTPUT
+          files: ${{ matrix.ci}}
+          set: |
+            *.cache-from=${{ matrix.ci.cache-from }}
+            *.cache-to=${{ matrix.ci.cache-to }}
 
   build-all-images:
     runs-on: ubuntu-latest
@@ -95,9 +97,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        ci-files: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
+        ci: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
     steps:
-      - name: set PWD environt variable
+      - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3.5.1
@@ -128,4 +130,7 @@ jobs:
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
-          files: ${{ matrix.ci-files }}
+          files: ${{ matrix.ci.bake }}
+          set: |
+            *.cache-from=${{ matrix.ci.cache-from }}
+            *.cache-to=${{ matrix.ci.cache-to }}

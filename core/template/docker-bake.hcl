@@ -18,12 +18,6 @@ target "<%= image_name %>" {
   tags = <%= custom_tags %>
   context = "${PWD}/<%= image_name %>/<%= version %>"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = [
-    "type=gha,scope=<%= image_name %>/<%= version %>",
-    "type=registry,ref=<%= full_ecr_path%>/<%= image_name %>/<%= version %>:cache"
-  ]
-  cache-to = [
-    "type=gha,scope=<%= image_name %>/<%= version %>,mode=max",
-    "type=registry,ref=<%= full_ecr_path%>/<%= image_name %>/<%= version %>:cache,mode=max"
-  ]
+  cache-from = ["type=gha,scope=<%= image_name %>/<%= version %>"]
+  cache-to = ["type=gha,scope=<%= image_name %>/<%= version %>,mode=max"]
 }

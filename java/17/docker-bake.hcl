@@ -15,12 +15,6 @@ target "java" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:17", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:17-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:17-jdk-jammy"]
   context = "${PWD}/java/17"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = [
-    "type=gha,scope=java/17",
-    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java/java/17:cache"
-  ]
-  cache-to = [
-    "type=gha,scope=java/17,mode=max",
-    "type=registry,ref=127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java/java/17:cache,mode=max"
-  ]
+  cache-from = ["type=gha,scope=java/17"]
+  cache-to = ["type=gha,scope=java/17,mode=max"]
 }
