@@ -86,8 +86,8 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.bake }}
           set: |
-            *.cache-from=${{ matrix.cache-from }}
-            *.cache-to=${{ matrix.cache-to }}
+            *.cache-from=${{ fromJSON(matrix.cache-from) }}
+            *.cache-to=${{ fromJSON(matrix.cache-to) }}
 
   build-all-images:
     runs-on: ubuntu-latest
@@ -132,5 +132,5 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.bake }}
           set: |
-            *.cache-from=${{ matrix.cache-from }}
-            *.cache-to=${{ matrix.cache-to }}
+            *.cache-from=${{ fromJSON(matrix.cache-from) }}
+            *.cache-to=${{ fromJSON(matrix.cache-to) }}
