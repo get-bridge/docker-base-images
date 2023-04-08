@@ -79,6 +79,10 @@ jobs:
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
+      - run: |
+          echo ${{ fromJSON(matrix.cache-from) }}
+          echo ${{ fromJSON(matrix.cache-to) }}
+
       - name: Build and push
         uses: docker/bake-action@v2.3.0
         with:
