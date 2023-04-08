@@ -69,5 +69,5 @@ def ecr_registry
 end
 
 def ghcr_registry
-  "https://ghcr.io"
+  "ghcr.io"
 end
