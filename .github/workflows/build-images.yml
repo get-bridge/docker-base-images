@@ -21,7 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.core_matrix }}
+      matrix: ${{ steps.set-matrix.outputs.non_core_matrix }}
     steps:
       - uses: actions/checkout@v3.5.1
         with:
@@ -35,8 +36,8 @@ jobs:
       - name: Set matrix output
         id: set-matrix
         run: |
-          echo "core-matrix=$(bundle exec rake ci:set-matrix:core)" >> $GITHUB_OUTPUT
-          echo "non-core-matrix=$(bundle exec rake ci:set-matrix:non-core)" >> $GITHUB_OUTPUT
+          echo "core_matrix=$(bundle exec rake ci:set-matrix:core)" >> $GITHUB_OUTPUT
+          echo "non_core_matrix=$(bundle exec rake ci:set-matrix:non-core)" >> $GITHUB_OUTPUT
 
   build-core-images:
     runs-on: ubuntu-latest
@@ -47,7 +48,7 @@ jobs:
       fail-fast: false
       # Build the core images first using the matrix strategy, from there, we
       # will get a list of other docker images to build concurrently.
-      matrix: ${{ fromJSON(needs.set-matrix.outputs.core-matrix) }}
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.core_matrix) }}
     steps:
       # If you want to set an environment variable equal to the result of a script
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
@@ -96,7 +97,7 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
-      matrix: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.non_core_matrix) }}
     steps:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
