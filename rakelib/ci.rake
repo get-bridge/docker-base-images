@@ -50,9 +50,13 @@ def matrix(&)
       details.fetch('versions').keys.map do |version|
         {
           bake: Pathname.new("#{image_name}/#{version}") + Util::BAKE_FILE,
-          cache: [
+          "cache-from" => [
             "type=gha,scope=#{image_name}/#{version}",
             "#{ecr_registry}/get-bridge/#{image_name}:#{version}-cache"
+          ],
+          "cache-to" => [
+            "type=gha,scope=#{image_name}/#{version},mode=max",
+            "#{ecr_registry}/get-bridge/#{image_name}:#{version}-cache,mode=max"
           ]
         }
       end
