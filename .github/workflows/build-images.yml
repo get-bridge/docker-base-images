@@ -44,6 +44,9 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     needs:
       - set-matrix
+    permissions:
+      packages: write
+      contents: read
     strategy:
       fail-fast: false
       # Build the core images first using the matrix strategy, from there, we
@@ -70,7 +73,7 @@ jobs:
           buildkitd-flags: --debug
           install: true
 
-      - name: Login to ECR
+      - name: Log in to ECR
         uses: docker/login-action@v2.1.0
         with:
           registry: ${{ env.ECR_REGISTRY }}
@@ -78,6 +81,13 @@ jobs:
           password: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
         uses: docker/bake-action@v2.3.0

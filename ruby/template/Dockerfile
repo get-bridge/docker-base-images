@@ -5,6 +5,7 @@
 ########## Ruby image ##########################
 FROM <%= base_image %>
 LABEL com.get-bridge.image.authors="get-bridge"
+LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
 
 USER root
 

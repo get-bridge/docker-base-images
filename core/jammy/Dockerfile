@@ -8,6 +8,8 @@
 # Grab tini binary (used as default entrypoint)
 FROM ubuntu:jammy as tini
 LABEL org.opencontainers.image.authors="get-bridge"
+LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
+
 ENV TINI_VERSION=v0.19.0
 # Options added via tini README.md suggestion
 # https://github.com/krallin/tini#building-tini
