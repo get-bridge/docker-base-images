@@ -53,11 +53,11 @@ def matrix(&)
           "cache-from" => [
             "*.cache-from=type=gha,scope=#{image_name}/#{version}",
             "*.cache-from=type=registry,ref=#{ecr_registry}/get-bridge/#{image_name}:#{version}-cache"
-          ],
+          ].join("\n"),
           "cache-to" => [
             "*.cache-to=type=gha,scope=#{image_name}/#{version},mode=max",
             "*.cache-to=type=registry,ref=#{ecr_registry}/get-bridge/#{image_name}:#{version}-cache,mode=max"
-          ]
+          ].join("\n")
         }
       end
     end

@@ -79,11 +79,6 @@ jobs:
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
-      - run: |
-          echo ${{ join(matrix.cache-from, '\n') }}
-      - run: |
-          echo ${{ join(matrix.cache-to, '\n') }}
-
       - name: Build and push
         uses: docker/bake-action@v2.3.0
         with:
@@ -91,8 +86,8 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.bake }}
           set: |
-            ${{ join(matrix.cache-from, '\n') }}
-            ${{ join(matrix.cache-to, '\n') }}
+            ${{ matrix.cache-from }}
+            ${{ matrix.cache-to }}
 
   build-all-images:
     runs-on: ubuntu-latest
@@ -137,5 +132,5 @@ jobs:
           push: ${{ github.ref == 'refs/heads/main' }}
           files: ${{ matrix.bake }}
           set: |
-            *.cache-from=${{ fromJSON(matrix.cache-from) }}
-            *.cache-to=${{ fromJSON(matrix.cache-to) }}
+            ${{ matrix.cache-from }}
+            ${{ matrix.cache-to }}
