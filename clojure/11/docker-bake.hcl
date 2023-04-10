@@ -15,6 +15,11 @@ target "clojure" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:11", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:11-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:11-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:11-lein-2.9.1", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:11-lein-2.9.1-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:latest"]
   context = "${PWD}/clojure/11"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = ["type=gha,scope=clojure/11"]
-  cache-to = ["type=gha,scope=clojure/11,mode=max"]
+  cache-from = [
+    "type=gha,scope=clojure/11",
+    "type=registry,ref=ghcr.io/get-bridge/clojure:11-cache"
+  ]
+  cache-to = [
+    "type=gha,scope=clojure/11,mode=max"
+  ]
 }

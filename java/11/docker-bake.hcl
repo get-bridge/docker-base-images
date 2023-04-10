@@ -15,6 +15,11 @@ target "java" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:11-jdk-jammy"]
   context = "${PWD}/java/11"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = ["type=gha,scope=java/11"]
-  cache-to = ["type=gha,scope=java/11,mode=max"]
+  cache-from = [
+    "type=gha,scope=java/11",
+    "type=registry,ref=ghcr.io/get-bridge/java:11-cache"
+  ]
+  cache-to = [
+    "type=gha,scope=java/11,mode=max"
+  ]
 }

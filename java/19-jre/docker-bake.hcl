@@ -15,6 +15,11 @@ target "java" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:19-jre", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:19-jre-jammy"]
   context = "${PWD}/java/19-jre"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = ["type=gha,scope=java/19-jre"]
-  cache-to = ["type=gha,scope=java/19-jre,mode=max"]
+  cache-from = [
+    "type=gha,scope=java/19-jre",
+    "type=registry,ref=ghcr.io/get-bridge/java:19-jre-cache"
+  ]
+  cache-to = [
+    "type=gha,scope=java/19-jre,mode=max"
+  ]
 }

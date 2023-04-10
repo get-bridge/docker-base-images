@@ -16,6 +16,11 @@ target "core" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic-slim"]
   context = "${PWD}/core/bionic"
   platforms = ["linux/amd64", "linux/arm64"]
-  cache-from = ["type=gha,scope=core/bionic"]
-  cache-to = ["type=gha,scope=core/bionic,mode=max"]
+  cache-from = [
+    "type=gha,scope=core/bionic",
+    "type=registry,ref=ghcr.io/get-bridge/core:bionic-cache"
+  ]
+  cache-to = [
+    "type=gha,scope=core/bionic,mode=max"
+  ]
 }

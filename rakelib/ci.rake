@@ -64,10 +64,6 @@ def matrix(&)
   }
 end
 
-def ecr_registry
-  Util::GLOBAL_DEFAULTS.fetch('defaults').fetch('ecr_registry')
-end
-
 def ghcr_registry
-  "ghcr.io"
+  Util::GLOBAL_DEFAULTS.fetch('defaults').fetch('ghcr_registry')
 end
