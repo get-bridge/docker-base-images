@@ -154,3 +154,124 @@ updates:
       - notification-only
     assignees:
       - djbender
+
+  - package-ecosystem: docker
+    directory: java/8
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/8-jre
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: clojure/11
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/11
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/11-jre
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/17
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/17-jre
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/18
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/18-jre
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/19
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: java/19-jre
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
