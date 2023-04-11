@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '~> 3.1.0'
+ruby '~> 3.1'
 
 gem 'aws-sdk-ecr', '~> 1.5'
 gem 'nokogiri'

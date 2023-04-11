@@ -28,7 +28,7 @@ globals:
 
 clojure:
   defaults:
-    flavor: slim
+    flavor: fat
   versions:
     '11':
       base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
@@ -91,9 +91,82 @@ java:
     '19':
       java_version: 19
       flavor: jdk
+      latest: true
     '19-jre':
       java_version: 19
       flavor: jre
+
+# NOTE: versions for node and npm were sourced from here:
+#       https://nodejs.org/en/download/releases
+# NOTE: let's use the default versions of npm per the chart but I acknowledge this may
+#       need to change if incomaptabilities are found
+# NOTE: Yarn defaults to v1 since I don't believe we use anything later than that
+node: &NODE
+  defaults:
+    flavor: slim
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+    yarn_version: 1.22.19
+  versions:
+    '8': &NODE8
+      # there is no deb for node v8 on anything later than bionic
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+      distribution_code_name: bionic
+      node_major: 8
+      node_version: 8.17.0
+      npm_version: 6.13.4
+    '8-fat':
+      <<: *NODE8
+      flavor: fat
+    '10': &NODE10
+      # there is no deb for node v10 on anything later than bionic
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+      distribution_code_name: bionic
+      node_major: 10
+      node_version: 10.24.1
+      npm_version: 6.14.12
+    '10-fat':
+      <<: *NODE10
+      flavor: fat
+    '12': &NODE12
+      # there is no deb for node v12 on anything later than bionic
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+      distribution_code_name: bionic
+      node_major: 12
+      node_version: 12.22.12
+      npm_version: 6.14.16
+    '12-fat':
+      <<: *NODE12
+      flavor: fat
+    '14': &NODE14
+      node_major: 14
+      node_version: 14.21.3
+      npm_version: 6.14.18
+    '14-fat':
+      <<: *NODE14
+      flavor: fat
+    '16': &NODE16
+      node_major: 16
+      node_version: 16.20.0
+      npm_version: 8.19.4
+    '16-fat':
+      <<: *NODE16
+      flavor: fat
+    '18': &NODE18
+      node_major: 18
+      node_version: 18.15.0
+      npm_version: 9.5.0
+    '18-fat':
+      <<: *NODE18
+      flavor: fat
+    '19': &NODE19
+      node_major: 19
+      node_version: 19.8.1
+      npm_version: 9.5.1
+      latest: true
+    '19-fat':
+      <<: *NODE19
+      flavor: fat
+      latest: false
 
 ruby: &RUBY
   defaults:
@@ -131,3 +204,4 @@ ruby: &RUBY
     '3.2-fat':
       <<: *RUBY32
       flavor: fat
+      latest: false
