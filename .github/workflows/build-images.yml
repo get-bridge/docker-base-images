@@ -23,6 +23,7 @@ jobs:
     outputs:
       core_matrix: ${{ steps.set-matrix.outputs.core_matrix }}
       non_core_matrix: ${{ steps.set-matrix.outputs.non_core_matrix }}
+    timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3.5.1
         with:
@@ -52,6 +53,8 @@ jobs:
       # Build the core images first using the matrix strategy, from there, we
       # will get a list of other docker images to build concurrently.
       matrix: ${{ fromJSON(needs.set-matrix.outputs.core_matrix) }}
+      max-parallel: 1
+    timeout-minutes: 20
     steps:
       # If you want to set an environment variable equal to the result of a script
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
@@ -108,6 +111,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: ${{ fromJSON(needs.set-matrix.outputs.non_core_matrix) }}
+    timeout-minutes: 120
     steps:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
