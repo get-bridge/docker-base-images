@@ -16,7 +16,6 @@ target "clojure" {
   context = "${PWD}/clojure/11"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=clojure/11",
     "type=registry,ref=ghcr.io/get-bridge/clojure:11-cache"
   ]
   cache-to = [

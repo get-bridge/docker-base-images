@@ -16,7 +16,6 @@ target "java" {
   context = "${PWD}/java/19"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=java/19",
     "type=registry,ref=ghcr.io/get-bridge/java:19-cache"
   ]
   cache-to = [

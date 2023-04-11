@@ -17,7 +17,6 @@ target "core" {
   context = "${PWD}/core/jammy-fat"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=core/jammy-fat",
     "type=registry,ref=ghcr.io/get-bridge/core:jammy-fat-cache"
   ]
   cache-to = [

@@ -16,7 +16,6 @@ target "ruby" {
   context = "${PWD}/ruby/3.0"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=ruby/3.0",
     "type=registry,ref=ghcr.io/get-bridge/ruby:3.0-cache"
   ]
   cache-to = [
