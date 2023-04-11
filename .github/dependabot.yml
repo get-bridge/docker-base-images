@@ -132,3 +132,25 @@ updates:
       - notification-only
     assignees:
       - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/3.2
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: ruby/3.2-fat
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
