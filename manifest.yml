@@ -28,7 +28,7 @@ globals:
 
 clojure:
   defaults:
-    flavor: slim
+    flavor: fat
   versions:
     '11':
       base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
@@ -91,6 +91,7 @@ java:
     '19':
       java_version: 19
       flavor: jdk
+      latest: true
     '19-jre':
       java_version: 19
       flavor: jre
@@ -161,9 +162,11 @@ node: &NODE
       node_major: 19
       node_version: 19.8.1
       npm_version: 9.5.1
+      latest: true
     '19-fat':
       <<: *NODE19
       flavor: fat
+      latest: false
 
 ruby: &RUBY
   defaults:
@@ -201,3 +204,4 @@ ruby: &RUBY
     '3.2-fat':
       <<: *RUBY32
       flavor: fat
+      latest: false

@@ -1,6 +1,13 @@
 # docker-base-images
 Official Bridge multi architecture docker base images
 
+Available images:
+- [Core - Ubuntu Bionic and Jammy](core/)
+- [Ruby](ruby/)
+- [Node](node/)
+- [Java](java/)
+- [Clojure](clojure/)
+
 # How to build
 - `docker buildx bake -f core/jammy/docker-bake.hcl`
 - or if you get an error `PWD=$(pwd) docker buildx bake -f core/jammy/docker-bake.hcl`

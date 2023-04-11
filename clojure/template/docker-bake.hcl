@@ -4,12 +4,14 @@
 <%
 # Specify any additional tags here, see defaults defined in lib/metadata.rb
 clojure_tags = [
-  "#{full_ecr_path}:#{java_version}-#{flavor}",
-  "#{full_ecr_path}:#{java_version}-#{flavor}-#{distribution_code_name}",
-  "#{full_ecr_path}:#{java_version}-lein-#{lein_version}-#{flavor}",
-  "#{full_ecr_path}:#{java_version}-lein-#{lein_version}-#{flavor}-#{distribution_code_name}",
+  "#{full_ecr_path}:#{java_version}",
+  "#{full_ecr_path}:#{java_version}-#{distribution_code_name}",
+  "#{full_ecr_path}:#{java_version}-lein-#{lein_version}",
+  "#{full_ecr_path}:#{java_version}-lein-#{lein_version}-#{distribution_code_name}",
 ]
-clojure_tags.push("#{full_ecr_path}:#{java_version}") if flavor&.casecmp('slim')&.zero?
+# if we end up with a second flavor we can then use this next line. See other
+# docker-bake.hcl templates for examples
+# clojure_tags.push("#{full_ecr_path}:#{java_version}") if flavor&.casecmp('slim')&.zero?
 custom_tags = docker_tags(clojure_tags || [])
 -%>
 
