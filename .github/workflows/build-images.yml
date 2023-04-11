@@ -53,7 +53,6 @@ jobs:
       # Build the core images first using the matrix strategy, from there, we
       # will get a list of other docker images to build concurrently.
       matrix: ${{ fromJSON(needs.set-matrix.outputs.core_matrix) }}
-      max-parallel: 1
     timeout-minutes: 20
     steps:
       # If you want to set an environment variable equal to the result of a script
