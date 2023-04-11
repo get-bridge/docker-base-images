@@ -11,6 +11,7 @@ WORKDIR /usr/src/app
 ENV NODE_MAJOR 10
 ENV NODE_VERSION 10.24.1
 ENV NPM_VERSION 6.14.12
+ENV YARN_VERSION 1.22.19
 
 RUN <<EOT
 #/usr/bin/env bash
@@ -28,6 +29,7 @@ RUN <<EOT
     nodejs
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
   npm install --global "npm@${NPM_VERSION}"
+  npm install --global "yarn@${YARN_VERSION}"
   rm -rf /root/.npm/_cacache
   npm cache clean --force
   # Install build dependencies for fat image, NOTE: fat image is NOT meant to be deployed to production
@@ -38,8 +40,10 @@ RUN <<EOT
   # Check that node commands work
   [ "$(command -v node)" = '/usr/bin/node' ]
   [ "$(command -v npm)" = '/usr/bin/npm' ]
+  [ "$(command -v yarn)" = '/usr/bin/yarn' ]
   node -v
   npm -v
+  yarn -v
 EOT
 
 USER docker

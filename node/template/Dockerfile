@@ -12,9 +12,7 @@ WORKDIR /usr/src/app
 ENV NODE_MAJOR <%= node_major %>
 ENV NODE_VERSION <%= node_version %>
 ENV NPM_VERSION <%= npm_version %>
-<% if flavor == 'yarn' -%>
 ENV YARN_VERSION <%= yarn_version %>
-<% end -%>
 
 RUN <<EOT
 #/usr/bin/env bash
@@ -32,9 +30,7 @@ RUN <<EOT
     nodejs
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
   npm install --global "npm@${NPM_VERSION}"
-<% if flavor == 'yarn' -%>
   npm install --global "yarn@${YARN_VERSION}"
-<% end -%>
   rm -rf /root/.npm/_cacache
   npm cache clean --force
 <% if flavor == 'fat' -%>
@@ -47,12 +43,10 @@ RUN <<EOT
   # Check that node commands work
   [ "$(command -v node)" = '/usr/bin/node' ]
   [ "$(command -v npm)" = '/usr/bin/npm' ]
+  [ "$(command -v yarn)" = '/usr/bin/yarn' ]
   node -v
   npm -v
-<% if flavor == 'yarn' -%>
-  [ "$(command -v yarn)" = '/usr/bin/yarn' ]
   yarn -v
-<% end -%>
 EOT
 
 USER docker

@@ -104,6 +104,7 @@ node: &NODE
   defaults:
     flavor: slim
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+    yarn_version: 1.22.19
   versions:
     '8': &NODE8
       # there is no deb for node v8 on anything later than bionic
@@ -115,14 +116,6 @@ node: &NODE
     '8-fat':
       <<: *NODE8
       flavor: fat
-    '8-yarn':
-      <<: *NODE8
-      flavor: yarn
-      yarn_version: 1.22.19
-    '8-fat-yarn':
-      <<: *NODE8
-      flavor: fat-yarn
-      yarn_version: 1.22.19
     '10': &NODE10
       # there is no deb for node v10 on anything later than bionic
       base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
@@ -133,14 +126,6 @@ node: &NODE
     '10-fat':
       <<: *NODE10
       flavor: fat
-    '10-yarn':
-      <<: *NODE10
-      flavor: yarn
-      yarn_version: 1.22.19
-    '10-fat-yarn':
-      <<: *NODE10
-      flavor: fat-yarn
-      yarn_version: 1.22.19
     '12': &NODE12
       # there is no deb for node v12 on anything later than bionic
       base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
@@ -151,14 +136,6 @@ node: &NODE
     '12-fat':
       <<: *NODE12
       flavor: fat
-    '12-yarn':
-      <<: *NODE12
-      flavor: yarn
-      yarn_version: 1.22.19
-    '12-fat-yarn':
-      <<: *NODE12
-      flavor: fat-yarn
-      yarn_version: 1.22.19
     '14': &NODE14
       node_major: 14
       node_version: 14.21.3
@@ -166,14 +143,6 @@ node: &NODE
     '14-fat':
       <<: *NODE14
       flavor: fat
-    '14-yarn':
-      <<: *NODE14
-      flavor: yarn
-      yarn_version: 1.22.19
-    '14-fat-yarn':
-      <<: *NODE14
-      flavor: fat-yarn
-      yarn_version: 1.22.19
     '16': &NODE16
       node_major: 16
       node_version: 16.20.0
@@ -181,14 +150,6 @@ node: &NODE
     '16-fat':
       <<: *NODE16
       flavor: fat
-    '16-yarn':
-      <<: *NODE16
-      flavor: yarn
-      yarn_version: 1.22.19
-    '16-fat-yarn':
-      <<: *NODE16
-      flavor: fat-yarn
-      yarn_version: 1.22.19
     '18': &NODE18
       node_major: 18
       node_version: 18.15.0
@@ -196,14 +157,6 @@ node: &NODE
     '18-fat':
       <<: *NODE18
       flavor: fat
-    '18-yarn':
-      <<: *NODE18
-      flavor: yarn
-      yarn_version: 1.22.19
-    '18-fat-yarn':
-      <<: *NODE18
-      flavor: fat-yarn
-      yarn_version: 1.22.19
     '19': &NODE19
       node_major: 19
       node_version: 19.8.1
@@ -211,14 +164,6 @@ node: &NODE
     '19-fat':
       <<: *NODE19
       flavor: fat
-    '19-yarn':
-      <<: *NODE19
-      flavor: yarn
-      yarn_version: 1.22.19
-    '19-fat-yarn':
-      <<: *NODE19
-      flavor: fat-yarn
-      yarn_version: 1.22.19
 
 ruby: &RUBY
   defaults:
