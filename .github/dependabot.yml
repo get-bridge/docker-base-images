@@ -1,5 +1,11 @@
 version: 2
 
+registries:
+  ecr:
+    type: docker-registry
+    url: ${{ vars.ECR_REGISTRY }}
+    key: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
+    token: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
 updates:
   - package-ecosystem: github-actions
     directory: /
@@ -333,6 +339,8 @@ updates:
 
   - package-ecosystem: docker
     directory: clojure/11
+    registries:
+      - ecr
     schedule:
       interval: daily
     labels:
