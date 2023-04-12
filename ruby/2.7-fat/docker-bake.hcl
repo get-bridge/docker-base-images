@@ -16,9 +16,11 @@ target "ruby" {
   context = "${PWD}/ruby/2.7-fat"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
+    "type=gha,scope=ruby/2.7-fat",
     "type=registry,ref=ghcr.io/get-bridge/ruby:2.7-fat-cache"
   ]
   cache-to = [
-    "type=gha,scope=ruby/2.7-fat,mode=max"
+    # disabled while GitHub Actions cache is cranky
+    # "type=gha,scope=ruby/2.7-fat,mode=max"
   ]
 }

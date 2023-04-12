@@ -17,9 +17,11 @@ target "core" {
   context = "${PWD}/core/bionic"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
+    "type=gha,scope=core/bionic",
     "type=registry,ref=ghcr.io/get-bridge/core:bionic-cache"
   ]
   cache-to = [
-    "type=gha,scope=core/bionic,mode=max"
+    # disabled while GitHub Actions cache is cranky
+    # "type=gha,scope=core/bionic,mode=max"
   ]
 }

@@ -17,9 +17,11 @@ target "core" {
   context = "${PWD}/core/jammy"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
+    "type=gha,scope=core/jammy",
     "type=registry,ref=ghcr.io/get-bridge/core:jammy-cache"
   ]
   cache-to = [
-    "type=gha,scope=core/jammy,mode=max"
+    # disabled while GitHub Actions cache is cranky
+    # "type=gha,scope=core/jammy,mode=max"
   ]
 }
