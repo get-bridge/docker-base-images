@@ -3,7 +3,7 @@ version: 2
 registries:
   ecr:
     type: docker-registry
-    url: https://${{ vars.ECR_REGISTRY }}
+    url: https://127178877223.dkr.ecr.us-east-2.amazonaws.com
     username: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
     password: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
 updates:
