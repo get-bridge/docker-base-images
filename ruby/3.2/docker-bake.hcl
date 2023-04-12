@@ -7,18 +7,20 @@
 variable "PWD" {default="" }
 
 group "default" {
-    targets = ["ruby"]
+  targets = ["ruby"]
 }
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "ruby" {
-    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2.0", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2.0-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2.0-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:latest"]
-    context = "${PWD}/ruby/3.2"
-    platforms = ["linux/amd64", "linux/arm64"]
-    cache-from = [
-        "type=gha,scope=ruby/3.2"
-    ]
-    cache-to = [
-        "type=gha,scope=ruby/3.2,mode=max"
-    ]
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2.0", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2.0-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2.0-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:latest"]
+  context = "${PWD}/ruby/3.2"
+  platforms = ["linux/amd64", "linux/arm64"]
+  cache-from = [
+    "type=gha,scope=ruby/3.2",
+    "type=registry,ref=ghcr.io/get-bridge/ruby:3.2-cache"
+  ]
+  cache-to = [
+    # disabled while GitHub Actions cache is cranky
+    # "type=gha,scope=ruby/3.2,mode=max"
+  ]
 }

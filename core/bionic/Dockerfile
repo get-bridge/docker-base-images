@@ -8,6 +8,8 @@
 # Grab tini binary (used as default entrypoint)
 FROM ubuntu:bionic as tini
 LABEL org.opencontainers.image.authors="get-bridge"
+LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
+
 ENV TINI_VERSION=v0.19.0
 # Options added via tini README.md suggestion
 # https://github.com/krallin/tini#building-tini
@@ -15,7 +17,7 @@ ENV CFLAGS="-DPR_SET_CHILD_SUBREAPER=36 -DPR_GET_CHILD_SUBREAPER=37"
 
 RUN <<EOT
 #!/usr/bin/env bash
-set -e
+set -exu
 apt-get update
 apt-get install --yes --no-install-recommends \
   build-essential \
@@ -46,7 +48,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Create a 'docker' user
 RUN <<EOT
 #!/usr/bin/env bash
-set -e
+set -exu
 addgroup --gid 9999 docker
 adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
 usermod -L docker

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Additional rake tasks
 require 'rubocop/rake_task'
 

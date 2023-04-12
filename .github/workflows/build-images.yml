@@ -17,24 +17,48 @@ env:
   COMPOSE_DOCKER_CLI_BUILD: 1
 
 jobs:
+  set-matrix:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    outputs:
+      core_matrix: ${{ steps.set-matrix.outputs.core_matrix }}
+      non_core_matrix: ${{ steps.set-matrix.outputs.non_core_matrix }}
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v3.5.1
+        with:
+          persist-credentials: false
+
+      - uses: ruby/setup-ruby@v1.146.0
+        with:
+          ruby-version: .ruby-version
+          bundler-cache: true
+
+      - name: Set matrix output
+        id: set-matrix
+        run: |
+          echo "core_matrix=$(bundle exec rake ci:set-matrix:core)" >> $GITHUB_OUTPUT
+          echo "non_core_matrix=$(bundle exec rake ci:set-matrix:non-core)" >> $GITHUB_OUTPUT
+
   build-core-images:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    needs:
+      - set-matrix
+    permissions:
+      packages: write
+      contents: read
     strategy:
       fail-fast: false
-      # Build the core images first using the matrix strategy, from there, we will get a list
-      # of other docker images to build concurrently.
-      matrix:
-        core-paths:
-          - "core/bionic/docker-bake.hcl"
-          - "core/bionic-fat/docker-bake.hcl"
-          - "core/jammy/docker-bake.hcl"
-          - "core/jammy-fat/docker-bake.hcl"
+      # Build the core images first using the matrix strategy, from there, we
+      # will get a list of other docker images to build concurrently.
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.core_matrix) }}
+    timeout-minutes: 20
     steps:
       # If you want to set an environment variable equal to the result of a script
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
       # https://docs.github.com/en/actions/learn-github-actions/environment-variables#passing-values-between-steps-and-jobs-in-a-workflow
-      - name: set PWD environt variable
+      - name: set PWD environment variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3.5.1
@@ -51,7 +75,7 @@ jobs:
           buildkitd-flags: --debug
           install: true
 
-      - name: Login to ECR
+      - name: Log in to ECR
         uses: docker/login-action@v2.1.0
         with:
           registry: ${{ env.ECR_REGISTRY }}
@@ -60,31 +84,22 @@ jobs:
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push
         uses: docker/bake-action@v2.3.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
-          files: ${{ matrix.core-paths }}
-
-  set-matrix:
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-    steps:
-      - uses: actions/checkout@v3.5.1
-        with:
-          persist-credentials: false
-
-      - uses: ruby/setup-ruby@v1.146.0
-        with:
-          ruby-version: '3.1'
-          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
-
-      - name: Set matrix output
-        id: set-matrix
-        run: echo "matrix=$(bundle exec rake ci:set-matrix)" >> $GITHUB_OUTPUT
+          files: ${{ matrix.bake }}
+          set: |
+            ${{ matrix.cache-from }}
+            ${{ matrix.cache-to }}
 
   build-all-images:
     runs-on: ubuntu-latest
@@ -94,10 +109,10 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
     strategy:
       fail-fast: false
-      matrix:
-        ci-files: ${{ fromJSON(needs.set-matrix.outputs.matrix) }}
+      matrix: ${{ fromJSON(needs.set-matrix.outputs.non_core_matrix) }}
+    timeout-minutes: 120
     steps:
-      - name: set PWD environt variable
+      - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v3.5.1
@@ -123,9 +138,19 @@ jobs:
         env:
           AWS_REGION: ${{ env.ECR_AWS_DEFAULT_REGION }}
 
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2.1.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build and push
         uses: docker/bake-action@v2.3.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
-          files: ${{ matrix.ci-files }}
+          files: ${{ matrix.bake }}
+          set: |
+            ${{ matrix.cache-from }}
+            ${{ matrix.cache-to }}

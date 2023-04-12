@@ -13,13 +13,15 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
-    tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic-fat"]
-    context = "${PWD}/core/bionic-fat"
-    platforms = ["linux/amd64", "linux/arm64"]
-    cache-from = [
-        "type=gha,scope=core/bionic-fat"
-    ]
-    cache-to = [
-        "type=gha,scope=core/bionic-fat,mode=max"
-    ]
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic-fat"]
+  context = "${PWD}/core/bionic-fat"
+  platforms = ["linux/amd64", "linux/arm64"]
+  cache-from = [
+    "type=gha,scope=core/bionic-fat",
+    "type=registry,ref=ghcr.io/get-bridge/core:bionic-fat-cache"
+  ]
+  cache-to = [
+    # disabled while GitHub Actions cache is cranky
+    # "type=gha,scope=core/bionic-fat,mode=max"
+  ]
 }

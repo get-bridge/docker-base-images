@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'erb'
 
 GENERATION_MESSAGE_TEMPLATE = <<~MESSAGE
