@@ -4,8 +4,8 @@ registries:
   ecr:
     type: docker-registry
     url: ${{ vars.ECR_REGISTRY }}
-    key: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
-    token: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
+    username: ${{ secrets.TRUSS_AWS_ACCESS_KEY_ID }}
+    password: ${{ secrets.TRUSS_AWS_SECRET_ACCESS_KEY }}
 updates:
   - package-ecosystem: github-actions
     directory: /
