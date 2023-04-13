@@ -25,7 +25,7 @@ jobs:
       non_core_matrix: ${{ steps.set-matrix.outputs.non_core_matrix }}
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v3.5.1
+      - uses: actions/checkout@v3.5.2
         with:
           persist-credentials: false
 
@@ -61,7 +61,7 @@ jobs:
       - name: set PWD environment variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v3.5.1
+      - uses: actions/checkout@v3.5.2
         with:
           persist-credentials: false
 
@@ -115,7 +115,7 @@ jobs:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v3.5.1
+      - uses: actions/checkout@v3.5.2
         with:
           persist-credentials: false
 
