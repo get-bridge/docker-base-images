@@ -20,7 +20,6 @@ target "ruby" {
     "type=registry,ref=ghcr.io/get-bridge/ruby:3.0-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=ruby/3.0,mode=max"
+    "type=gha,scope=ruby/3.0,mode=max"
   ]
 }

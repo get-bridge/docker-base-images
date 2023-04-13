@@ -20,7 +20,6 @@ target "clojure" {
     "type=registry,ref=ghcr.io/get-bridge/clojure:11-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=clojure/11,mode=max"
+    "type=gha,scope=clojure/11,mode=max"
   ]
 }

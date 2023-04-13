@@ -20,7 +20,6 @@ target "node" {
     "type=registry,ref=ghcr.io/get-bridge/node:10-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=node/10,mode=max"
+    "type=gha,scope=node/10,mode=max"
   ]
 }

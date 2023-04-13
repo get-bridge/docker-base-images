@@ -21,7 +21,6 @@ target "core" {
     "type=registry,ref=ghcr.io/get-bridge/core:bionic-fat-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=core/bionic-fat,mode=max"
+    "type=gha,scope=core/bionic-fat,mode=max"
   ]
 }

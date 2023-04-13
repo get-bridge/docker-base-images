@@ -21,7 +21,6 @@ target "core" {
     "type=registry,ref=ghcr.io/get-bridge/core:jammy-fat-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=core/jammy-fat,mode=max"
+    "type=gha,scope=core/jammy-fat,mode=max"
   ]
 }

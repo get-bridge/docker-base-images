@@ -20,7 +20,6 @@ target "java" {
     "type=registry,ref=ghcr.io/get-bridge/java:19-jre-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=java/19-jre,mode=max"
+    "type=gha,scope=java/19-jre,mode=max"
   ]
 }

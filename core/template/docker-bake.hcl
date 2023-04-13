@@ -23,7 +23,6 @@ target "<%= image_name %>" {
     "type=registry,ref=ghcr.io/get-bridge/<%= image_name %>:<%= version %>-cache"
   ]
   cache-to = [
-    # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=<%= image_name %>/<%= version %>,mode=max"
+    "type=gha,scope=<%= image_name %>/<%= version %>,mode=max"
   ]
 }
