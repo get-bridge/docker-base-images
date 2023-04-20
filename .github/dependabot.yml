@@ -228,6 +228,28 @@ updates:
       - djbender
 
   - package-ecosystem: docker
+    directory: node/20
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
+    directory: node/20-fat
+    schedule:
+      interval: daily
+    labels:
+      - dependencies
+      - do-not-merge
+      - notification-only
+    assignees:
+      - djbender
+
+  - package-ecosystem: docker
     directory: ruby/2.7
     schedule:
       interval: daily

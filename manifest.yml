@@ -163,9 +163,16 @@ node: &NODE
       node_major: 19
       node_version: 19.8.1
       npm_version: 9.5.1
-      latest: true
     '19-fat':
       <<: *NODE19
+      flavor: fat
+    '20': &NODE20
+      node_major: 20
+      node_version: 20.0.0
+      npm_version: 9.6.4
+      latest: true
+    '20-fat':
+      <<: *NODE20
       flavor: fat
       latest: false
 

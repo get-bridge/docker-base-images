@@ -1,4 +1,6 @@
 # docker-base-images
+[![Build Images](https://github.com/get-bridge/docker-base-images/actions/workflows/build-images.yml/badge.svg)](https://github.com/get-bridge/docker-base-images/actions/workflows/build-images.yml)
+
 Official Bridge multi architecture docker base images
 
 Available images:
