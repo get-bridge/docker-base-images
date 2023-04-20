@@ -49,6 +49,7 @@ jobs:
       packages: write
       contents: read
     strategy:
+      max-parallel: 1
       fail-fast: false
       # Build the core images first using the matrix strategy, from there, we
       # will get a list of other docker images to build concurrently.
