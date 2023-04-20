@@ -12,15 +12,15 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "node" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19.8.1-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19.8.1-slim-jammy"]
-  context = "${PWD}/node/19"
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20-fat-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20.0.0-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20.0.0-fat-jammy"]
+  context = "${PWD}/node/20-fat"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=node/19",
-    "type=registry,ref=ghcr.io/get-bridge/node:19-cache"
+    "type=gha,scope=node/20-fat",
+    "type=registry,ref=ghcr.io/get-bridge/node:20-fat-cache"
   ]
   cache-to = [
     # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=node/19,mode=max"
+    # "type=gha,scope=node/20-fat,mode=max"
   ]
 }
