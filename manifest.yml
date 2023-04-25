@@ -154,15 +154,15 @@ node: &NODE
       flavor: fat
     '18': &NODE18
       node_major: 18
-      node_version: 18.15.0
-      npm_version: 9.5.0
+      node_version: 18.16.0
+      npm_version: 9.5.1
     '18-fat':
       <<: *NODE18
       flavor: fat
     '19': &NODE19
       node_major: 19
-      node_version: 19.8.1
-      npm_version: 9.5.1
+      node_version: 19.9.0
+      npm_version: 9.6.3
     '19-fat':
       <<: *NODE19
       flavor: fat
