@@ -6,7 +6,7 @@
 
 ########## tini ##########################
 # Grab tini binary (used as default entrypoint)
-FROM ubuntu:jammy as tini
+FROM ubuntu:lunar as tini
 LABEL org.opencontainers.image.authors="get-bridge"
 LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
 
@@ -41,7 +41,7 @@ EOT
 
 
 ########## Core image ##########################
-FROM ubuntu:jammy
+FROM ubuntu:lunar
 LABEL com.get-bridge.image.authors="get-bridge"
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -51,6 +51,7 @@ RUN <<EOT
 set -exu
 apt-get update
 apt-get install --yes --no-install-recommends \
+  adduser \
   ca-certificates \
   curl \
   locales \

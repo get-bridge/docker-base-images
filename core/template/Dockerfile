@@ -47,15 +47,21 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN <<EOT
 #!/usr/bin/env bash
 set -exu
-addgroup --gid 9999 docker
-adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
-usermod -L docker
 apt-get update
 apt-get install --yes --no-install-recommends \
+<%- if distribution_code_name == 'lunar' -%>
+  adduser \
+<%- end -%>
   ca-certificates \
   curl \
   locales \
   vim-tiny
+
+# create docker user
+addgroup --gid 9999 docker
+adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
+usermod -L docker
+
 update-ca-certificates
 # See the Locals heading at https://hub.docker.com/_/ubuntu
 # Alias created as some languages (such as ruby) require the extra local

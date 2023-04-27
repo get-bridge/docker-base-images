@@ -17,9 +17,9 @@
 globals:
   defaults:
     additional_tags: []
-    base_image: ubuntu:jammy
+    base_image: ubuntu:lunar
     distribution: ubuntu
-    distribution_code_name: jammy
+    distribution_code_name: lunar
     docker_syntax: docker/dockerfile:1.4  # https://hub.docker.com/r/docker/dockerfile
     ecr_registry: 127178877223.dkr.ecr.us-east-2.amazonaws.com
     ghcr_registry: ghcr.io
@@ -43,12 +43,19 @@ core:
   defaults:
     flavor: slim
   versions:
-    jammy:
+    lunar:
       latest: true # apply the latest tag to this version
+    lunar-fat:
+      flavor: fat
+    jammy:
+      base_image: ubuntu:jammy
+      distribution_code_name: jammy
     # Fat image has things like build-essential, and other libraries needed for compilation
     # This image should only be used via docker multi-stage build and not deployed, see README for details
     jammy-fat:
       flavor: fat
+      base_image: ubuntu:jammy
+      distribution_code_name: jammy
     bionic:
       base_image: ubuntu:bionic
       distribution_code_name: bionic
@@ -61,10 +68,6 @@ java:
   defaults:
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
   versions:
-    # 'graalvm-11':
-    #   distro: jammy
-    #   flavor: jdk
-    #   java_version: 11
     '8':
       java_version: 8
       flavor: jdk
