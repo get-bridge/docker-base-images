@@ -142,6 +142,8 @@ node: &NODE
       <<: *NODE12
       flavor: fat
     '14': &NODE14
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+      distribution_code_name: jammy
       node_major: 14
       node_version: 14.21.3
       npm_version: 6.14.18
@@ -149,6 +151,8 @@ node: &NODE
       <<: *NODE14
       flavor: fat
     '16': &NODE16
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+      distribution_code_name: jammy
       node_major: 16
       node_version: 16.20.0
       npm_version: 8.19.4
