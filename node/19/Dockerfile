@@ -2,7 +2,7 @@
 
 
 ########## Node image ##################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
 LABEL com.get-bridge.image.authors="get-brige"
 
 USER root
@@ -22,7 +22,7 @@ RUN <<EOT
   apt-get install --yes --no-install-recommends \
     gnupg
   curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | apt-key add -
-  echo "deb https://deb.nodesource.com/node_19.x lunar main" \
+  echo "deb https://deb.nodesource.com/node_19.x jammy main" \
     > /etc/apt/sources.list.d/nodesource.list
   apt-get update
   apt-get install --yes --no-install-recommends \
