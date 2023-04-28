@@ -6,15 +6,22 @@ require_relative '../lib/util'
 namespace :ci do
   namespace 'set-matrix' do
     desc 'Generate core index of bake config, cache, and set-matrix output'
-    task 'core' do
+    task :core do
       core_filter = proc { |image_name| image_name == 'core' }
 
       puts matrix(&core_filter).to_json
     end
 
     desc 'Generate non-core index of bake config, cache, and set-matrix output'
-    task 'non-core' do
-      non_core_filter = proc { |image_name| image_name != 'core' }
+    task :'non-core' do
+      non_core_filter = proc { |image_name| image_name != 'core' && image_name != 'clojure' }
+
+      puts matrix(&non_core_filter).to_json
+    end
+
+    desc 'Generate clojure index of bake config, cache, and set-matrix output'
+    task :clojure do
+      non_core_filter = proc { |image_name| image_name == 'clojure' }
 
       puts matrix(&non_core_filter).to_json
     end
