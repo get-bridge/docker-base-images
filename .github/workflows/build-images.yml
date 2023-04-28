@@ -23,6 +23,7 @@ jobs:
     outputs:
       core_matrix: ${{ steps.set-matrix.outputs.core_matrix }}
       non_core_matrix: ${{ steps.set-matrix.outputs.non_core_matrix }}
+      clojure_matrix: ${{ steps.set-matrix.outputs.clojure_matrix }}
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v3.5.2
