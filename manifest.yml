@@ -48,11 +48,14 @@ core:
     rolling:
       base_image: ubuntu:lunar
       distribution_code_name: lunar
+    # NOTE: Fat image has things like build-essential, and other libraries needed for compilation
+    # This image should only be used via docker multi-stage build and not deployed
+    rolling-fat:
+      base_image: ubuntu:lunar
+      distribution_code_name: lunar
     lunar:
       base_image: ubuntu:lunar
       distribution_code_name: lunar
-    # NOTE: Fat image has things like build-essential, and other libraries needed for compilation
-    # This image should only be used via docker multi-stage build and not deployed
     lunar-fat:
       base_image: ubuntu:lunar
       distribution_code_name: lunar
