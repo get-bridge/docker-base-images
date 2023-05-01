@@ -13,15 +13,15 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:lunar", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:lunar-slim"]
-  context = "${PWD}/core/lunar"
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:rolling", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:rolling-slim"]
+  context = "${PWD}/core/rolling"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=core/lunar",
-    "type=registry,ref=ghcr.io/get-bridge/core:lunar-cache"
+    "type=gha,scope=core/rolling",
+    "type=registry,ref=ghcr.io/get-bridge/core:rolling-cache"
   ]
   cache-to = [
     # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=core/lunar,mode=max"
+    # "type=gha,scope=core/rolling,mode=max"
   ]
 }
