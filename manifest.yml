@@ -17,9 +17,9 @@
 globals:
   defaults:
     additional_tags: []
-    base_image: ubuntu:lunar
+    base_image: ubuntu:jammy
     distribution: ubuntu
-    distribution_code_name: lunar
+    distribution_code_name: jammy
     docker_syntax: docker/dockerfile:1.4  # https://hub.docker.com/r/docker/dockerfile
     ecr_registry: 127178877223.dkr.ecr.us-east-2.amazonaws.com
     ghcr_registry: ghcr.io
@@ -44,18 +44,21 @@ core:
     flavor: slim
   versions:
     lunar:
-      latest: true # apply the latest tag to this version
+      base_image: ubuntu:lunar
+      distribution_code_name: lunar
+      rolling: true # NOTE: rolling is always latest ubuntu release.
+    # NOTE: Fat image has things like build-essential, and other libraries needed for compilation
+    # This image should only be used via docker multi-stage build and not deployed
     lunar-fat:
+      base_image: ubuntu:lunar
+      distribution_code_name: lunar
       flavor: fat
+      rolling: true # NOTE: rolling is always the most recent ubuntu release.
     jammy:
-      base_image: ubuntu:jammy
-      distribution_code_name: jammy
-    # Fat image has things like build-essential, and other libraries needed for compilation
-    # This image should only be used via docker multi-stage build and not deployed, see README for details
+      # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
+      latest: true
     jammy-fat:
       flavor: fat
-      base_image: ubuntu:jammy
-      distribution_code_name: jammy
     bionic:
       base_image: ubuntu:bionic
       distribution_code_name: bionic

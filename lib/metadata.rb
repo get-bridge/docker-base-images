@@ -46,6 +46,7 @@ class Metadata
       tags_array.push(default_flavor_tag, default_version_tag)
       tags_array.push("#{full_ecr_path}:#{github_sha}") if github_sha
       tags_array.push("#{full_ecr_path}:latest") if latest
+      tags_array.push("#{full_ecr_path}:rolling") if rolling
     end.flatten.compact.uniq
   end
 
