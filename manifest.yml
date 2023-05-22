@@ -174,8 +174,8 @@ node: &NODE
       flavor: fat
     '20': &NODE20
       node_major: 20
-      node_version: 20.0.0
-      npm_version: 9.6.4
+      node_version: 20.2.0
+      npm_version: 9.6.6
       latest: true
     '20-fat':
       <<: *NODE20
