@@ -6,8 +6,8 @@ development and testing and include development libraries for easy building
 of production assets.
 
 Available tags:
-- [`20`, `20-slim`, `20-slim-jammy`, `20.0.0-slim`, `20.0.0-slim-jammy`, `latest`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20)
-- [`20-fat`, `20-fat-jammy`, `20.0.0-fat`, `20.0.0-fat-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20-fat)
+- [`20`, `20-slim`, `20-slim-jammy`, `20.2.0-slim`, `20.2.0-slim-jammy`, `latest`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20)
+- [`20-fat`, `20-fat-jammy`, `20.2.0-fat`, `20.2.0-fat-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:20-fat)
 - [`19`, `19-slim`, `19-slim-jammy`, `19.9.0-slim`, `19.9.0-slim-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19)
 - [`19-fat`, `19-fat-jammy`, `19.9.0-fat`, `19.9.0-fat-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:19-fat)
 - [`18`, `18-slim`, `18-slim-jammy`, `18.16.0-slim`, `18.16.0-slim-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:18)
