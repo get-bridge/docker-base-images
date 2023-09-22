@@ -26,7 +26,7 @@ jobs:
       clojure_matrix: ${{ steps.set-matrix.outputs.clojure_matrix }}
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           persist-credentials: false
 
@@ -63,7 +63,7 @@ jobs:
       - name: set PWD environment variable
         run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           persist-credentials: false
 
@@ -121,7 +121,7 @@ jobs:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           persist-credentials: false
 
@@ -179,7 +179,7 @@ jobs:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v4.0.0
+      - uses: actions/checkout@v4.1.0
         with:
           persist-credentials: false
 
