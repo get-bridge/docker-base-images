@@ -13,13 +13,14 @@ on:
 env:
   ECR_AWS_DEFAULT_REGION: us-east-2
   ECR_REGISTRY: 127178877223.dkr.ecr.us-east-2.amazonaws.com
-  DOCKER_BUILDKIT: 1
-  COMPOSE_DOCKER_CLI_BUILD: 1
 
 jobs:
   set-matrix:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: >
+      contains(github.event.pull_request.labels.*.name, 'dependencies')
+      || github.event_name == 'push'
+      || github.event_name == 'workflow_dispatch'
     outputs:
       core_matrix: ${{ steps.set-matrix.outputs.core_matrix }}
       non_core_matrix: ${{ steps.set-matrix.outputs.non_core_matrix }}
@@ -44,7 +45,10 @@ jobs:
 
   build-core-images:
     runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: >
+      contains(github.event.pull_request.labels.*.name, 'dependencies')
+      || github.event_name == 'push'
+      || github.event_name == 'workflow_dispatch'
     needs:
       - set-matrix
     permissions:
@@ -61,7 +65,7 @@ jobs:
       # you must do so via a run step, vs the `env: ` workflow syntax. Additinally see
       # https://docs.github.com/en/actions/learn-github-actions/environment-variables#passing-values-between-steps-and-jobs-in-a-workflow
       - name: set PWD environment variable
-        run:  echo "PWD=$(pwd)" >> $GITHUB_ENV
+        run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
       - uses: actions/checkout@v4.1.1
         with:
@@ -74,7 +78,6 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v3.0.0
         with:
-          buildkitd-flags: --debug
           install: true
 
       - name: Log in to ECR
@@ -108,7 +111,10 @@ jobs:
     needs:
       - build-core-images
       - set-matrix
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: >
+      contains(github.event.pull_request.labels.*.name, 'dependencies')
+      || github.event_name == 'push'
+      || github.event_name == 'workflow_dispatch'
     permissions:
       packages: write
       contents: read
@@ -132,7 +138,6 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v3.0.0
         with:
-          buildkitd-flags: --debug
           install: true
 
       - name: Login to ECR
@@ -166,7 +171,10 @@ jobs:
     needs:
       - set-matrix
       - build-all-images
-    if: contains(github.event.pull_request.labels.*.name, 'dependencies') || github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+    if: >
+      contains(github.event.pull_request.labels.*.name, 'dependencies')
+      || github.event_name == 'push'
+      || github.event_name == 'workflow_dispatch'
     permissions:
       packages: write
       contents: read
@@ -190,7 +198,6 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v3.0.0
         with:
-          buildkitd-flags: --debug
           install: true
 
       - name: Login to ECR
