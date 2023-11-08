@@ -13,6 +13,7 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - github_actions
     reviewers:
       - get-bridge/oberbaum
 
@@ -22,6 +23,7 @@ updates:
       interval: daily
     labels:
       - dependencies
+      - ruby
     reviewers:
       - get-bridge/oberbaum
 
@@ -36,6 +38,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -47,6 +50,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -58,6 +62,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -69,6 +74,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -80,6 +86,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -91,6 +98,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -102,6 +110,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -113,6 +122,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -124,6 +134,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -135,6 +146,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -146,6 +158,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -157,6 +170,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -168,6 +182,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -179,6 +194,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -190,6 +206,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -201,6 +218,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -212,6 +230,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -223,6 +242,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -234,6 +254,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -245,6 +266,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -256,6 +278,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -267,6 +290,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -278,6 +302,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -289,6 +314,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -300,6 +326,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -311,6 +338,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -322,6 +350,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -333,6 +362,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -344,6 +374,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -355,6 +386,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -368,6 +400,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -379,6 +412,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -390,6 +424,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -401,6 +436,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -412,6 +448,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -423,6 +460,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -434,6 +472,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -445,6 +484,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
@@ -456,6 +496,7 @@ updates:
     labels:
       - dependencies
       - do-not-merge
+      - docker
       - notification-only
     assignees:
       - djbender
