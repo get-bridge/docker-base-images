@@ -16,7 +16,7 @@ jobs:
 
       - uses: actions/setup-node@v4.0.0
 
-      - uses: actions/setup-python@v4.7.1
+      - uses: actions/setup-python@v4.8.0
 
       - name: Install techdocs-cli
         run: sudo npm install -g @techdocs/cli
