@@ -76,7 +76,7 @@ jobs:
 
       - name: Setup Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v3.0.0
+        uses: docker/setup-buildx-action@v3.2.0
         with:
           install: true
 
@@ -136,7 +136,7 @@ jobs:
 
       - name: Setup Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v3.0.0
+        uses: docker/setup-buildx-action@v3.2.0
         with:
           install: true
 
@@ -196,7 +196,7 @@ jobs:
 
       - name: Setup Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v3.0.0
+        uses: docker/setup-buildx-action@v3.2.0
         with:
           install: true
 
