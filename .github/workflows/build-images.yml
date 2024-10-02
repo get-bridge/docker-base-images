@@ -97,7 +97,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/bake-action@v4.1.0
+        uses: docker/bake-action@v5.10.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
@@ -157,7 +157,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/bake-action@v4.1.0
+        uses: docker/bake-action@v5.10.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
@@ -217,7 +217,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push
-        uses: docker/bake-action@v4.1.0
+        uses: docker/bake-action@v5.10.0
         with:
           pull: true
           push: ${{ github.ref == 'refs/heads/main' }}
