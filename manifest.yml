@@ -66,6 +66,13 @@ core:
       base_image: ubuntu:bionic
       distribution_code_name: bionic
       flavor: fat
+    noble:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+    noble-fat:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+      flavor: fat
 
 java:
   defaults:
