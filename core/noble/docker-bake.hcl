@@ -13,7 +13,7 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble-slim"]
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:latest", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble-slim"]
   context = "${PWD}/core/noble"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [

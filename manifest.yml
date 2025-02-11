@@ -56,7 +56,6 @@ core:
       rolling: true # NOTE: rolling is always the most recent ubuntu release.
     jammy:
       # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
-      latest: true
     jammy-fat:
       flavor: fat
     bionic:
@@ -69,6 +68,7 @@ core:
     noble:
       base_image: ubuntu:noble
       distribution_code_name: noble
+      latest: true
     noble-fat:
       base_image: ubuntu:noble
       distribution_code_name: noble

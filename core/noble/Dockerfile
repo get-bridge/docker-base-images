@@ -57,8 +57,8 @@ apt-get install --yes --no-install-recommends \
   vim-tiny
 
 # create docker user
-addgroup --gid 9999 docker
-adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
+groupadd --gid 9999 docker
+useradd --uid 9999 --gid 9999 --comment "Docker User" docker
 usermod -L docker
 
 update-ca-certificates
