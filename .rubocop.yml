@@ -14,5 +14,5 @@ Style/HashSyntax:
 Style/Documentation:
   Enabled: false
 
-Style/FrozenStringLiteralCommen:
+Style/FrozenStringLiteralComment:
   Enabled: false
