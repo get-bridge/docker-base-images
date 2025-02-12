@@ -27,167 +27,167 @@ globals:
 
 ############### Image definitions #################################
 
-clojure:
-  defaults:
-    flavor: fat
-  versions:
-    '11':
-      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
-      latest: true
-      java_version: '11'
-      lein_version: '2.9.1'
-      package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
-      jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
+#clojure:
+#  defaults:
+#    flavor: fat
+#  versions:
+#    '11':
+#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
+#      latest: true
+#      java_version: '11'
+#      lein_version: '2.9.1'
+#      package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
+#      jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
 
 core:
   defaults:
     flavor: slim
   versions:
-    lunar:
-      base_image: ubuntu:lunar
-      distribution_code_name: lunar
-      rolling: true # NOTE: rolling is always latest ubuntu release.
-    # NOTE: Fat image has things like build-essential, and other libraries needed for compilation
-    # This image should only be used via docker multi-stage build and not deployed
-    lunar-fat:
-      base_image: ubuntu:lunar
-      distribution_code_name: lunar
-      flavor: fat
-      rolling: true # NOTE: rolling is always the most recent ubuntu release.
-    jammy:
-      # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
-    jammy-fat:
-      flavor: fat
-    bionic:
-      base_image: ubuntu:bionic
-      distribution_code_name: bionic
-    bionic-fat:
-      base_image: ubuntu:bionic
-      distribution_code_name: bionic
-      flavor: fat
+#    lunar:
+#      base_image: ubuntu:lunar
+#      distribution_code_name: lunar
+#      rolling: true # NOTE: rolling is always latest ubuntu release.
+#    # NOTE: Fat image has things like build-essential, and other libraries needed for compilation
+#    # This image should only be used via docker multi-stage build and not deployed
+#    lunar-fat:
+#      base_image: ubuntu:lunar
+#      distribution_code_name: lunar
+#      flavor: fat
+#      rolling: true # NOTE: rolling is always the most recent ubuntu release.
+#    jammy:
+#      # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
+#    jammy-fat:
+#      flavor: fat
+#    bionic:
+#      base_image: ubuntu:bionic
+#      distribution_code_name: bionic
+#    bionic-fat:
+#      base_image: ubuntu:bionic
+#      distribution_code_name: bionic
+#      flavor: fat
     noble:
       base_image: ubuntu:noble
       distribution_code_name: noble
-      latest: true
-    noble-fat:
-      base_image: ubuntu:noble
-      distribution_code_name: noble
-      flavor: fat
+#      latest: true
+#    noble-fat:
+#      base_image: ubuntu:noble
+#      distribution_code_name: noble
+#      flavor: fat
 
-java:
-  defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
-  versions:
-    '8':
-      java_version: 8
-      flavor: jdk
-    '8-jre':
-      java_version: 8
-      flavor: jre
-    '11':
-      java_version: 11
-      flavor: jdk
-    '11-jre':
-      java_version: 11
-      flavor: jre
-    '17':
-      java_version: 17
-      flavor: jdk
-    '17-jre':
-      java_version: 17
-      flavor: jre
-    '18':
-      java_version: 18
-      flavor: jdk
-    '18-jre':
-      java_version: 18
-      flavor: jre
-    '19':
-      java_version: 19
-      flavor: jdk
-      latest: true
-    '19-jre':
-      java_version: 19
-      flavor: jre
-
-# NOTE: versions for node and npm were sourced from here:
-#       https://nodejs.org/en/download/releases
-# NOTE: let's use the default versions of npm per the chart but I acknowledge this may
-#       need to change if incomaptabilities are found
-# NOTE: Yarn defaults to v1 since I don't believe we use anything later than that
-node: &NODE
-  defaults:
-    flavor: slim
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
-    yarn_version: 1.22.19
-  versions:
-    '8': &NODE8
-      # there is no deb for node v8 on anything later than bionic
-      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
-      distribution_code_name: bionic
-      node_major: 8
-      node_version: 8.17.0
-      npm_version: 6.13.4
-    '8-fat':
-      <<: *NODE8
-      flavor: fat
-    '10': &NODE10
-      # there is no deb for node v10 on anything later than bionic
-      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
-      distribution_code_name: bionic
-      node_major: 10
-      node_version: 10.24.1
-      npm_version: 6.14.12
-    '10-fat':
-      <<: *NODE10
-      flavor: fat
-    '12': &NODE12
-      # there is no deb for node v12 on anything later than bionic
-      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
-      distribution_code_name: bionic
-      node_major: 12
-      node_version: 12.22.12
-      npm_version: 6.14.16
-    '12-fat':
-      <<: *NODE12
-      flavor: fat
-    '14': &NODE14
-      node_major: 14
-      node_version: 14.21.3
-      npm_version: 6.14.18
-    '14-fat':
-      <<: *NODE14
-      flavor: fat
-    '16': &NODE16
-      node_major: 16
-      node_version: 16.20.0
-      npm_version: 8.19.4
-    '16-fat':
-      <<: *NODE16
-      flavor: fat
-    '18': &NODE18
-      node_major: 18
-      node_version: 18.16.0
-      npm_version: 9.5.1
-    '18-fat':
-      <<: *NODE18
-      flavor: fat
-    '19': &NODE19
-      node_major: 19
-      node_version: 19.9.0
-      npm_version: 9.6.3
-    '19-fat':
-      <<: *NODE19
-      flavor: fat
-    '20': &NODE20
-      node_major: 20
-      node_version: 20.2.0
-      npm_version: 9.6.6
-      latest: true
-    '20-fat':
-      <<: *NODE20
-      flavor: fat
-      latest: false
+#java:
+#  defaults:
+#    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+#  versions:
+#    '8':
+#      java_version: 8
+#      flavor: jdk
+#    '8-jre':
+#      java_version: 8
+#      flavor: jre
+#    '11':
+#      java_version: 11
+#      flavor: jdk
+#    '11-jre':
+#      java_version: 11
+#      flavor: jre
+#    '17':
+#      java_version: 17
+#      flavor: jdk
+#    '17-jre':
+#      java_version: 17
+#      flavor: jre
+#    '18':
+#      java_version: 18
+#      flavor: jdk
+#    '18-jre':
+#      java_version: 18
+#      flavor: jre
+#    '19':
+#      java_version: 19
+#      flavor: jdk
+#      latest: true
+#    '19-jre':
+#      java_version: 19
+#      flavor: jre
+#
+## NOTE: versions for node and npm were sourced from here:
+##       https://nodejs.org/en/download/releases
+## NOTE: let's use the default versions of npm per the chart but I acknowledge this may
+##       need to change if incomaptabilities are found
+## NOTE: Yarn defaults to v1 since I don't believe we use anything later than that
+#node: &NODE
+#  defaults:
+#    flavor: slim
+#    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+#    yarn_version: 1.22.19
+#  versions:
+#    '8': &NODE8
+#      # there is no deb for node v8 on anything later than bionic
+#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+#      distribution_code_name: bionic
+#      node_major: 8
+#      node_version: 8.17.0
+#      npm_version: 6.13.4
+#    '8-fat':
+#      <<: *NODE8
+#      flavor: fat
+#    '10': &NODE10
+#      # there is no deb for node v10 on anything later than bionic
+#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+#      distribution_code_name: bionic
+#      node_major: 10
+#      node_version: 10.24.1
+#      npm_version: 6.14.12
+#    '10-fat':
+#      <<: *NODE10
+#      flavor: fat
+#    '12': &NODE12
+#      # there is no deb for node v12 on anything later than bionic
+#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
+#      distribution_code_name: bionic
+#      node_major: 12
+#      node_version: 12.22.12
+#      npm_version: 6.14.16
+#    '12-fat':
+#      <<: *NODE12
+#      flavor: fat
+#    '14': &NODE14
+#      node_major: 14
+#      node_version: 14.21.3
+#      npm_version: 6.14.18
+#    '14-fat':
+#      <<: *NODE14
+#      flavor: fat
+#    '16': &NODE16
+#      node_major: 16
+#      node_version: 16.20.0
+#      npm_version: 8.19.4
+#    '16-fat':
+#      <<: *NODE16
+#      flavor: fat
+#    '18': &NODE18
+#      node_major: 18
+#      node_version: 18.16.0
+#      npm_version: 9.5.1
+#    '18-fat':
+#      <<: *NODE18
+#      flavor: fat
+#    '19': &NODE19
+#      node_major: 19
+#      node_version: 19.9.0
+#      npm_version: 9.6.3
+#    '19-fat':
+#      <<: *NODE19
+#      flavor: fat
+#    '20': &NODE20
+#      node_major: 20
+#      node_version: 20.2.0
+#      npm_version: 9.6.6
+#      latest: true
+#    '20-fat':
+#      <<: *NODE20
+#      flavor: fat
+#      latest: false
 
 ruby: &RUBY
   defaults:
@@ -200,29 +200,29 @@ ruby: &RUBY
       ruby_major: 2.7
       ruby_version: 2.7.8
       ruby_download_sha256: f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb
-    '2.7-fat':
-      <<: *RUBY27
-      flavor: fat
-    '3.0': &RUBY30
-      ruby_major: 3.0
-      ruby_version: 3.0.6
-      ruby_download_sha256: b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1
-    '3.0-fat':
-      <<: *RUBY30
-      flavor: fat
-    '3.1': &RUBY31
-      ruby_major: 3.1
-      ruby_version: 3.1.4
-      ruby_download_sha256: 1b6d6010e76036c937b9671f4752f065aeca800a6c664f71f6c9a699453af94f
-    '3.1-fat':
-      <<: *RUBY31
-      flavor: fat
-    '3.2': &RUBY32
-      ruby_major: 3.2
-      ruby_version: 3.2.2
-      ruby_download_sha256: 4b352d0f7ec384e332e3e44cdbfdcd5ff2d594af3c8296b5636c710975149e23
-      latest: true # apply the latest tag
-    '3.2-fat':
-      <<: *RUBY32
-      flavor: fat
-      latest: false
+#    '2.7-fat':
+#      <<: *RUBY27
+#      flavor: fat
+#    '3.0': &RUBY30
+#      ruby_major: 3.0
+#      ruby_version: 3.0.6
+#      ruby_download_sha256: b5cbee93e62d85cfb2a408c49fa30a74231ae8409c2b3858e5f5ea254d7ddbd1
+#    '3.0-fat':
+#      <<: *RUBY30
+#      flavor: fat
+#    '3.1': &RUBY31
+#      ruby_major: 3.1
+#      ruby_version: 3.1.4
+#      ruby_download_sha256: 1b6d6010e76036c937b9671f4752f065aeca800a6c664f71f6c9a699453af94f
+#    '3.1-fat':
+#      <<: *RUBY31
+#      flavor: fat
+#    '3.2': &RUBY32
+#      ruby_major: 3.2
+#      ruby_version: 3.2.2
+#      ruby_download_sha256: 4b352d0f7ec384e332e3e44cdbfdcd5ff2d594af3c8296b5636c710975149e23
+#      latest: true # apply the latest tag
+#    '3.2-fat':
+#      <<: *RUBY32
+#      flavor: fat
+#      latest: false
