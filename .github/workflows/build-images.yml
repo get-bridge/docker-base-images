@@ -27,11 +27,11 @@ jobs:
       clojure_matrix: ${{ steps.set-matrix.outputs.clojure_matrix }}
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v4.1.2
+      - uses: actions/checkout@v4
         with:
           persist-credentials: false
 
-      - uses: ruby/setup-ruby@v1.173.0
+      - uses: ruby/setup-ruby@v1
         with:
           ruby-version: .ruby-version
           bundler-cache: true
