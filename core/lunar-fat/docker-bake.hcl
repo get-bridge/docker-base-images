@@ -15,6 +15,7 @@ group "default" {
 target "core" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:lunar-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:rolling"]
   context = "${PWD}/core/lunar-fat"
+  source = "/core/lunar-fat"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
     "type=gha,scope=core/lunar-fat",
