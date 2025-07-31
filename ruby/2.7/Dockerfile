@@ -5,7 +5,7 @@
 # task `rake generate:ruby`
 
 ########## Ruby image ##########################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
 LABEL com.get-bridge.image.authors="get-bridge"
 LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
 
@@ -136,12 +136,12 @@ RUN <<EOT
 #!/usr/bin/env bash
   set -eux
   echo 'gem: --no-document' >> /home/docker/.gemrc
-  mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/build_info \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/cache \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/doc \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/extensions \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/gems \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/specifications \
+  mkdir -p /home/docker/.gem/ruby/"$RUBY_MAJOR".0/build_info \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/cache \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/doc \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/extensions \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/gems \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/specifications \
            /home/docker/.bundle
 
 EOT
