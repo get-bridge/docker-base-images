@@ -197,30 +197,38 @@ ruby: &RUBY
     flavor: slim
   versions:
     '2.7': &RUBY27
+      bundler_version: 2.4.22
       ruby_major: 2.7
       ruby_version: 2.7.8
       ruby_download_sha256: f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb
+      rubygems_version: 3.4.22
     '2.7-fat':
       <<: *RUBY27
       flavor: fat
     '3.0': &RUBY30
+      bundler_version: 2.5.23
       ruby_major: 3.0
       ruby_version: 3.0.7
       ruby_download_sha256: 1748338373c4fad80129921080d904aca326e41bd9589b498aa5ee09fd575bab
+      rubygems_version: 3.5.23
     '3.0-fat':
       <<: *RUBY30
       flavor: fat
     '3.1': &RUBY31
+      bundler_version: 2.6.9
       ruby_major: 3.1
       ruby_version: 3.1.7
       ruby_download_sha256: 658acc455b6bda87ac6cc1380e86552b9c1af87055e7a127589c5bf7ed80b035
+      rubygems_version: 3.6.9
     '3.1-fat':
       <<: *RUBY31
       flavor: fat
     '3.2': &RUBY32
+      bundler_version: 2.7.1
       ruby_major: 3.2
       ruby_version: 3.2.9
       ruby_download_sha256: cf6699d0084c588e7944d92e1a8edda28b1cc3ee471a1f0aebb4b3d32c9753b2
+      rubygems_version: 3.7.1
       latest: true # apply the latest tag
     '3.2-fat':
       <<: *RUBY32
