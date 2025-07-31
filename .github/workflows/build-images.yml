@@ -67,10 +67,6 @@ jobs:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
 
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -126,10 +122,6 @@ jobs:
     steps:
       - name: set PWD environment variable
         run: echo "PWD=$(pwd)" >> $GITHUB_ENV
-
-      - uses: actions/checkout@v4
-        with:
-          persist-credentials: false
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3

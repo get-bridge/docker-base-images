@@ -49,7 +49,7 @@ RUN <<EOT
 set -exu
 apt-get update
 apt-get install --yes --no-install-recommends \
-<%- if distribution_code_name == 'noble' -%>
+<%- if distribution_code_name == 'lunar' -%>
   adduser \
 <%- end -%>
   ca-certificates \
@@ -57,12 +57,7 @@ apt-get install --yes --no-install-recommends \
   locales \
   vim-tiny
 
-# create docker user
-<%- if distribution_code_name == 'noble' -%>
-groupadd --gid 9999 docker
-<%- else -%>
 addgroup --gid 9999 docker
-<%- end -%>
 adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
 usermod -L docker
 
