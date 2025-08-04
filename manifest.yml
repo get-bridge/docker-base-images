@@ -43,17 +43,6 @@ core:
   defaults:
     flavor: slim
   versions:
-#    lunar:
-#      base_image: ubuntu:lunar
-#      distribution_code_name: lunar
-#      rolling: true # NOTE: rolling is always latest ubuntu release.
-#    # NOTE: Fat image has things like build-essential, and other libraries needed for compilation
-#    # This image should only be used via docker multi-stage build and not deployed
-#    lunar-fat:
-#      base_image: ubuntu:lunar
-#      distribution_code_name: lunar
-#      flavor: fat
-#      rolling: true # NOTE: rolling is always the most recent ubuntu release.
     jammy:
       # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
       latest: true
@@ -71,18 +60,6 @@ java:
   defaults:
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
   versions:
-#    '8':
-#      java_version: 8
-#      flavor: jdk
-#    '8-jre':
-#      java_version: 8
-#      flavor: jre
-#    '11':
-#      java_version: 11
-#      flavor: jdk
-#    '11-jre':
-#      java_version: 11
-#      flavor: jre
     '17':
       java_version: 17
       flavor: jdk
@@ -95,13 +72,6 @@ java:
     '18-jre':
       java_version: 18
       flavor: jre
-#    '19':
-#      java_version: 19
-#      flavor: jdk
-#      latest: true
-#    '19-jre':
-#      java_version: 19
-#      flavor: jre
     '21':
       java_version: 21
       flavor: jdk
@@ -121,43 +91,6 @@ node: &NODE
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
     yarn_version: 1.22.19
   versions:
-#    '8': &NODE8
-#      # there is no deb for node v8 on anything later than bionic
-#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
-#      distribution_code_name: bionic
-#      node_major: 8
-#      node_version: 8.17.0
-#      npm_version: 6.13.4
-#    '8-fat':
-#      <<: *NODE8
-#      flavor: fat
-#    '10': &NODE10
-#      # there is no deb for node v10 on anything later than bionic
-#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
-#      distribution_code_name: bionic
-#      node_major: 10
-#      node_version: 10.24.1
-#      npm_version: 6.14.12
-#    '10-fat':
-#      <<: *NODE10
-#      flavor: fat
-#    '12': &NODE12
-#      # there is no deb for node v12 on anything later than bionic
-#      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:bionic
-#      distribution_code_name: bionic
-#      node_major: 12
-#      node_version: 12.22.12
-#      npm_version: 6.14.16
-#    '12-fat':
-#      <<: *NODE12
-#      flavor: fat
-#    '14': &NODE14
-#      node_major: 14
-#      node_version: 14.21.3
-#      npm_version: 6.14.18
-#    '14-fat':
-#      <<: *NODE14
-#      flavor: fat
     '16': &NODE16
       node_major: 16
       node_version: 16.20.0
