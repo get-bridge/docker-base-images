@@ -12,15 +12,15 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "java" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:19", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:19-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:19-jdk-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:latest"]
-  context = "./java/19"
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:21", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:21-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:21-jdk-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:latest"]
+  context = "./java/21"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=java/19",
-    "type=registry,ref=ghcr.io/get-bridge/java:19-cache"
+    "type=gha,scope=java/21",
+    "type=registry,ref=ghcr.io/get-bridge/java:21-cache"
   ]
   cache-to = [
     # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=java/19,mode=max"
+    # "type=gha,scope=java/21,mode=max"
   ]
 }

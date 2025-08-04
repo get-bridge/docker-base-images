@@ -13,7 +13,7 @@ group "default" {
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "node" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:14", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:14-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:14-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:14.21.3-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/node:14.21.3-slim-jammy"]
-  context = "${PWD}/node/14"
+  context = "./node/14"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
     "type=gha,scope=node/14",

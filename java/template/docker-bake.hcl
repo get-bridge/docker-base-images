@@ -20,7 +20,7 @@ group "default" {
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "<%= image_name %>" {
   tags = <%= custom_tags %>
-  context = "${PWD}/<%= image_name %>/<%= version %>"
+  context = "./<%= image_name %>/<%= version %>"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
     "type=gha,scope=<%= image_name %>/<%= version %>",

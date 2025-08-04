@@ -13,7 +13,7 @@ group "default" {
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "java" {
   tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:8", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:8-jdk", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java:8-jdk-jammy"]
-  context = "${PWD}/java/8"
+  context = "./java/8"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
     "type=gha,scope=java/8",

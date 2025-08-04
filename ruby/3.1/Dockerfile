@@ -5,7 +5,7 @@
 # task `rake generate:ruby`
 
 ########## Ruby image ##########################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
 LABEL com.get-bridge.image.authors="get-bridge"
 LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
 
@@ -34,12 +34,12 @@ install: --no-document
 update: --no-document
 EOT
 
-ENV BUNDLER_VERSION 2.4.5
+ENV BUNDLER_VERSION 2.6.9
 ENV LANG en_US.utf-8
-ENV RUBYGEMS_VERSION 3.4.5
-ENV RUBY_DOWNLOAD_SHA256 1b6d6010e76036c937b9671f4752f065aeca800a6c664f71f6c9a699453af94f
+ENV RUBYGEMS_VERSION 3.6.9
+ENV RUBY_DOWNLOAD_SHA256 658acc455b6bda87ac6cc1380e86552b9c1af87055e7a127589c5bf7ed80b035
 ENV RUBY_MAJOR 3.1
-ENV RUBY_VERSION 3.1.4
+ENV RUBY_VERSION 3.1.7
 
 # NOTE: some of ruby's build scripts are written in ruby so we need to install ruby
 # in order to compile ruby. We use apt-mark to uninstall packages we don't need.
@@ -118,12 +118,12 @@ RUN <<EOT
 #!/usr/bin/env bash
   set -eux
   echo 'gem: --no-document' >> /home/docker/.gemrc
-  mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/build_info \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/cache \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/doc \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/extensions \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/gems \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/specifications \
+  mkdir -p /home/docker/.gem/ruby/"$RUBY_MAJOR".0/build_info \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/cache \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/doc \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/extensions \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/gems \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/specifications \
            /home/docker/.bundle
 
 EOT

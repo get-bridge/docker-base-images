@@ -12,8 +12,8 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "ruby" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1.4", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1.4-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1.4-slim-jammy"]
-  context = "${PWD}/ruby/3.1"
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1-slim-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1.7", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1.7-slim", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.1.7-slim-jammy"]
+  context = "./ruby/3.1"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
     "type=gha,scope=ruby/3.1",

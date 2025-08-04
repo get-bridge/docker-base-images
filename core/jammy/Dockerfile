@@ -6,7 +6,7 @@
 
 ########## tini ##########################
 # Grab tini binary (used as default entrypoint)
-FROM ubuntu:jammy as tini
+FROM ubuntu:jammy AS tini
 LABEL org.opencontainers.image.authors="get-bridge"
 LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
 
@@ -28,10 +28,10 @@ apt-get install --yes --no-install-recommends \
   make \
   tar
 update-ca-certificates
-curl -L https://github.com/krallin/tini/archive/refs/tags/$TINI_VERSION.tar.gz -o tini-$TINI_VERSION.tar.gz
-tar -xf tini-$TINI_VERSION.tar.gz
+curl -L https://github.com/krallin/tini/archive/refs/tags/"$TINI_VERSION".tar.gz -o tini-"$TINI_VERSION".tar.gz
+tar -xf tini-"$TINI_VERSION".tar.gz
 # Compile tini from source to ensure compatability with the m1 architectures
-cd tini-$(echo $TINI_VERSION | cut -c2-)
+cd tini-$(echo "$TINI_VERSION" | cut -c2-)
 cmake .
 make
 # Ensure tini runs

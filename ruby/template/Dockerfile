@@ -168,12 +168,12 @@ RUN <<EOT
 #!/usr/bin/env bash
   set -eux
   echo 'gem: --no-document' >> /home/docker/.gemrc
-  mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/build_info \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/cache \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/doc \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/extensions \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/gems \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/specifications \
+  mkdir -p /home/docker/.gem/ruby/"$RUBY_MAJOR".0/build_info \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/cache \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/doc \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/extensions \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/gems \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/specifications \
            /home/docker/.bundle
 
 EOT

@@ -5,7 +5,7 @@
 # task `rake generate:ruby`
 
 ########## Ruby image ##########################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
 LABEL com.get-bridge.image.authors="get-bridge"
 LABEL org.opencontainers.image.source=https://github.com/get-bridge/docker-base-images
 
@@ -52,9 +52,9 @@ install: --no-document
 update: --no-document
 EOT
 
-ENV BUNDLER_VERSION 2.4.5
+ENV BUNDLER_VERSION 2.5.23
 ENV LANG en_US.utf-8
-ENV RUBYGEMS_VERSION 3.4.5
+ENV RUBYGEMS_VERSION 3.5.23
 ENV RUBY_DOWNLOAD_SHA256 1748338373c4fad80129921080d904aca326e41bd9589b498aa5ee09fd575bab
 ENV RUBY_MAJOR 3.0
 ENV RUBY_VERSION 3.0.7
@@ -163,12 +163,12 @@ RUN <<EOT
 #!/usr/bin/env bash
   set -eux
   echo 'gem: --no-document' >> /home/docker/.gemrc
-  mkdir -p /home/docker/.gem/ruby/$RUBY_MAJOR.0/build_info \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/cache \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/doc \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/extensions \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/gems \
-           /home/docker/.gem/ruby/$RUBY_MAJOR.0/specifications \
+  mkdir -p /home/docker/.gem/ruby/"$RUBY_MAJOR".0/build_info \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/cache \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/doc \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/extensions \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/gems \
+           /home/docker/.gem/ruby/"$RUBY_MAJOR".0/specifications \
            /home/docker/.bundle
 
 EOT
