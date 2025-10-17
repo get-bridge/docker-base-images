@@ -1,25 +1,23 @@
-require 'aws-sdk-ecr'
-require 'json'
+require "aws-sdk-ecr"
+require "json"
 
 class Ecr
   attr_reader :client, :dry_run
 
   def initialize(dry_run: true, **opts)
-    default_options = { region: 'us-east-2' }.merge(opts)
+    default_options = { region: "us-east-2" }.merge(opts)
     @dry_run = dry_run
     @client = Aws::ECR::Client.new(default_options)
   end
 
   def create_if_missing(repository_names: [])
-    unless repository_names.is_a?(Array) && repository_names.count.positive?
-      raise 'Argument must be a non empty Array<String>'
-    end
+    raise "Argument must be a non empty Array<String>" unless repository_names.is_a?(Array) && repository_names.any?
 
     diff = repository_names.sort - ecr_respository_names
-    if diff.count.positive?
+    if diff.any?
       create_repository(repository_names: diff)
     else
-      puts 'All repositories have been created'
+      puts "All repositories have been created"
     end
   end
 
@@ -44,16 +42,16 @@ class Ecr
     client.describe_repositories(default_options)
   end
 
-  def create_repository(repository_names:, **opts) # rubocop:disable Metrics/MethodLength
+  def create_repository(repository_names:, **opts)
     default_options = {
-      registry_id: '127178877223', # bridge-shared
-      image_tag_mutability: 'MUTABLE',
+      registry_id: "127178877223", # bridge-shared
+      image_tag_mutability: "MUTABLE",
       image_scanning_configuration: { scan_on_push: true },
-      encryption_configuration: { encryption_type: 'AES256' }
+      encryption_configuration: { encryption_type: "AES256" }
     }.merge(opts)
     repository_names.each do |repository|
       default_options = default_options.merge(repository_name: repository)
-      puts "creating #{default_options} #{dry_run ? '(dry run)' : nil}"
+      puts "creating #{default_options} #{"(dry run)" unless dry_run}"
       client.create_repository(default_options) unless dry_run
     end
   rescue Aws::ECR::Errors::RepositoryAlreadyExistsException => e

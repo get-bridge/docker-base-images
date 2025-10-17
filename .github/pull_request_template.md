@@ -1,7 +1,6 @@
 #### JIRA
 
 #### Changes
-
 -
 
 #### Checklist
@@ -9,7 +8,6 @@
 - [ ] Bug
 
 #### Test plan
-
 - [ ] Walk-through
 - [ ] Peer review
 - [ ] Inspection
@@ -17,7 +15,6 @@
     - <!-- Replace this with the bullet points about the steps how to execute the test -->
 
 #### Risk Analysis - the risk of change is evaluated
-
 - [ ] Low - Majority of the changes are low risk which doesn’t require extra testing, only code review by 1 reviewer
     - [ ] 1 reviewer
 - [ ] Medium - Some portion of changes are medium risk which need peer testing and review by 2 reviewers

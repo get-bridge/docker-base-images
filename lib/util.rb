@@ -1,28 +1,28 @@
-require 'fileutils'
-require 'pathname'
-require 'rake'
-require 'yaml'
+require "fileutils"
+require "pathname"
+require "rake"
+require "yaml"
 
 # Util class is used by ../rakelib/*.rake files
 class Util
   PROJECT_DIR = Rake.original_dir
   PROJECT_PATHNAME = Pathname.new(PROJECT_DIR)
-  BAKE_FILE = 'docker-bake.hcl'
-  MANIFEST = YAML.load_file(File.join(PROJECT_DIR, 'manifest.yml'), aliases: true)
+  BAKE_FILE = "docker-bake.hcl".freeze
+  MANIFEST = YAML.load_file(File.join(PROJECT_DIR, "manifest.yml"), aliases: true)
 
   # Get global defaults, and delete from yml so they are not translated into a docker image
-  GLOBAL_DEFAULTS = MANIFEST.delete('globals')
+  GLOBAL_DEFAULTS = MANIFEST.delete("globals")
 
   # Used by Util#with_clean_output_dir to build out paths
   # example:
-  #  input of ['ruby', '3.1'] would return <project_dir>/ruby/3.1
+  #  input of ["ruby", "3.1"] would return <project_dir>/ruby/3.1
   def self.build_output_path(*parts)
     File.join(PROJECT_DIR, *parts)
   end
 
   # In generate rake tasks, this method is used to generate the template paths
   def self.build_template_dir(image_name)
-    File.join(image_name, 'template')
+    File.join(image_name, "template")
   end
 
   # In generate rake tasks, this method is used to
