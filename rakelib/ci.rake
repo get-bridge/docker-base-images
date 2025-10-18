@@ -1,27 +1,27 @@
-require 'json'
+require "json"
 
 # lib/util has shared constants and methods used in rake tasks
-require_relative '../lib/util'
+require_relative "../lib/util"
 
 namespace :ci do
-  namespace 'set-matrix' do
-    desc 'Generate core index of bake config, cache, and set-matrix output'
+  namespace "set-matrix" do
+    desc "Generate core index of bake config, cache, and set-matrix output"
     task :core do
-      core_filter = proc { |image_name| image_name == 'core' }
+      core_filter = proc { |image_name| image_name == "core" }
 
       puts matrix(&core_filter).to_json
     end
 
-    desc 'Generate non-core index of bake config, cache, and set-matrix output'
-    task :'non-core' do
-      non_core_filter = proc { |image_name| image_name != 'core' && image_name != 'clojure' }
+    desc "Generate non-core index of bake config, cache, and set-matrix output"
+    task :"non-core" do
+      non_core_filter = proc { |image_name| image_name != "core" && image_name != "clojure" }
 
       puts matrix(&non_core_filter).to_json
     end
 
-    desc 'Generate clojure index of bake config, cache, and set-matrix output'
+    desc "Generate clojure index of bake config, cache, and set-matrix output"
     task :clojure do
-      non_core_filter = proc { |image_name| image_name == 'clojure' }
+      non_core_filter = proc { |image_name| image_name == "clojure" }
 
       puts matrix(&non_core_filter).to_json
     end
@@ -30,7 +30,7 @@ end
 
 # input is a proc like:
 #
-#     proc { |image_name| image_name == 'core' }
+#     proc { |image_name| image_name == "core" }
 #
 # and must be dereferenced when called:
 #
@@ -54,7 +54,7 @@ end
 def matrix(&)
   {
     include: Util::MANIFEST.select(&).flat_map do |image_name, details|
-      details.fetch('versions').keys.map do |version|
+      details.fetch("versions").keys.map do |version|
         {
           bake: Pathname.new("#{image_name}/#{version}") + Util::BAKE_FILE,
           "cache-from" => [
@@ -72,5 +72,5 @@ def matrix(&)
 end
 
 def ghcr_registry
-  Util::GLOBAL_DEFAULTS.fetch('defaults').fetch('ghcr_registry')
+  Util::GLOBAL_DEFAULTS.fetch("defaults").fetch("ghcr_registry")
 end

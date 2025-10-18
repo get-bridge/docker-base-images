@@ -16,7 +16,7 @@ class Metadata
 
   # Ends up looking something like 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge
   def ecr_namespace
-    "#{ENV.fetch('ECR_REGISTRY', ecr_registry)}/get-bridge"
+    "#{ENV.fetch("ECR_REGISTRY", ecr_registry)}/get-bridge"
   end
 
   # Ends up looking something like 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby
@@ -36,7 +36,7 @@ class Metadata
   private
 
   def github_sha
-    ENV.fetch('GITHUB_SHA', nil)
+    ENV.fetch("GITHUB_SHA", nil)
   end
 
   # Examples
@@ -69,7 +69,7 @@ class Metadata
   #   ruby:3.1 ruby:3.1-slim point at the same image
   #   ruby:3.1-fat will not have the non flavor tag
   def default_version_tag
-    if flavor&.casecmp('fat')&.zero?
+    if flavor&.casecmp("fat")&.zero?
       []
     else
       ["#{full_ecr_path}:#{version}"]

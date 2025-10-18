@@ -1,12 +1,12 @@
-require 'erb'
-require_relative 'metadata'
+require "erb"
+require_relative "metadata"
 
 class Template
   attr_reader :path, :erb
 
   def initialize(template_path)
     @path = template_path
-    @erb = ERB.new(File.read(template_path), trim_mode: '-')
+    @erb = ERB.new(File.read(template_path), trim_mode: "-")
   end
 
   def filename

@@ -1,10 +1,10 @@
-source 'https://rubygems.org'
+source "https://rubygems.org"
 
-ruby '~> 3.1'
+ruby "~> 3.2"
 
-gem 'aws-sdk-ecr', '~> 1.5'
-gem 'nokogiri'
-gem 'rake'
-gem 'rubocop', require: false
-gem 'rubocop-performance', require: false
-gem 'rubocop-rake', require: false
+gem "aws-sdk-ecr", "~> 1.110"
+gem "nokogiri"
+gem "rake"
+gem "rubocop", require: false
+gem "rubocop-performance", require: false
+gem "rubocop-rake", require: false

@@ -157,13 +157,33 @@ ruby: &RUBY
       <<: *RUBY31
       flavor: fat
     '3.2': &RUBY32
-      bundler_version: 2.7.1
+      bundler_version: 2.7.2
       ruby_major: 3.2
       ruby_version: 3.2.9
       ruby_download_sha256: cf6699d0084c588e7944d92e1a8edda28b1cc3ee471a1f0aebb4b3d32c9753b2
-      rubygems_version: 3.7.1
-      latest: true # apply the latest tag
+      rubygems_version: 3.7.2
     '3.2-fat':
       <<: *RUBY32
+      flavor: fat
+      latest: false
+    '3.3': &RUBY33
+      bundler_version: 2.7.2
+      ruby_major: 3.3
+      ruby_version: 3.3.9
+      ruby_download_sha256: 2b24a2180a2f7f63c099851a1d01e6928cf56d515d136a91bd2075423a7a76bb
+      rubygems_version: 3.7.2
+    '3.3-fat':
+      <<: *RUBY33
+      flavor: fat
+      latest: false
+    '3.4': &RUBY34
+      bundler_version: 2.7.2
+      ruby_major: 3.4
+      ruby_version: 3.4.7
+      ruby_download_sha256: db425a86f6e07546957578f4946cc700a91e7fd51115a86c56e096f30e0530c7
+      rubygems_version: 3.7.2
+      latest: true # apply the latest tag
+    '3.4-fat':
+      <<: *RUBY34
       flavor: fat
       latest: false
