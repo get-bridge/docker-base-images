@@ -45,7 +45,7 @@ core:
   versions:
     jammy:
       # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
-      latest: true
+      latest: false
     jammy-fat:
       flavor: fat
     bionic:
@@ -55,10 +55,18 @@ core:
       base_image: ubuntu:bionic
       distribution_code_name: bionic
       flavor: fat
+    noble:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+      latest: true
+    noble-fat:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+      flavor: fat
 
 java:
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
   versions:
     '17':
       java_version: 17
@@ -88,7 +96,7 @@ java:
 node: &NODE
   defaults:
     flavor: slim
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
     yarn_version: 1.22.19
   versions:
     '16': &NODE16
@@ -124,7 +132,7 @@ node: &NODE
 
 ruby: &RUBY
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
     bundler_version: 2.4.5
     rubygems_version: 3.4.5
     flavor: slim
