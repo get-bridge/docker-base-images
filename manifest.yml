@@ -45,13 +45,21 @@ core:
   versions:
     jammy:
       # NOTE: never tag non-LTS releases as latest, its better to tag the specific LTS release below as latest.
-      latest: true
+      latest: false
     jammy-fat:
+      flavor: fat
+    noble:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+      latest: true
+    noble-fat:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
       flavor: fat
 
 java:
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
   versions:
     '21':
       java_version: 21
@@ -84,7 +92,7 @@ java:
 
 ruby: &RUBY
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
     bundler_version: 2.4.5
     rubygems_version: 3.4.5
     flavor: slim
