@@ -112,7 +112,9 @@ RUN <<EOT
           | awk '/=>/ { print $(NF-1) }' \
           | sort -u \
           | grep -vE '^/usr/local/lib/' \
+          | xargs -r realpath \
           | xargs -r dpkg-query --search \
+          | grep -v '^diversion' \
           | cut -d: -f1 \
           | sort -u \
           | xargs -r apt-mark manual
