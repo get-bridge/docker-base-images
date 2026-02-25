@@ -2,7 +2,7 @@
 
 
 ########## Node image ##################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
 LABEL com.get-bridge.image.authors="get-brige"
 
 USER root
