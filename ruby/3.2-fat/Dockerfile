@@ -92,6 +92,7 @@ RUN <<EOT
           | sort -u \
           | grep -vE '^/usr/local/lib/' \
           | xargs -r realpath \
+          | grep -vE '^(/usr/local/|/usr/src/)' \
           | xargs -r dpkg-query --search \
           | grep -v '^diversion' \
           | cut -d: -f1 \
