@@ -2,7 +2,7 @@
 
 
 ########## Node image ##################
-FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+FROM 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
 LABEL com.get-bridge.image.authors="get-brige"
 
 USER root
@@ -21,8 +21,9 @@ RUN <<EOT
   apt-get update
   apt-get install --yes --no-install-recommends \
     gnupg
-  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource.gpg.key | gpg --dearmor | apt-key add -
-  echo "deb https://deb.nodesource.com/node_18.x jammy main" \
+  mkdir -p /etc/apt/keyrings
+  curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+  echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_18.x nodistro main" \
     > /etc/apt/sources.list.d/nodesource.list
   apt-get update
   apt-get install --yes --no-install-recommends \

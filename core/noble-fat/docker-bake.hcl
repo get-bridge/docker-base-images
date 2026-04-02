@@ -13,15 +13,15 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "core" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy-slim"]
-  context = "./core/jammy"
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble-fat"]
+  context = "./core/noble-fat"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
-    "type=gha,scope=core/jammy",
-    "type=registry,ref=ghcr.io/get-bridge/core:jammy-cache"
+    "type=gha,scope=core/noble-fat",
+    "type=registry,ref=ghcr.io/get-bridge/core:noble-fat-cache"
   ]
   cache-to = [
     # disabled while GitHub Actions cache is cranky
-    # "type=gha,scope=core/jammy,mode=max"
+    # "type=gha,scope=core/noble-fat,mode=max"
   ]
 }
