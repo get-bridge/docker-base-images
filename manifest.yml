@@ -77,9 +77,11 @@ java:
     '18':
       java_version: 18
       flavor: jdk
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
     '18-jre':
       java_version: 18
       flavor: jre
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
     '21':
       java_version: 21
       flavor: jdk
