@@ -48,13 +48,13 @@ core:
       latest: true
     jammy-fat:
       flavor: fat
-    bionic:
-      base_image: ubuntu:bionic
-      distribution_code_name: bionic
-    bionic-fat:
-      base_image: ubuntu:bionic
-      distribution_code_name: bionic
-      flavor: fat
+#    bionic:
+#      base_image: ubuntu:bionic
+#      distribution_code_name: bionic
+#    bionic-fat:
+#      base_image: ubuntu:bionic
+#      distribution_code_name: bionic
+#      flavor: fat
 
 java:
   defaults:
