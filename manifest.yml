@@ -48,30 +48,11 @@ core:
       latest: true
     jammy-fat:
       flavor: fat
-#    bionic:
-#      base_image: ubuntu:bionic
-#      distribution_code_name: bionic
-#    bionic-fat:
-#      base_image: ubuntu:bionic
-#      distribution_code_name: bionic
-#      flavor: fat
 
 java:
   defaults:
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
   versions:
-#    '17':
-#      java_version: 17
-#      flavor: jdk
-#    '17-jre':
-#      java_version: 17
-#      flavor: jre
-#    '18':
-#      java_version: 18
-#      flavor: jdk
-#    '18-jre':
-#      java_version: 18
-#      flavor: jre
     '21':
       java_version: 21
       flavor: jdk
@@ -91,27 +72,6 @@ java:
 #    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
 #    yarn_version: 1.22.19
 #  versions:
-#    '16': &NODE16
-#      node_major: 16
-#      node_version: 16.20.0
-#      npm_version: 8.19.4
-#    '16-fat':
-#      <<: *NODE16
-#      flavor: fat
-#    '18': &NODE18
-#      node_major: 18
-#      node_version: 18.16.0
-#      npm_version: 9.5.1
-#    '18-fat':
-#      <<: *NODE18
-#      flavor: fat
-#    '19': &NODE19
-#      node_major: 19
-#      node_version: 19.9.0
-#      npm_version: 9.6.3
-#    '19-fat':
-#      <<: *NODE19
-#      flavor: fat
 #    '20': &NODE20
 #      node_major: 20
 #      node_version: 20.2.0
