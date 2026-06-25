@@ -27,7 +27,7 @@ jobs:
       clojure_matrix: ${{ steps.set-matrix.outputs.clojure_matrix }}
     timeout-minutes: 5
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v7
         with:
           persist-credentials: false
 

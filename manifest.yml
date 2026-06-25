@@ -179,8 +179,8 @@ ruby: &RUBY
     '3.4': &RUBY34
       bundler_version: 2.7.2
       ruby_major: 3.4
-      ruby_version: 3.4.7
-      ruby_download_sha256: db425a86f6e07546957578f4946cc700a91e7fd51115a86c56e096f30e0530c7
+      ruby_version: 3.4.9
+      ruby_download_sha256: 4231c54072601a171faed1699f105985e9971c94cd382b78feb4eb44eec2dd1a
       rubygems_version: 3.7.2
       latest: true # apply the latest tag
     '3.4-fat':
