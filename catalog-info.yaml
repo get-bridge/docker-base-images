@@ -1,0 +1,30 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: docker-base-images
+  title: Docker Base Images
+  description: Bridge Docker base images. Standardised base Docker images for all
+    Bridge services — hardened JVM base (for Kotlin/Java), Ruby base, Node base, and
+    Go base images. Pre-installed with Bridge tooling dependencies, Datadog agent
+    integration points, and security patches. All Bridge service images build FROM
+    these.
+  tags:
+    - dockerfile
+    - docker
+    - base-image
+    - jvm
+    - ruby
+    - node
+    - security
+    - library
+  annotations:
+    bridge.io/language: dockerfile
+    bridge.io/tier: backend
+    bridge.io/ruby-version: 3.4.9
+    github.com/project-slug: get-bridge/docker-base-images
+    backstage.io/source-location: url:https://github.com/get-bridge/docker-base-images
+spec:
+  type: library
+  lifecycle: production
+  owner: group:platform
+  system: backend-platform

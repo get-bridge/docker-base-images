@@ -48,30 +48,11 @@ core:
       latest: true
     jammy-fat:
       flavor: fat
-    bionic:
-      base_image: ubuntu:bionic
-      distribution_code_name: bionic
-    bionic-fat:
-      base_image: ubuntu:bionic
-      distribution_code_name: bionic
-      flavor: fat
 
 java:
   defaults:
     base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
   versions:
-    '17':
-      java_version: 17
-      flavor: jdk
-    '17-jre':
-      java_version: 17
-      flavor: jre
-    '18':
-      java_version: 18
-      flavor: jdk
-    '18-jre':
-      java_version: 18
-      flavor: jre
     '21':
       java_version: 21
       flavor: jdk
@@ -80,47 +61,26 @@ java:
       java_version: 21
       flavor: jre
 
-# NOTE: versions for node and npm were sourced from here:
-#       https://nodejs.org/en/download/releases
-# NOTE: let's use the default versions of npm per the chart but I acknowledge this may
-#       need to change if incomaptabilities are found
-# NOTE: Yarn defaults to v1 since I don't believe we use anything later than that
-node: &NODE
-  defaults:
-    flavor: slim
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
-    yarn_version: 1.22.19
-  versions:
-    '16': &NODE16
-      node_major: 16
-      node_version: 16.20.0
-      npm_version: 8.19.4
-    '16-fat':
-      <<: *NODE16
-      flavor: fat
-    '18': &NODE18
-      node_major: 18
-      node_version: 18.16.0
-      npm_version: 9.5.1
-    '18-fat':
-      <<: *NODE18
-      flavor: fat
-    '19': &NODE19
-      node_major: 19
-      node_version: 19.9.0
-      npm_version: 9.6.3
-    '19-fat':
-      <<: *NODE19
-      flavor: fat
-    '20': &NODE20
-      node_major: 20
-      node_version: 20.2.0
-      npm_version: 9.6.6
-      latest: true
-    '20-fat':
-      <<: *NODE20
-      flavor: fat
-      latest: false
+## NOTE: versions for node and npm were sourced from here:
+##       https://nodejs.org/en/download/releases
+## NOTE: let's use the default versions of npm per the chart but I acknowledge this may
+##       need to change if incomaptabilities are found
+## NOTE: Yarn defaults to v1 since I don't believe we use anything later than that
+#node: &NODE
+#  defaults:
+#    flavor: slim
+#    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
+#    yarn_version: 1.22.19
+#  versions:
+#    '20': &NODE20
+#      node_major: 20
+#      node_version: 20.2.0
+#      npm_version: 9.6.6
+#      latest: true
+#    '20-fat':
+#      <<: *NODE20
+#      flavor: fat
+#      latest: false
 
 ruby: &RUBY
   defaults:
@@ -129,24 +89,6 @@ ruby: &RUBY
     rubygems_version: 3.4.5
     flavor: slim
   versions:
-    '2.7': &RUBY27
-      bundler_version: 2.4.22
-      ruby_major: 2.7
-      ruby_version: 2.7.8
-      ruby_download_sha256: f22f662da504d49ce2080e446e4bea7008cee11d5ec4858fc69000d0e5b1d7fb
-      rubygems_version: 3.4.22
-    '2.7-fat':
-      <<: *RUBY27
-      flavor: fat
-    '3.0': &RUBY30
-      bundler_version: 2.5.23
-      ruby_major: 3.0
-      ruby_version: 3.0.7
-      ruby_download_sha256: 1748338373c4fad80129921080d904aca326e41bd9589b498aa5ee09fd575bab
-      rubygems_version: 3.5.23
-    '3.0-fat':
-      <<: *RUBY30
-      flavor: fat
     '3.1': &RUBY31
       bundler_version: 2.6.9
       ruby_major: 3.1
@@ -179,8 +121,8 @@ ruby: &RUBY
     '3.4': &RUBY34
       bundler_version: 2.7.2
       ruby_major: 3.4
-      ruby_version: 3.4.7
-      ruby_download_sha256: db425a86f6e07546957578f4946cc700a91e7fd51115a86c56e096f30e0530c7
+      ruby_version: 3.4.9
+      ruby_download_sha256: 4231c54072601a171faed1699f105985e9971c94cd382b78feb4eb44eec2dd1a
       rubygems_version: 3.7.2
       latest: true # apply the latest tag
     '3.4-fat':
