@@ -58,7 +58,7 @@ core:
 
 java:
   defaults:
-    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
+    base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:jammy
   versions:
     '21':
       java_version: 21
