@@ -49,7 +49,7 @@ RUN <<EOT
 set -exu
 apt-get update
 apt-get install --yes --no-install-recommends \
-<%- if distribution_code_name == 'lunar' || distribution_code_name == 'noble' -%>
+<%- if distribution_code_name == 'noble' -%>
   adduser \
 <%- end -%>
   ca-certificates \
