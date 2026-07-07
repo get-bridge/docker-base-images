@@ -147,7 +147,6 @@ USER docker
 RUN <<EOT
 #!/usr/bin/env bash
   set -eux
-  touch /home/docker/.gemrc
   echo 'gem: --no-document' >> /home/docker/.gemrc
   mkdir -p /home/docker/.gem/ruby/"$RUBY_MAJOR".0/build_info \
            /home/docker/.gem/ruby/"$RUBY_MAJOR".0/cache \

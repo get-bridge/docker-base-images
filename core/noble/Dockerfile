@@ -30,7 +30,7 @@ apt-get install --yes --no-install-recommends \
 update-ca-certificates
 curl -L https://github.com/krallin/tini/archive/refs/tags/"$TINI_VERSION".tar.gz -o tini-"$TINI_VERSION".tar.gz
 tar -xf tini-"$TINI_VERSION".tar.gz
-# Compile tini from source to ensure compatability with the m1 architectures
+# Compile tini from source to ensure compatibility with the m1 architectures
 cd tini-$(echo "$TINI_VERSION" | cut -c2-)
 cmake .
 make
@@ -61,6 +61,7 @@ apt-get install --yes --no-install-recommends \
 addgroup --gid 9999 docker
 adduser --uid 9999 --gid 9999 --disabled-password --gecos "Docker User" docker
 usermod -L docker
+chown -R docker:docker /home/docker
 
 update-ca-certificates
 # See the Locals heading at https://hub.docker.com/_/ubuntu
@@ -85,7 +86,7 @@ USER docker
 # always use tini
 ENTRYPOINT ["/tini", "--"]
 
-# keep backwards compatability with use cases that assume CMD is 'bash' since
-# specifying an ENTRYPOINT always clears the CMD that was inheritted by the FROM image
+# keep backward compatibility with use cases that assume CMD is 'bash' since
+# specifying an ENTRYPOINT always clears the CMD that was inherited by the FROM image
 # ref: https://docs.docker.com/engine/reference/builder/#understand-how-cmd-and-entrypoint-interact
 CMD ["bash"]
