@@ -48,6 +48,13 @@ core:
       latest: true
     jammy-fat:
       flavor: fat
+    noble:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+    noble-fat:
+      base_image: ubuntu:noble
+      distribution_code_name: noble
+      flavor: fat
 
 java:
   defaults:
@@ -124,7 +131,7 @@ ruby: &RUBY
       ruby_version: 3.4.9
       ruby_download_sha256: 4231c54072601a171faed1699f105985e9971c94cd382b78feb4eb44eec2dd1a
       rubygems_version: 3.7.2
-      latest: true # apply the latest tag
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
     '3.4-fat':
       <<: *RUBY34
       flavor: fat
