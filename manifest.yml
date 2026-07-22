@@ -33,11 +33,15 @@ clojure:
   versions:
     '11':
       base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
-      latest: true
       java_version: '11'
       lein_version: '2.9.1'
       package_sha: 'a4c239b407576f94e2fef5bfa107f0d3f97d0b19c253b08860d9609df4ab8b29'
       jar_sha: 'ea7c831a4f5c38b6fc3926c6ad32d1d4b9b91bf830a715ecff5a70a18bda55f8'
+    '21':
+      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/java
+      latest: true
+      java_version: '21'
+      lein_version: '2.9.1'
 
 core:
   defaults:
