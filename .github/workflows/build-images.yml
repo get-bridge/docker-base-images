@@ -16,7 +16,8 @@ env:
 
 jobs:
   set-matrix:
-    runs-on: ubuntu-latest
+    # Pinned to the same runner image as the build jobs below
+    runs-on: ubuntu-24.04
     if: >
       contains(github.event.pull_request.labels.*.name, 'dependencies')
       || github.event_name == 'push'
@@ -44,7 +45,8 @@ jobs:
           echo "clojure_matrix=$(bundle exec rake ci:set-matrix:clojure)" >> $GITHUB_OUTPUT
 
   build-core-images:
-    runs-on: ubuntu-latest
+    # Pinned: on ubuntu-26.04, emulated arm64 jammy builds segfault in libc-bin (ldconfig)
+    runs-on: ubuntu-24.04
     if: >
       contains(github.event.pull_request.labels.*.name, 'dependencies')
       || github.event_name == 'push'
@@ -102,7 +104,8 @@ jobs:
             ${{ matrix.cache-to }}
 
   build-all-images:
-    runs-on: ubuntu-latest
+    # Pinned: on ubuntu-26.04, emulated arm64 jammy builds segfault in libc-bin (ldconfig)
+    runs-on: ubuntu-24.04
     needs:
       - build-core-images
       - set-matrix
@@ -157,7 +160,8 @@ jobs:
             ${{ matrix.cache-to }}
 
   build-clojure-images:
-    runs-on: ubuntu-latest
+    # Pinned: on ubuntu-26.04, emulated arm64 jammy builds segfault in libc-bin (ldconfig)
+    runs-on: ubuntu-24.04
     needs:
       - set-matrix
       - build-all-images
