@@ -12,7 +12,7 @@ group "default" {
 
 # NOTE: the context is required for now due to https://github.com/docker/buildx/issues/1028
 target "clojure" {
-  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-lein-2.9.1", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-lein-2.9.1-jammy"]
+  tags = ["127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-fat", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-lein-2.9.1", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:21-lein-2.9.1-jammy", "127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/clojure:latest"]
   context = "./clojure/21"
   platforms = ["linux/amd64", "linux/arm64"]
   cache-from = [
