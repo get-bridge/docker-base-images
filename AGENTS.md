@@ -7,6 +7,7 @@ This repository builds and publishes base Docker images.
 - Prefer minimal, deterministic Docker layers.
 - Do not introduce breaking tag changes without updating docs.
 - Keep generated files in sync with templates.
+- Edit `manifest.yml` or the templates, then run `bundle exec rake generate:<image>`; never hand-edit generated files.
 
 ## Code Style
 - Follow existing Ruby/Rake conventions.

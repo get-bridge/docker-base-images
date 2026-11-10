@@ -6,8 +6,8 @@ development and testing and include development libraries for easy building
 of production assets.
 
 Available tags:
-- [`3.4`, `3.4-slim`, `3.4-slim-jammy`, `3.4.7`, `3.4.7-slim`, `3.4.7-slim-jammy`, `latest`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.4)
-- [`3.4-fat`, `3.4-fat-jammy`, `3.4.7-fat`, `3.4.7-fat-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.4-fat)
+- [`3.4`, `3.4-slim`, `3.4-slim-jammy`, `3.4.12`, `3.4.12-slim`, `3.4.12-slim-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.4)
+- [`3.4-fat`, `3.4-fat-jammy`, `3.4.12-fat`, `3.4.12-fat-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.4-fat)
 - [`3.3`, `3.3-slim`, `3.3-slim-jammy`, `3.3.9`, `3.3.9-slim`, `3.3.9-slim-jammy`, `latest`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.3)
 - [`3.3-fat`, `3.3-fat-jammy`, `3.3.9-fat`, `3.3.9-fat-jammy`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.3-fat)
 - [`3.2`, `3.2-slim`, `3.2-slim-jammy`, `3.2.9`, `3.2.9-slim`, `3.2.9-slim-jammy`, `latest`](127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/ruby:3.2)
