@@ -3,7 +3,7 @@ require_relative "../lib/util"
 require_relative "../lib/generation_message"
 require_relative "../lib/template"
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 namespace :generate do
   Util::MANIFEST.each do |image_name, details|
     desc "Generate all #{image_name} Dockerfiles"
@@ -50,4 +50,3 @@ namespace :generate do
   desc "Generate all templatized Dockerfiles"
   task "all" => Rake.application.tasks.select { |t| t.name.start_with?("generate") }.map(&:name)
 end
-# rubocop:enable Metrics/BlockLength

@@ -130,12 +130,11 @@ ruby: &RUBY
       flavor: fat
       latest: false
     '3.4': &RUBY34
-      bundler_version: 2.7.2
+      bundler_version: 4.0.24
       ruby_major: 3.4
-      ruby_version: 3.4.9
-      ruby_download_sha256: 4231c54072601a171faed1699f105985e9971c94cd382b78feb4eb44eec2dd1a
-      rubygems_version: 3.7.2
-      base_image: 127178877223.dkr.ecr.us-east-2.amazonaws.com/get-bridge/core:noble
+      ruby_version: 3.4.12
+      ruby_download_sha256: db6c147940d7ad0b706823d42c8e6713c36dec70a1f83f635f1d3a7f0599ec90
+      rubygems_version: 4.0.24
     '3.4-fat':
       <<: *RUBY34
       flavor: fat
