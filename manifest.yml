@@ -132,8 +132,8 @@ ruby: &RUBY
     '3.4': &RUBY34
       bundler_version: 4.0.24
       ruby_major: 3.4
-      ruby_version: 3.4.12
-      ruby_download_sha256: db6c147940d7ad0b706823d42c8e6713c36dec70a1f83f635f1d3a7f0599ec90
+      ruby_version: 3.4.13
+      ruby_download_sha256: 6474dff9c02ea685fc44877a4807a27366bf109b176dad182108bb8c96d09589
       rubygems_version: 4.0.24
     '3.4-fat':
       <<: *RUBY34
